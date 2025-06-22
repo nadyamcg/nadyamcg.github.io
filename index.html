@@ -3,12 +3,61 @@
 <head>
   <title>my github page</title>
   <style>
-    body { font-family: Arial; text-align: center; padding: 50px; }
-    h1 { color: #2e86c1; }
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      color: #2e86c1;
+      font-size: 2.8rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s ease-in;
+    }
+    p {
+      color: #34495e;
+      font-size: 1.4rem;
+      max-width: 600px;
+      margin: 25px auto;
+      line-height: 1.6;
+    }
+    .browser-emoji {
+      font-size: 4rem;
+      margin: 20px 0;
+      display: block;
+    }
+    .github-link {
+      display: inline-block;
+      background: #2e86c1;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11);
+      transition: all 0.3s ease;
+    }
+    .github-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1);
+      background: #2573a7;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
-  <h1>hello from my browser! 👋</h1>
-  <p>built 100% without a PC, for now.</p>
+  <div class="container">
+    <span class="browser-emoji">🌐</span>
+    <h1>hello from my browser! 👋</h1>
+    <p>built 100% without a PC, for now.</p>
+    
+  </div>
 </body>
 </html>
