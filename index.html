@@ -1,63 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>my github page</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      padding: 50px;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      min-height: 100vh;
-      margin: 0;
-    }
-    h1 {
-      color: #2e86c1;
-      font-size: 2.8rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-      animation: fadeIn 1.5s ease-in;
-    }
-    p {
-      color: #34495e;
-      font-size: 1.4rem;
-      max-width: 600px;
-      margin: 25px auto;
-      line-height: 1.6;
-    }
-    .browser-emoji {
-      font-size: 4rem;
-      margin: 20px 0;
-      display: block;
-    }
-    .github-link {
-      display: inline-block;
-      background: #2e86c1;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 20px;
-      box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11);
-      transition: all 0.3s ease;
-    }
-    .github-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1);
-      background: #2573a7;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+    <meta charset="utf-8">
+    <title>Nadya's space</title>
+    <meta name="description" content="Nadya's space">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        /* ===== ashspace theme ===== */
+        body {
+            color: #8899ff;
+            background-color: black;
+            margin: 60px;
+            font-family: Sylfaen, Times, serif;
+        }
+
+        p, li, ul {
+            text-align: justify;
+            font-size: large;
+        }
+
+        .small {
+            font-size: medium;
+        }
+
+        b {
+            color: #00a0c0;
+        }
+
+        a:link    { color: #99aaff; }
+        a:visited { color: #4455aa; }
+        a:hover   { background-color: #000044; }
+
+        h1, h2, h3 {
+            color: #9999aa;
+        }
+
+        h2, h3 {
+            padding-top: 20px;
+        }
+
+        /* ===== structural styles ===== */
+        body, h1, #navbar, .main-content {
+            text-align: center;
+        }
+        
+        .footer {
+            text-align: left;
+            margin-top: 20px;
+        }
+        
+        #navbar a {
+            margin: 0 10px;
+        }
+        
+        hr {
+            margin-top: 20px;
+            border-color: #334477;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <span class="browser-emoji">🌐</span>
-    <h1>hello from my browser! 👋</h1>
-    <p>built 100% without a PC, for now.</p>
+    <h1>Nadya's space</h1>
     
-  </div>
+    <div id="navbar">
+        <a href="/index.html">Home</a> |
+        <a href="/blog/">Blog</a> |
+        <a href="/canary/">Canary</a> |
+        <a href="/contact/">Contact</a>
+    </div>
+    
+    <hr>
+    
+    <div class="main-content">
+        <p>「I intend on finishing this page some time soon.」</p>
+        
+        <p>my name is <b>Nadezhda</b>, but I simply go by <b>Nadya</b>.</p>
+        
+        <p>this domain documents my activities, thoughts, and whereabouts on the internet.</p>
+        
+        <p><b>forget me not</b>.</p>
+    </div>
+    
+    <hr>
+    
+    <div class="footer">
+        <p>last update to this page: June 22, 2025.</p>
+    </div>
 </body>
 </html>
