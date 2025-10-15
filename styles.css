@@ -82,3 +82,46 @@ hr{ margin-top:20px; border-color:var(--rule) }
   padding: 16px 18px;
   display: block;
 }
+
+/* --- mobile-safe layout patch --- */
+
+/* fluid outer margin so content never overflows on small screens */
+:root { --outer-space: clamp(12px, 4vw, 60px); }
+body  { margin: var(--outer-space); }
+
+/* prevent grid children from overflowing their column */
+.two-col { 
+  display: grid; 
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 18px; 
+  align-items: start;
+}
+@media (max-width: 720px){
+  .two-col { grid-template-columns: 1fr; }
+}
+
+/* allow items to actually shrink inside grids */
+.two-col > *, .note { min-width: 0; }
+
+/* hard-wrap long text/links so no horizontal scroll */
+p, li, .list, .note { 
+  overflow-wrap: anywhere; 
+  word-break: break-word; 
+  hyphens: auto;
+}
+
+/* code/keys keep their horizontal scroll (that’s fine) */
+pre, .mono { white-space: pre; overflow-x: auto; }
+
+/* final guardrail: disable page-wide horizontal scrolling */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* kill the double-scroll issue */
+html, body { height: auto; }         /* override the old 100% */
+body { min-height: 100vh; }           /* still fill the viewport */
+
+/* keep horizontal overflow off the page */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* make sure only code blocks scroll, not the page */
+pre, .mono { white-space: pre; overflow-x: auto; overflow-y: visible; }
