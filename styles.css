@@ -10,32 +10,75 @@
 }
 *{box-sizing:border-box}
 html,body{height:100%}
+
 body{
   color:var(--text);
   background-color:var(--bg);
   margin:60px;
-  font-family: Sylfaen, Times, serif;
+  font-family:Sylfaen, Times, serif;
   text-align:center;
 }
-.note {
-  border: 1px solid #334477;
-  padding: 12px;
-  border-radius: 6px;
-  background: rgba(17,17,34,.35);
-}
+
 main{max-width:860px;margin:0 auto}
-p, li, ul{ text-align: justify; font-size: large; }
+
+p, li, ul{ text-align: justify; font-size: large; line-height:1.6 }
 .small{ font-size: medium; opacity:.9 }
+.mono{ font-family: ui-monospace, Menlo, Consolas, "Liberation Mono", monospace; }
+
+/* links */
 b{ color:var(--accent) }
 a:link{ color:var(--link) }
 a:visited{ color:var(--link-visited) }
-a:hover{ background-color:#000044 }
+a:hover, a:focus{
+  background-color:#000044;
+  text-decoration:underline;
+  outline:2px dotted var(--link);
+  outline-offset:2px;
+}
+
+/* headings */
 h1,h2,h3{ color:var(--muted); text-align:center }
 h2,h3{ padding-top:20px }
+
+/* navbar + rules */
 #navbar a{ margin:0 10px }
 hr{ margin-top:20px; border-color:var(--rule) }
 .footer{ text-align:left; margin-top:20px }
-.note{ border:1px solid var(--rule); padding:12px; border-radius:6px; background:rgba(17,17,34,.35); }
-.list{ list-style: square; padding-left: 1.25rem;}
-kbd{border:1px solid var(--rule); padding:.15rem .35rem; border-radius:4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.95rem}
-code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+
+/* blue boxed note */
+.note{
+  border:1px solid var(--rule);
+  padding:12px;
+  border-radius:6px;
+  background:rgba(17,17,34,.35);
+}
+
+/* lists */
+.list{ list-style:square; padding-left:1.25rem; margin:0 }
+
+/* layout helpers */
+.stack{ display:grid; gap:18px }
+.two-col{ display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start }
+
+/* responsive */
+@media (max-width: 800px){
+  body{ margin:16px }
+  .two-col{ grid-template-columns:1fr }
+}
+
+/* consistent note spacing */
+.note h1,
+.note h2,
+.note h3,
+.note p:first-child {
+  margin-top: 0;
+}
+
+.note p:last-child {
+  margin-bottom: 0;
+}
+
+.note {
+  padding: 16px 18px;
+  display: block;
+}

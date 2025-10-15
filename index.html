@@ -3,34 +3,110 @@
 <head>
 <meta charset="utf-8">
 <title>nadya's space</title>
-<meta name="description" content="nadya's space">
+<meta name="description" content="nadya's space — notes, canary, and ways to reach me">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <main>
-<h1>nadya's space</h1>
+  <h1>nadya's space</h1>
 
-<div id="navbar">
+  <nav id="navbar">
     <a href="/index.html">home</a> |
     <a href="/blog/">blog</a> |
     <a href="/canary/">canary</a> |
     <a href="/contact/">contact</a>
-</div>
-<hr>
+  </nav>
 
-<p>my name is <b>nadezhda</b>, but i simply go by <b>nadya</b>.</p>
+  <hr>
 
-<p>this domain documents my activities, thoughts, and whereabouts on the internet.</p>
+  <section class="stack">
+    <!-- intro -->
+    <p>my name is <b>Nadezhda</b>, but i simply go by <b>Nadya</b>.</p>
+      <p><b>forget me not</b>.</p>
+    </div>
 
-<div class="note">
-  <p><b>forget me not</b>.</p>
-</div>
+    <!-- now -->
+    <section id="now">
+      <div class="note highlight">
+        <h2><span class="emoji"></span> now</h2>
+        <p class="small">
+          tinkering with <b>linux</b>, refining this site,
+          studying computer science at <b>Wright State</b>, and writing about <b>digital identity</b>.
+        </p>
+      </div>
+    </section>
 
-<hr>
-<div class="footer">
-<p>last update to this page: October 15, 2025.</p>
-</div>
+    <!-- recent + explore -->
+    <section class="two-col">
+      <div class="note" id="recent">
+        <p class="small"><b>latest:</b> loading…</p>
+      </div>
+      <div class="note">
+        <p class="small"><b>explore:</b></p>
+        <ul class="list small">
+          <li><a href="/blog/">read the blog</a> - what I think and feel.</li>
+          <li><a href="/canary/">check the canary</a> - proof i’m still here.</li>
+          <li><a href="/contact/">contact</a> - async, text-first.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- identity -->
+    <section class="note">
+      <p class="small"><b>identity:</b> i sign updates and push over ssh. public key:</p>
+      <pre class="small mono">
+    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILZQZd3Y2SSio2DN97JDQ5DY8zMrk571BtqYjeMVE+E2 nadyamcg@proton.me
+    fingerprint (sha256): xe2MQ5wNdqNQOZKJuDvKEh95NMZuc5fIY3z6hD2l2yg
+
+    visual fingerprint:
+    +--[ED25519 256]--+
+    |     . ..++.o    |
+    |    . . +=oB .   |
+    |   . .   .B.o    |
+    |    *    o +     |
+    |   = = .S.+ o    |
+    |. o B Bo+o .     |
+    | + = =.==        |
+    |. +   E. =       |
+    | .     o+ .      |
+    +----[SHA256]-----+
+      </pre>
+      <p class="small">see <a href="/canary/">/canary/</a> for the live token and update window.</p>
+    </section>
+
+
+  <hr>
+
+  <footer class="footer">
+    <p>last update to this page: October 15, 2025.</p>
+  </footer>
 </main>
+
+<!-- recent post loader -->
+<script>
+(async function(){
+  try{
+    const res = await fetch('/blog/posts.json',{cache:'no-cache'});
+    const data = await res.json();
+    const posts = (data.posts||[]).slice().sort((a,b)=> a.date < b.date ? 1 : -1);
+    const p = posts[0];
+    const el = document.getElementById('recent');
+    if(!p){
+      el.innerHTML = '<p class="small"><b>latest:</b> nothing posted yet.</p>';
+      return;
+    }
+    el.innerHTML = `
+      <p class="small" style="margin:0;">
+        <b>latest:</b> <a href="/blog/${p.slug}.html">${p.title}</a> - ${p.date}
+      </p>
+      ${p.summary ? `<p class="small" style="margin-top:8px;">${p.summary}</p>` : ''}
+    `;
+  }catch(e){
+    document.getElementById('recent').innerHTML = '<p class="small"><b>latest:</b> could not load posts.</p>';
+  }
+})();
+</script>
 </body>
 </html>
