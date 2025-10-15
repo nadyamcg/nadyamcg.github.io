@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
-# .git/hooks/pre-commit — optional guard to ensure canary updated when staged
 set -euo pipefail
 file="canary/canary.json"
-if git diff --cached --quiet -- "$file"; then
-  exit 0
+url="$(git remote get-url origin 2>/dev/null || true)"
+if [[ "$url" =~ ^https:// ]]; then
+  echo "pre-commit: origin is HTTPS; switch to SSH:" >&2
+  echo "  git remote set-url origin git@github.com:<USER>/<REPO>.git" >&2
+  exit 2
 fi
-old="$(git show :$file 2>/dev/null || true)"
-new="$(cat "$file")"
-if command -v jq >/dev/null 2>&1; then
-  if [[ -n "$old" ]] && jq -e '.token' >/dev/null 2>&1 <<<"$old"; then
-    oldtok="$(jq -r '.token' <<<"$old")"
-    newtok="$(jq -r '.token' <<<"$new")"
-    oldts="$(jq -r '.last_update' <<<"$old")"
-    newts="$(jq -r '.last_update' <<<"$new")"
-    if [[ "$oldtok" == "$newtok" || "$oldts" == "$newts" ]]; then
-      echo "pre-commit: canary token or timestamp did not change. please refresh." >&2
-      exit 1
+if git diff --cached --name-only | grep -qx "$file"; then
+  if command -v jq >/dev/null 2>&1; then
+    old="$(git show :$file 2>/dev/null || true)"
+    new="$(cat "$file")"
+    if [[ -n "$old" ]] && jq -e '.token' >/dev/null 2>&1 <<<"$old"; then
+      oldtok="$(jq -r '.token' <<<"$old")"
+      newtok="$(jq -r '.token' <<<"$new")"
+      oldts="$(jq -r '.last_update' <<<"$old")"
+      newts="$(jq -r '.last_update' <<<"$new")"
+      if [[ "$oldtok" == "$newtok" || "$oldts" == "$newts" ]]; then
+        echo "pre-commit: canary token or timestamp did not change. please refresh." >&2
+        exit 1
+      fi
     fi
   fi
 fi
-exit 0
