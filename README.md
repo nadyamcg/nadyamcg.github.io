@@ -17,7 +17,7 @@
 
 ### assisted method (local script)
 for convenience, a local script can do steps 2-4 for you.
-see CANARY-README.md in root.
+see `CANARY-README.md` in root.
 
 by default, `window_days` is `14`; change if needed.
 
