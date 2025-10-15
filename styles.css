@@ -1,0 +1,41 @@
+/* ===== ashspace theme (shared) ===== */
+:root{
+  --bg:#000;
+  --text:#8899ff;
+  --muted:#9999aa;
+  --link:#99aaff;
+  --link-visited:#4455aa;
+  --accent:#00a0c0;
+  --rule:#334477;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  color:var(--text);
+  background-color:var(--bg);
+  margin:60px;
+  font-family: Sylfaen, Times, serif;
+  text-align:center;
+}
+.note {
+  border: 1px solid #334477;
+  padding: 12px;
+  border-radius: 6px;
+  background: rgba(17,17,34,.35);
+}
+main{max-width:860px;margin:0 auto}
+p, li, ul{ text-align: justify; font-size: large; }
+.small{ font-size: medium; opacity:.9 }
+b{ color:var(--accent) }
+a:link{ color:var(--link) }
+a:visited{ color:var(--link-visited) }
+a:hover{ background-color:#000044 }
+h1,h2,h3{ color:var(--muted); text-align:center }
+h2,h3{ padding-top:20px }
+#navbar a{ margin:0 10px }
+hr{ margin-top:20px; border-color:var(--rule) }
+.footer{ text-align:left; margin-top:20px }
+.note{ border:1px solid var(--rule); padding:12px; border-radius:6px; background:rgba(17,17,34,.35); }
+.list{ list-style: square; padding-left: 1.25rem;}
+kbd{border:1px solid var(--rule); padding:.15rem .35rem; border-radius:4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.95rem}
+code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}

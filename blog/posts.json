@@ -1,0 +1,10 @@
+{
+  "posts": [
+    {
+      "title": "hello, world",
+      "slug": "hello-world",
+      "date": "2025-10-15",
+      "summary": "setting up my space."
+    }
+  ]
+}

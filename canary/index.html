@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>canary</title>
+<meta name="description" content="canary">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main>
+<h1>canary</h1>
+
+<div id="navbar">
+    <a href="/index.html">home</a> |
+    <a href="/blog/">blog</a> |
+    <a href="/canary/">canary</a> |
+    <a href="/contact/">contact</a>
+</div>
+<hr>
+
+<p>this page is a <b>dead man's switch</b> style canary. if the token below is not refreshed within a set window, assume something may be wrong.</p>
+
+<div id="status" class="note small">checking canary…</div>
+
+<script>
+async function check(){
+  try{
+    const res = await fetch('./canary.json', {cache:'no-cache'});
+    const data = await res.json();
+    const last = new Date(data.last_update);
+    const windowDays = Number(data.window_days||14);
+    const nextDue = new Date(last.getTime() + windowDays*24*60*60*1000);
+    const now = new Date();
+    const alive = now <= nextDue;
+    const daysLeft = Math.ceil((nextDue - now)/(24*60*60*1000));
+    const el = document.getElementById('status');
+    el.innerHTML = `
+      <p><b>last update (utc):</b> ${last.toISOString()}</p>
+      <p><b>token:</b> <code>${data.token||'(missing)'}</code></p>
+      <p><b>window:</b> ${windowDays} days</p>
+      <p><b>next due by (utc):</b> ${nextDue.toISOString()}</p>
+      <p><b>status:</b> ${alive ? '✅ ok — ' + daysLeft + ' day(s) remaining' : '❌ overdue — please check on me'}</p>
+    `;
+  }catch(e){
+    document.getElementById('status').textContent = 'could not read canary.json';
+  }
+}
+check();
+</script>
+
+<div class="note small">
+<p><b>how i update this:</b> manually generate a token through a verified SSH to <code>canary/canary.json</code> and change both <code>last_update</code> (utc iso) and <code>token</code> (any new random string). commit &amp; push.</p>
+<p>if the page shows ❌ overdue, it means i missed my update window.</p>
+<p>this verifies that I am still alive and active online.</p>
+</div>
+
+<div class="note small">
+  <p><b>ssh public key:</b></p>
+  <pre style="font-family: monospace; text-align:left; overflow-x:auto;">
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILZQZd3Y2SSio2DN97JDQ5DY8zMrk571BtqYjeMVE+E2 nadyamcg@proton.me
+  </pre>
+  <p><b>visual fingerprint:</b></p>
+  <pre style="font-family: monospace; text-align:left; overflow-x:auto;">
++--[ED25519 256]--+
+|     . ..++.o    |
+|    . . +=oB .   |
+|   . .   .B.o    |
+|    *    o +     |
+|   = = .S.+ o    |
+|. o B Bo+o .     |
+| + = =.==        |
+|. +   E. =       |
+| .     o+ .      |
++----[SHA256]-----+
+  </pre>
+  <p>fingerprint (sha256): <code>xe2MQ5wNdqNQOZKJuDvKEh95NMZuc5fIY3z6hD2l2yg</code></p>
+  <p>this key corresponds to the identity that signs and pushes updates to this repository.</p>
+</div>
+
+<hr>
+<div class="footer">
+<p>last update to this page: October 15, 2025.</p>
+</div>
+</main>
+</body>
+</html>
