@@ -113,7 +113,7 @@ p, li, .list, .note {
 /* code/keys keep their horizontal scroll (that’s fine) */
 pre, .mono { white-space: pre; overflow-x: auto; }
 
-/* final guardrail: disable page-wide horizontal scrolling */
+/* disable page-wide horizontal scrolling */
 html, body { max-width: 100%; overflow-x: hidden; }
 
 /* kill the double-scroll issue */
@@ -125,3 +125,47 @@ html, body { max-width: 100%; overflow-x: hidden; }
 
 /* make sure only code blocks scroll, not the page */
 pre, .mono { white-space: pre; overflow-x: auto; overflow-y: visible; }
+
+/* --- final anti-clipping patch for window resize --- */
+
+/* never lock the root height */
+html, body { 
+  height: auto !important; 
+  min-height: 0 !important; 
+  max-width: 100%;
+  overflow-x: hidden;   /* keep stray horizontal scroll off */
+  overflow-y: auto;     /* ensure the page itself scrolls */
+}
+
+/* outer margin stays fluid and won't cause clipping when shrinking */
+:root { --outer-space: clamp(12px, 4vw, 60px); }
+body  { margin: var(--outer-space); }
+
+/* main fills available width but never exceeds preferred max */
+main { 
+  width: min(100%, 860px); 
+  margin-inline: auto; 
+  min-width: 0; 
+}
+
+/* grid that always collapses cleanly with no overflow during resize */
+.two-col {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+/* allow children to actually shrink inside grid/boxes */
+.two-col > *, .note { min-width: 0; }
+
+/* text wraps instead of pushing the canvas wider */
+p, li, .list, .note { 
+  overflow-wrap: anywhere; 
+  word-break: break-word; 
+  hyphens: auto;
+}
+
+/* only code/keys scroll horizontally (not the whole page) */
+pre, .mono { white-space: pre; overflow-x: auto; overflow-y: visible; }
+
