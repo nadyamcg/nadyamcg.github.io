@@ -5,6 +5,13 @@
       "slug": "hello-world",
       "date": "2025-10-15",
       "summary": "setting up my space."
+    },
+
+    {
+      "title": "better days",
+      "slug": "better-days",
+      "date": "2025-10-15",
+      "summary": "have i seen better days?"
     }
   ]
 }
