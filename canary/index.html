@@ -31,7 +31,7 @@
       <h2>canary expired</h2>
       <p id="expired-timer" class="small" aria-live="polite"></p>
       <div id="expired-message" class="small">
-        <p>if you're seeing this, I missed my update window. this does not necessarily prove harm; life happens.</p>
+        <p>if you're seeing this, I missed my update window. this does not <i>necessarily</i> prove harm; life happens.</p>
         <p>this mainly proves that whatever is happening is unplanned.</p>
         <p>if you know me personally, please try my usual channels first. then phone number, if you have it.</p>
         <p>I am sorry if this is the last you see of me.</p>
@@ -74,7 +74,7 @@ async function check(){
       <p><b>token:</b> <code>${data.token || '(missing)'}</code></p>
       <p><b>window:</b> ${windowDays} days</p>
       <p><b>next due by (utc):</b> ${nextDue.toISOString()}</p>
-      <p><b>status:</b> ${alive ? '✅ ok — ' + daysLeft + ' day(s) remaining' : '❌ overdue — please check on me'}</p>
+      <p><b>status:</b> ${alive ? '✅ ok ' + daysLeft + ' day(s) remaining' : '❌ overdue - please check on me'}</p>
     `;
 
     // overlay behavior
@@ -148,7 +148,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILZQZd3Y2SSio2DN97JDQ5DY8zMrk571BtqYjeMVE+E2
 
 <hr>
 <div class="footer">
-  <p>last update to this page: October 18, 2025.</p>
+  <p>last update to this page: October 19, 2025.</p>
 </div>
 </main>
 </body>
