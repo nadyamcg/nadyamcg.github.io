@@ -9,4 +9,8 @@ git remote set-url origin git@github.com:<USER>/<REPO>.git
 both will update `canary/canary.json`, commit, and push over SSH.
 ## optional guard
 `make setup-hook` installs a pre-commit hook that blocks HTTPS remotes and ensures the canary actually changed (needs `jq`).
-> do not automate. manual action is the proof-of-life.
+### notes
+if you're using linux, be sure to mark `refresh_canary.py` as an executable:
+`chmod +x refresh_canary.py`
+
+> do not automate this process. manual action is the proof-of-life.
