@@ -1,0 +1,10 @@
+{
+  "projects": [
+    {
+      "title": "hex color sorter",
+      "slug": "hex-sort",
+      "date": "2025-12-18",
+      "summary": "sort hex colors by hue or luminance. simple interface with localStorage persistence."
+    }
+  ]
+}

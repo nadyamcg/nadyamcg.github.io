@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>hex color sorter</title>
+<meta name="description" content="hex color sorter">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.color-input-section {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.color-input {
+  flex: 1;
+  background: rgba(17,17,34,.35);
+  border: 1px solid var(--rule);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: ui-monospace, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: medium;
+}
+.color-input::placeholder {
+  color: var(--muted);
+  opacity: 0.6;
+}
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+  background: #000;
+  padding: 8px;
+  border-radius: 4px;
+  isolation: isolate;
+}
+.color-square {
+  aspect-ratio: 1;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  overflow: hidden;
+  opacity: 1;
+}
+.color-square:hover::after {
+  content: '×';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--accent);
+}
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.status-text {
+  color: var(--muted);
+  font-size: small;
+  margin-top: 8px;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>hex color sorter</h1>
+
+<div id="navbar">
+  <a href="/index.html">home</a> |
+  <a href="/blog/">blog</a> |
+  <a href="/web-projects/">web projects</a> |
+  <a href="/canary/">canary</a> |
+  <a href="/contact/">contact</a>
+</div>
+<hr>
+
+<div class="stack">
+  <div class="note">
+    <div class="color-input-section">
+      <input
+        type="text"
+        id="hex-input"
+        class="color-input"
+        placeholder="#ff0000 or ff0000"
+      >
+      <button id="add-btn" class="btn">add</button>
+    </div>
+    <p class="status-text" id="status">enter a hex color to begin.</p>
+  </div>
+
+  <div class="note">
+    <div class="controls">
+      <button id="sort-hue" class="btn">sort by hue</button>
+      <button id="sort-lum" class="btn">sort by luminance</button>
+      <button id="clear-all" class="btn">clear all</button>
+      <button id="export-btn" class="btn">export</button>
+      <button id="import-btn" class="btn">import</button>
+    </div>
+  </div>
+
+  <div class="note">
+    <h3 style="margin-top:0;">collection (<span id="count">0</span>)</h3>
+    <div id="color-grid" class="color-grid"></div>
+  </div>
+
+  <div class="note small">
+    <p><b>how to use:</b></p>
+    <ul class="list">
+      <li>add hex colors one at a time (with or without #)</li>
+      <li>click squares to remove individual colors</li>
+      <li>sort by hue (red→purple) or luminance (light→dark)</li>
+      <li>export copies JSON array to clipboard</li>
+      <li>import pastes JSON array from clipboard</li>
+      <li>colors auto-save to localStorage</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+<div class="footer">
+  <p>last update to this page: December 18, 2025.</p>
+</div>
+</main>
+
+<script>
+// global state
+let colors = [];
+const STORAGE_KEY = 'hex-sort-colors';
+
+// DOM elements
+const hexInput = document.getElementById('hex-input');
+const addBtn = document.getElementById('add-btn');
+const status = document.getElementById('status');
+const colorGrid = document.getElementById('color-grid');
+const countEl = document.getElementById('count');
+const sortHueBtn = document.getElementById('sort-hue');
+const sortLumBtn = document.getElementById('sort-lum');
+const clearBtn = document.getElementById('clear-all');
+const exportBtn = document.getElementById('export-btn');
+const importBtn = document.getElementById('import-btn');
+
+// color conversion functions
+function hexToRgb(hex) {
+  hex = hex.replace(/^#/, '');
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return [r, g, b];
+}
+
+function rgbToHsl(r, g, b) {
+  r /= 255;
+  g /= 255;
+  b /= 255;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const l = (max + min) / 2;
+  let h = 0;
+  let s = 0;
+
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d) + (g < b ? 6 : 0); break;
+      case g: h = ((b - r) / d) + 2; break;
+      case b: h = ((r - g) / d) + 4; break;
+    }
+    h /= 6;
+  }
+  return [h * 360, s * 100, l * 100];
+}
+
+// validation
+function normalizeHex(input) {
+  let hex = input.trim().toLowerCase();
+  if (hex.startsWith('#')) hex = hex.substring(1);
+  if (!/^[0-9a-f]{6}$/.test(hex)) return null;
+  return '#' + hex;
+}
+
+// persistence
+function saveColors() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(colors));
+  } catch(e) {
+    console.error('Failed to save:', e);
+  }
+}
+
+function loadColors() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      colors = JSON.parse(stored);
+      render();
+    }
+  } catch(e) {
+    console.error('Failed to load:', e);
+  }
+}
+
+// rendering
+function render() {
+  colorGrid.innerHTML = '';
+  countEl.textContent = colors.length;
+
+  if (colors.length === 0) {
+    colorGrid.innerHTML = '<p class="small" style="grid-column:1/-1;">no colors yet.</p>';
+    return;
+  }
+
+  colors.forEach((hex, index) => {
+    const square = document.createElement('div');
+    square.className = 'color-square';
+    square.style.backgroundColor = hex;
+    square.title = hex;
+    square.addEventListener('click', () => removeColor(index));
+    colorGrid.appendChild(square);
+  });
+}
+
+// actions
+function addColor() {
+  const normalized = normalizeHex(hexInput.value);
+  if (!normalized) {
+    status.textContent = 'invalid hex format. use #ff0000 or ff0000';
+    status.style.color = 'var(--accent)';
+    return;
+  }
+
+  if (colors.includes(normalized)) {
+    status.textContent = 'color already in collection.';
+    status.style.color = 'var(--muted)';
+    return;
+  }
+
+  colors.push(normalized);
+  saveColors();
+  render();
+  hexInput.value = '';
+  status.textContent = `added ${normalized}. total: ${colors.length}`;
+  status.style.color = 'var(--text)';
+}
+
+function removeColor(index) {
+  const removed = colors[index];
+  colors.splice(index, 1);
+  saveColors();
+  render();
+  status.textContent = `removed ${removed}. total: ${colors.length}`;
+  status.style.color = 'var(--text)';
+}
+
+function sortByHue() {
+  colors.sort((a, b) => {
+    const rgb1 = hexToRgb(a);
+    const rgb2 = hexToRgb(b);
+    const hsl1 = rgbToHsl(rgb1[0], rgb1[1], rgb1[2]);
+    const hsl2 = rgbToHsl(rgb2[0], rgb2[1], rgb2[2]);
+
+    // primary: hue
+    if (Math.abs(hsl1[0] - hsl2[0]) > 1) {
+      return hsl1[0] - hsl2[0];
+    }
+    // secondary: saturation (higher first)
+    if (Math.abs(hsl1[1] - hsl2[1]) > 1) {
+      return hsl2[1] - hsl1[1];
+    }
+    // tertiary: lightness
+    return hsl1[2] - hsl2[2];
+  });
+  saveColors();
+  render();
+  status.textContent = 'sorted by hue (red→purple).';
+  status.style.color = 'var(--text)';
+}
+
+function sortByLuminance() {
+  colors.sort((a, b) => {
+    const rgb1 = hexToRgb(a);
+    const rgb2 = hexToRgb(b);
+    const hsl1 = rgbToHsl(rgb1[0], rgb1[1], rgb1[2]);
+    const hsl2 = rgbToHsl(rgb2[0], rgb2[1], rgb2[2]);
+    return hsl1[2] - hsl2[2]; // light to dark
+  });
+  saveColors();
+  render();
+  status.textContent = 'sorted by luminance (light→dark).';
+  status.style.color = 'var(--text)';
+}
+
+function clearAll() {
+  if (colors.length === 0) return;
+  if (!confirm(`clear all ${colors.length} colors?`)) return;
+  colors = [];
+  saveColors();
+  render();
+  status.textContent = 'cleared all colors.';
+  status.style.color = 'var(--text)';
+}
+
+async function exportColors() {
+  if (colors.length === 0) {
+    status.textContent = 'no colors to export.';
+    status.style.color = 'var(--muted)';
+    return;
+  }
+
+  const json = JSON.stringify(colors, null, 2);
+  try {
+    await navigator.clipboard.writeText(json);
+    status.textContent = `copied ${colors.length} colors to clipboard.`;
+    status.style.color = 'var(--text)';
+  } catch(e) {
+    status.textContent = 'failed to copy. check console for JSON.';
+    status.style.color = 'var(--accent)';
+    console.log('Export JSON:', json);
+  }
+}
+
+async function importColors() {
+  try {
+    const text = await navigator.clipboard.readText();
+    const imported = JSON.parse(text);
+
+    if (!Array.isArray(imported)) {
+      throw new Error('not an array');
+    }
+
+    const valid = imported.filter(item => {
+      const normalized = normalizeHex(item);
+      return normalized !== null;
+    }).map(item => normalizeHex(item));
+
+    if (valid.length === 0) {
+      status.textContent = 'no valid hex colors found.';
+      status.style.color = 'var(--accent)';
+      return;
+    }
+
+    // merge with existing, removing duplicates
+    const merged = [...new Set([...colors, ...valid])];
+    colors = merged;
+    saveColors();
+    render();
+    status.textContent = `imported ${valid.length} colors. total: ${colors.length}`;
+    status.style.color = 'var(--text)';
+  } catch(e) {
+    status.textContent = 'import failed. paste JSON array: ["#ff0000", "#00ff00"]';
+    status.style.color = 'var(--accent)';
+  }
+}
+
+// event listeners
+addBtn.addEventListener('click', addColor);
+hexInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') addColor();
+});
+sortHueBtn.addEventListener('click', sortByHue);
+sortLumBtn.addEventListener('click', sortByLuminance);
+clearBtn.addEventListener('click', clearAll);
+exportBtn.addEventListener('click', exportColors);
+importBtn.addEventListener('click', importColors);
+
+// initialize
+loadColors();
+</script>
+</body>
+<script src="/neko/neko.js" defer></script>
+</html>
