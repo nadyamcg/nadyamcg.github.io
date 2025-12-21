@@ -15,6 +15,7 @@
   <nav id="navbar">
     <a href="/index.html">home</a> |
     <a href="/blog/">blog</a> |
+    <a href="/web-projects/">web projects</a> |
     <a href="/canary/">canary</a> |
     <a href="/contact/">contact</a>
   </nav>
@@ -22,64 +23,167 @@
   <hr>
 
   <section class="stack">
-    <!-- intro -->
-    <p>my name is <b>Nadezhda</b>, but I simply go by <b>Nadya</b>.</p>
-    <p><b>forget me not</b>.</p>
+    <div class="intro">
+      <p class="greeting">my name is <b>Nadezhda</b>, but I simply go by <b>Nadya</b>.</p>
+      <span class="request">forget me not.</span>
+      <p class="greeting">· • —– ٠ ✤ ٠ —– • ·</p>
+      <p class="small" style="margin-top:0dem;"><a href="https://github.com/nadyamcg">github</a> | <a href="https://discord.com/users/1319646536577192029">discord</a></p>
     </div>
 
-    <!-- now -->
-    <section id="now">
-      <div class="note highlight">
-        <h2><span class="emoji"></span> now</h2>
-        <p class="small">
-          tinkering with <b>Arch Linux</b>, studying computer science, and learning to mod <b>Vintage Story</b> — currently leading 3 modding projects. I also write about <b>digital identity</b>  and <b>mental illness</b> sometimes.
-        </p>
+  <section id="now">
+    <div class="contact-card">
+      <h2>now</h2>
+      <p class="small">
+        tinkering with <b>Arch Linux</b>, studying computer science, reconnecting with <b>MIDI</b>, and learning to mod <b>Vintage Story</b> — currently leading 3 modding projects. I also occasionally write about <b>digital identity</b> and <b>mental illness</b>, observations from the perspective of the schizoaffective experience.
+      </p>
+    </div>
+  </section>
+
+  <!-- recent + explore -->
+  <section class="two-col">
+    <div class="note" id="recent">
+      <p class="small"><b>latest:</b> loading…</p>
+    </div>
+    <div class="contact-card">
+      <p class="small"><b>explore:</b></p>
+      <ul class="list small">
+        <li><a href="https://github.com/nadyamcg">github</a> - my code and projects.</li>
+        <li><a href="/blog/">read the blog</a> - what I think and feel.</li>
+        <li><a href="/web projects/">try a web app</a> - tools and experiments.</li>
+        <li><a href="/canary/">check the canary</a> - proof I'm still here.</li>
+        <li><a href="/contact/">contact</a> - where you can reach me.</li>
+      </ul>
+    </div>
+  </section>
+
+<!-- ssh identity -->
+<section class="note">
+  <div style="margin-bottom: 1.5em;">
+    <h2 style="margin: 0 0 0.5em 0; text-align: center;">verification</h2>
+    <p class="small" style="margin: 0; text-align: center;">
+      I sign updates and push over SSH with the following public key:
+    </p>
+  </div>
+
+  <div style="
+    background: rgba(17, 17, 34, 0.25);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px;
+    margin: 1.5em 0;
+    text-align: left;
+  ">
+    <div class="copyable-block">
+      <p class="small" style="margin: 0 0 0.5em 0; color: var(--accent);">ssh-ed25519</p>
+      <pre class="small mono" id="ssh-key" style="
+        margin: 0 0 1em 0;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+        overflow-x: auto;
+        white-space: pre;
+        user-select: all;
+        cursor: text;
+      ">
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILZQZd3Y2SSio2DN97JDQ5DY8zMrk571BtqYjeMVE+E2 nadyamcg@proton.me</pre>
+      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <button class="btn copy-btn" onclick="copySshKey()" style="font-size: 0.9em;">
+          <span class="btn-text">copy key</span>
+        </button>
+        <span class="small mono" style="color: var(--accent);">
+          fingerprint (sha256): xe2MQ5wNdqNQOZKJuDvKEh95NMZuc5fIY3z6hD2l2yg
+        </span>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- recent + explore -->
-    <section class="two-col">
-      <div class="note" id="recent">
-        <p class="small"><b>latest:</b> loading…</p>
-      </div>
-      <div class="note">
-        <p class="small"><b>explore:</b></p>
-        <ul class="list small">
-          <li><a href="/blog/">read the blog</a> - what I think and feel.</li>
-          <li><a href="/canary/">check the canary</a> - proof I’m still here.</li>
-          <li><a href="/contact/">contact</a> - async, text-first.</li>
-        </ul>
-      </div>
-    </section>
+  <div class="visual-print-container" style="
+    text-align: center;
+    padding: 1em;
+    position: relative;
+  ">
+    <div style="
+      display: inline-block;
+      position: relative;
+    ">
+      <pre class="fingerprint-art" style="
+        font-family: ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.95em;
+        line-height: 1.2;
+        margin: 0;
+        text-align: center;
+        letter-spacing: 0;
+        color: var(--text);
+        position: relative;
+        z-index: 2;
+      ">
++--[ED25519 256]--+
+|     . ..++.o    |
+|    . . +=oB .   |
+|   . .   .B.o    |
+|    *    o +     |
+|   = = .S.+ o    |
+|. o B Bo+o .     |
+| + = =.==        |
+|. +   E. =       |
+| .     o+ .      |
++----[SHA256]-----+</pre>
+      <div style="
+        position: absolute;
+        top: -10px;
+        left: -12px;
+        right: -12px;
+        bottom: -8px;
+        border: 1px solid rgba(153, 170, 255, 0.1);
+        border-radius: 4px;
+        z-index: 1;
+        pointer-events: none;
+      "></div>
+    </div>
+  </div>  
+  <p class="small" style="text-align: center; margin: 1em 0;">
+    see <a href="/canary/">/canary/</a> for the live token and update window.
+  </p>
+</section>
 
-    <!-- identity -->
-    <section class="note">
-      <p class="small"><b>identity:</b> I sign updates and push over ssh. public key:</p>
-      <pre class="small mono">
-    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILZQZd3Y2SSio2DN97JDQ5DY8zMrk571BtqYjeMVE+E2 nadyamcg@proton.me
-    fingerprint (sha256): xe2MQ5wNdqNQOZKJuDvKEh95NMZuc5fIY3z6hD2l2yg
+<script>
+function copySshKey() {
+  const keyElement = document.getElementById('ssh-key');
+  const keyText = keyElement.textContent.trim();
+  const btn = document.querySelector('.copy-btn .btn-text');
+  
+  navigator.clipboard.writeText(keyText).then(() => {
+    const originalText = btn.textContent;
+    btn.textContent = 'copied';
+    
+    setTimeout(() => {
+      btn.textContent = originalText;
+    }, 2000);
+  }).catch(err => {
+    console.error('failed to copy: ', err);
+    btn.textContent = 'failed';
+    setTimeout(() => {
+      btn.textContent = 'copy key';
+    }, 2000);
+  });
+}
 
-    visual fingerprint:
-    +--[ED25519 256]--+
-    |     . ..++.o    |
-    |    . . +=oB .   |
-    |   . .   .B.o    |
-    |    *    o +     |
-    |   = = .S.+ o    |
-    |. o B Bo+o .     |
-    | + = =.==        |
-    |. +   E. =       |
-    | .     o+ .      |
-    +----[SHA256]-----+
-      </pre>
-      <p class="small">see <a href="/canary/">/canary/</a> for the live token and update window.</p>
-    </section>
-
+// select entire key when clicking on the pre element
+document.getElementById('ssh-key').addEventListener('click', function(e) {
+  if (window.getSelection().toString() === '') {
+    const range = document.createRange();
+    range.selectNodeContents(this);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+});
+</script>
 
   <hr>
 
   <footer class="footer">
-    <p>last update to this page: December 15, 2025.</p>
+    <p>last update to this page: December 18, 2025.</p>
   </footer>
 </main>
 
@@ -108,4 +212,5 @@
 })();
 </script>
 </body>
+<script src="/neko/neko.js" defer></script>
 </html>
