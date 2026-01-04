@@ -12,6 +12,13 @@
       "slug": "better-days",
       "date": "2025-10-16",
       "summary": "have I seen better days?"
+    },
+
+    {
+      "title": "two years later",
+      "slug": "two-years-later",
+      "date": "2026-1-4",
+      "summary": "the day I tried to kill myself."
     }
   ]
 }
