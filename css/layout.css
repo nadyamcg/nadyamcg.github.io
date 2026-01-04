@@ -1,0 +1,36 @@
+/* layout: main container, navbar, footer, responsive */
+
+main {
+    width: min(100%, 860px);
+    margin-inline: auto;
+    min-width: 0;
+}
+
+#navbar {
+    letter-spacing: 0.1em;
+}
+
+#navbar a {
+    margin: 0 10px;
+    transition: text-shadow 0.3s ease;
+}
+
+#navbar a:hover {
+    text-shadow: 0 0 6px var(--glow);
+}
+
+hr {
+    margin-top: 20px;
+    border-color: var(--rule)
+}
+
+.footer {
+    text-align: left;
+    margin-top: 20px
+}
+
+@media (max-width: 800px) {
+    body {
+        margin: var(--outer-space)
+    }
+}
