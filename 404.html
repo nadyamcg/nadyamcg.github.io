@@ -1,84 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>404 - not found</title>
-<meta name="description" content="page not found">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>４０４</title>
+<meta name="viewport" content="width=device-width, initial-scale=0.5">
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.png" type="image/png">
-<link rel="stylesheet" href="/styles.css">
+<style>
+:root {
+    --bg: #000;
+    --text: #8899ff;
+    --headers: #9999aa;
+    --accent: #00a0c0;
+    --glow: rgba(136, 153, 255, 0.6);
+    --glow-soft: rgba(136, 153, 255, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+}
+
+body {
+    background-color: var(--bg);
+    background-image: url('assets/bg-noise.gif');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: sylfaen, times, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* scanlines overlay */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* fade in */
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* text glow pulse */
+@keyframes glow-pulse {
+    0%, 100% { text-shadow: 0 0 4px var(--glow), 0 0 12px var(--glow-soft); }
+    50% { text-shadow: 0 0 8px var(--glow), 0 0 20px var(--glow-soft); }
+}
+
+/* blink */
+@keyframes blink {
+    50% { opacity: 0.2; }
+}
+
+.content {
+    position: absolute;
+    top: 8%;
+    left: 6%;
+    animation: fade-in 0.8s ease-out;
+}
+
+.code {
+    font-size: 80px;
+    letter-spacing: 0.3em;
+    color: var(--text);
+    text-shadow: 0 0 6px var(--glow), 0 0 16px var(--glow-soft);
+    animation: glow-pulse 4s ease-in-out infinite;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 18px;
+    letter-spacing: 0.4em;
+    color: var(--headers);
+    text-shadow: 0 0 4px var(--glow-soft);
+    margin-bottom: 60px;
+    text-transform: uppercase;
+}
+
+.message {
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    line-height: 2.2;
+    color: var(--text);
+    opacity: 0.8;
+    max-width: 500px;
+}
+
+.message a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: text-shadow 0.3s ease;
+}
+
+.message a:hover {
+    text-shadow: 0 0 8px var(--accent);
+}
+
+.flower {
+    display: block;
+    margin-top: 50px;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--headers);
+    opacity: 0.5;
+}
+
+.flower-icon {
+    display: inline-block;
+    animation: blink 3s ease-in-out infinite;
+}
+
+/* decorative lines */
+.deco {
+    position: absolute;
+    top: 6%;
+    right: 8%;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    opacity: 0.15;
+    text-align: right;
+    line-height: 1.8;
+}
+
+.deco span {
+    display: block;
+}
+
+.deco .d1 { animation: blink 2s linear infinite; }
+.deco .d2 { animation: blink 2s linear infinite; animation-delay: 0.4s; }
+.deco .d3 { animation: blink 2s linear infinite; animation-delay: 0.8s; }
+.deco .d4 { animation: blink 2s linear infinite; animation-delay: 1.2s; }
+.deco .d5 { animation: blink 2s linear infinite; animation-delay: 1.6s; }
+
+/* image positioned bottom right */
+.figure {
+    position: fixed;
+    bottom: -1px;
+    right: 5%;
+    width: 400px;
+    height: auto;
+    opacity: 0.7;
+    pointer-events: none;
+    animation: fade-in 1.2s ease-out;
+    z-index: 50;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+    .content {
+        top: 5%;
+        left: 5%;
+        right: 5%;
+    }
+    .code {
+        font-size: 48px;
+    }
+    .title {
+        font-size: 14px;
+        letter-spacing: 0.2em;
+    }
+    .deco {
+        display: none;
+    }
+    .figure {
+        width: 280px;
+        right: 0;
+        opacity: 0.5;
+    }
+}
+</style>
 </head>
 <body>
-<main>
-  <h1>nadya's space</h1>
 
-  <nav id="navbar">
-    <a href="/index.html">home</a> |
-    <a href="/blog/">blog</a> |
-    <a href="/web-projects/">web projects</a> |
-    <a href="/canary/">canary</a> |
-    <a href="/contact/">contact</a>
-  </nav>
-  <hr>
+<div class="content">
+    <div class="code">４０４</div>
+    <div class="title">страница не найдена</div>
 
-  <section class="stack">
-    <div class="note">
-      <h2>404 - not found</h2>
-      <p class="small">the page you've asked for isn’t here!</p>
+    <div class="message">
+        ты заблудился.<br>
+        нет такой страницы.<br><br>
+
+        <a href="/index.html">← вернуться домой</a><br>
+        <a href="/blog/">← читать блог</a><br>
+        <a href="/contact/">← связаться</a>
+
+        <span class="flower">
+            <span class="flower-icon">✿</span> незабудка
+        </span>
     </div>
+</div>
 
-    <section class="two-col">
-      <div class="note" id="recent">
-        <p class="small"><b>latest:</b> loading…</p>
-      </div>
-      <div class="note">
-        <p class="small"><b>try these:</b></p>
-        <ul class="list small">
-          <li><a href="/index.html">go to the homepage</a></li>
-          <li><a href="/blog/">read the blog</a></li>
-          <li><a href="/canary/">check the canary</a></li>
-          <li><a href="/contact/">contact me</a></li>
-        </ul>
-      </div>
-    </section>
+<div class="deco">
+    <span class="d1">║░░░░░░░░░░░║</span>
+    <span class="d2">║░▒▒▒▒▒▒▒▒░║</span>
+    <span class="d3">║░▒░░░░░░▒░║</span>
+    <span class="d4">║░▒▒▒▒▒▒▒▒░║</span>
+    <span class="d5">║░░░░░░░░░░░║</span>
+</div>
 
-    <div class="note">
-      <p class="small">if a link brought you here from my site, I probably moved or renamed something. it's also possible that I have deleted a blog post. if you really want to see it then just check the commit history.</p>
-    </div>
-  </section>
+<!-- <img class="figure" src="/assets/404-figure.gif" alt=""> -->
 
-  <hr>
-
-  <footer class="footer">
-    <p>last update to this page: December 18, 2025.</p>
-  </footer>
-</main>
-
-<!-- recent post loader (same pattern as home) -->
-<script>
-(async function(){
-  try{
-    const res = await fetch('/blog/posts.json',{cache:'no-cache'});
-    const data = await res.json();
-    const posts = (data.posts||[]).slice().sort((a,b)=> a.date < b.date ? 1 : -1);
-    const p = posts[0];
-    const el = document.getElementById('recent');
-    if(!p){
-      el.innerHTML = '<p class="small"><b>latest:</b> nothing posted yet.</p>';
-      return;
-    }
-    el.innerHTML = `
-      <p class="small" style="margin:0;">
-        <b>latest:</b> <a href="/blog/${p.slug}.html">${p.title}</a> — ${p.date}
-      </p>
-      ${p.summary ? `<p class="small" style="margin-top:8px;">${p.summary}</p>` : ''}
-    `;
-  }catch(e){
-    document.getElementById('recent').innerHTML = '<p class="small"><b>latest:</b> could not load posts.</p>';
-  }
-};
-</script>
 </body>
-<script src="/neko/neko.js" defer></script>
 </html>
