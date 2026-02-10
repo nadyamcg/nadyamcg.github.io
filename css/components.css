@@ -1,8 +1,13 @@
-/* components: note, buttons, modals, intro sections */
+/* components: note, buttons, modals, intro sections, cursors */
+
+/* interactive cursor for clickable elements */
+a, button, label, select, .file-label, summary {
+    cursor: url('/assets/cursor/cursor2.gif'), pointer;
+}
 
 .note {
     border: 1px solid var(--rule);
-    border-radius: 6px;
+    border-radius: 0px;
     background: rgba(17, 17, 34, .35);
     padding: 16px 18px;
     display: block;
@@ -27,11 +32,9 @@
 
 .intro {
     text-align: center;
-    margin-bottom: 18px;
 }
 
 .intro p {
-    margin: 0;
     text-align: center;
 }
 
@@ -42,13 +45,11 @@
 
 .intro .request {
     display: block;
-    margin-top: 0.5em;
     font-size: large;
     opacity: 0.8;
 }
 
 .intro-note {
-    margin: 24px auto;
     text-align: center;
     max-width: 500px;
 }
@@ -57,7 +58,6 @@
     font-size: 1.1em;
     color: var(--headers);
     font-style: italic;
-    margin: 0;
     text-align: center;
 }
 
@@ -66,12 +66,24 @@
     color: var(--link);
     border: 1px solid var(--rule);
     padding: 8px 12px;
-    border-radius: 6px;
+    border-radius: 0px;
     cursor: pointer;
 }
 
 .btn:hover {
-    background: #000044
+    background: var(--fmnDarkest);
+}
+
+/* utility: action row aligned right */
+.actions-right {
+    text-align: right;
+}
+
+/* utility: preformatted code block */
+.pre-block {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    text-align: left;
+    overflow-x: auto;
 }
 
 /* canary overlay/modal */
@@ -101,4 +113,11 @@
     font-weight: 600;
     margin: 6px 0 10px 0;
     color: var(--accent);
+}
+
+.page-decor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    image-rendering: pixelated;
 }

@@ -1,0 +1,112 @@
+/* body::before { background-image: url('/assets/bg/wind4.gif'); }
+ *
+ * body::before { opacity: 0.3; animation: none; }
+ *
+ * main { background: rgba(0, 0, 0, 0.75); }
+ *
+ * <img class="page-decor" id="decor-xxx" ...>
+ * #decor-moon { bottom: 20px; right: 40px; width: 120px; opacity: 0.6; }
+ * ------------------------------------------------ */
+
+/* homepage-specific styles */
+
+/* ssh verification section */
+.ssh-header {
+  margin-bottom: 1.5em;
+}
+
+.ssh-header h2 {
+  margin: 0 0 0.5em 0;
+  text-align: center;
+}
+
+.ssh-header p {
+  margin: 0;
+  text-align: center;
+}
+
+.ssh-key-box {
+  background: rgba(17, 17, 34, 0.25);
+  border: 1px solid var(--rule);
+  border-radius: 0px;
+  padding: 16px;
+  margin: 1.5em 0;
+  text-align: left;
+}
+
+.ssh-key-label {
+  margin: 0 0 0.5em 0;
+  color: var(--accent);
+}
+
+.ssh-key-pre {
+  margin: 0 0 1em 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0px;
+  overflow-x: auto;
+  white-space: pre;
+  user-select: all;
+  cursor: text;
+}
+
+.ssh-key-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ssh-key-actions .btn {
+  font-size: 0.9em;
+}
+
+.ssh-fingerprint-text {
+  color: var(--accent);
+}
+
+/* fingerprint art display */
+.fingerprint-container {
+  text-align: center;
+  padding: 1em;
+  position: relative;
+}
+
+.fingerprint-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.fingerprint-art {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.95em;
+  line-height: 1.2;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0;
+  color: var(--text);
+  position: relative;
+  z-index: 2;
+}
+
+.fingerprint-border {
+  position: absolute;
+  top: -10px;
+  left: -12px;
+  right: -12px;
+  bottom: -8px;
+  border: 1px solid rgba(153, 170, 255, 0.1);
+  border-radius: 0px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ssh-footer {
+  text-align: center;
+  margin: 1em 0;
+}
+
+/* intro social links spacing */
+.intro-links {
+  margin-top: 0;
+}

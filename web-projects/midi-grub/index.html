@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="convert MIDI files to GRUB_INIT_TUNE boot tune format.">
-  <title>MIDI to GRUB tune converter</title>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/effects.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <title>⌈ＭＩＤＩ　ｔｏ　ＧＲＵＢ⌋</title>
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="stylesheet" href="./css/art.css">
 </head>
 <body>
   <main>
-    <h1>MIDI to GRUB tune</h1>
-    <p class="subtitle">convert MIDI files to GRUB_INIT_TUNE format</p>
+    <h1>ＭＩＤＩ　ｔｏ　ＧＲＵＢ　ｔｕｎｅ</h1>
+    <p class="subtitle">convert MIDI files to GRUB boot tunes</p>
 
     <nav id="navbar">
       <a href="/index.html">home</a> |
@@ -36,7 +36,7 @@
       </div>
       <div id="file-info" class="file-info hidden">
         <span id="file-name"></span>
-        <button id="clear-file" type="button" class="btn-small">Clear</button>
+        <button id="clear-file" type="button" class="btn-small">clear</button>
       </div>
     </section>
 
@@ -103,7 +103,7 @@
     <section id="tune-editor-section">
       <div class="tune-editor-header">
         <h2>GRUB tune</h2>
-        <button id="clear-tune-btn" type="button" class="btn-small" title="Clear tune">Clear</button>
+        <button id="clear-tune-btn" type="button" class="btn-small" title="clear tune">clear</button>
       </div>
 
       <div id="tune-warnings" class="warning-box hidden">
@@ -159,7 +159,7 @@
       <h3>example tunes</h3>
       <div class="examples-gallery">
         <div class="example-card" data-tune="480 262 1 440 1">
-          <img src="assets/suprdsk00.gif" alt="cassette" class="example-art" loading="lazy">
+          <img src="/assets/objects/suprdsk00.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Single A4 Note</div>
             <div class="example-desc">default GRUB tone</div>
@@ -171,7 +171,7 @@
         </div>
 
         <div class="example-card" data-tune="600 988 1 1319 4">
-          <img src="assets/suprdsk01.gif" alt="cassette" class="example-art" loading="lazy">
+          <img src="/assets/objects/suprdsk01.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Mario Coin</div>
             <div class="example-desc">my life is like a video game</div>
@@ -183,7 +183,7 @@
         </div>
 
         <div class="example-card" data-tune="1750 523 1 392 1 523 1 659 1 784 1 1047 1 784 1 415 1 523 1 622 1 831 1 622 1 831 1 1046 1 1244 1 1661 1 1244 1 466 1 587 1 698 1 932 1 1185 1 1397 1 1865 1 1397 1">
-          <img src="assets/suprdsk02.gif" alt="cassette" class="example-art" loading="lazy">
+          <img src="/assets/objects/suprdsk02.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Mario Powerup</div>
             <div class="example-desc">this one just sounds cool</div>
@@ -195,7 +195,7 @@
         </div>
 
         <div class="example-card" data-tune="440 1319 1 1175 1 740 2 831 2 1100 1 1000 1 587 2 659 2 988 1 880 1 554 2 659 2 880 6">
-          <img src="assets/suprdsk03.gif" alt="cassette" class="example-art" loading="lazy">
+          <img src="/assets/objects/suprdsk03.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Nokia Ringtone</div>
             <div class="example-desc">do u have games on ur phone</div>
@@ -206,8 +206,8 @@
           </div>
         </div>
 
-                <div class="example-card" data-tune="57600 784 61 0 92 784 62 0 92 784 61 0 123 784 31 0 123 784 31 0 122 784 62 0 92 784 61 0 585 932 61 0 92 932 62 0 92 932 61 0 123 932 31 0 123 932 31 0 122 932 62 0 92 932 61 0 679 1047 20 1319 20 1047 20 1319 20 1047 15 0 5 1319 20 1047 128">
-          <img src="assets/suprdsk00.gif" alt="cassette" class="example-art" loading="lazy">
+        <div class="example-card" data-tune="57820 784 62 0 92 784 62 0 92 784 62 0 92 784 62 0 92 784 62 0 492 932 62 0 92 932 62 0 92 932 62 0 92 932 62 0 92 932 62 0 92 932 62 0 92 932 62 0 492 1047 20 1319 20 1047 20 1319 20 1047 20 1319 20 1047 123">
+          <img src="/assets/objects/suprdsk00.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Star Wars Battlefront</div>
             <div class="example-desc">beep beep beep beep beep</div>
@@ -218,8 +218,8 @@
           </div>
         </div>
 
-        <div class="example-card" data-tune="48000 622 341 0 19 311 113 0 7 466 227 0 13 415 480 622 227 0 13 466 480">
-          <img src="assets/suprdsk01.gif" alt="cassette" class="example-art" loading="lazy">
+        <div class="example-card" data-tune="48000 622 341 0 14 311 113 0 7 466 227 0 14 415 480 622 227 0 14 466 4800">
+          <img src="/assets/objects/suprdsk01.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Windows XP Startup</div>
             <div class="example-desc">"who's been drawing dicks?"</div>
@@ -231,7 +231,7 @@
         </div>
 
         <div class="example-card" data-tune="43200 294 238 0 2 294 240 392 720 370 240 330 240 370 240 392 240 440 240 392 480 294 720">
-          <img src="assets/suprdsk02.gif" alt="cassette" class="example-art" loading="lazy">
+          <img src="/assets/objects/suprdsk02.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Radio Moscow</div>
             <div class="example-desc">позывные радио москвы</div>
@@ -243,7 +243,7 @@
         </div>
 
         <div class="example-card" data-tune="3378 330 34 0 2 247 5 0 2 247 4 0 2 330 11 0 2 247 10 0 2 330 11 0 2 415 10 0 2 494 23 0 2 440 21 0 3 415 23 0 2 370 10 0 2 247 11 0 2 330 34 0 2 311 11 0 2 370 10 0 2 330 11 0 2 247 10 0 2 208 11 0 2 277 46 0 2 220 35 0 2 277 10 0 2 370 35 0 2 330 10 0 2 311 11 0 2 277 10 0 2 247 17 0 2 220 4 0 2 208 70">
-          <img src="assets/suprdsk03.gif" alt="cassette" class="example-art" loading="lazy">
+          <img src="/assets/objects/suprdsk03.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Internationale</div>
             <div class="example-desc">C64 version</div>
@@ -255,7 +255,7 @@
         </div>
 
         <div class="example-card" data-tune="76860 233 480 294 1714 0 16 233 193 294 480 311 480 294 480 262 288 233 993">
-          <img src="assets/suprdsk00.gif" alt="cassette" class="example-art" loading="lazy">
+          <img src="/assets/objects/suprdsk00.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Komm, süsser Tod</div>
             <div class="example-desc">End of Evangelion</div>
@@ -267,7 +267,7 @@
         </div>
 
         <div class="example-card" data-tune="40800 523 238 0 2 466 238 0 2 440 455 0 25 392 227 0 13 440 683 0 37 349 455">
-          <img src="assets/suprdsk01.gif" alt="cassette" class="example-art" loading="lazy">
+          <img src="/assets/objects/suprdsk01.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Cruel World</div>
             <div class="example-desc">Red Dead Redemption 2</div>
@@ -279,7 +279,7 @@
         </div>
 
         <div class="example-card" data-tune="48340 587 240 554 240 494 240 554 240 587 240 659 360 740 360 494 900">
-          <img src="assets/suprdsk02.gif" alt="cassette" class="example-art" loading="lazy">
+          <img src="/assets/objects/suprdsk02.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">Duvet</div>
             <div class="example-desc">Serial Experiments Lain</div>
@@ -291,7 +291,7 @@
         </div>
 
         <div class="example-card" data-tune="34560 659 96 0 96 659 96 0 96 880 96 0 192 988 96 1047 96">
-          <img src="assets/suprdsk03.gif" alt="cassette" class="example-art" loading="lazy">
+          <img src="/assets/objects/suprdsk03.gif" alt="cassette" class="example-art" loading="lazy">
           <div class="example-info">
             <div class="example-name">We Are Charlie Kirk</div>
             <div class="example-desc">we carry the flame</div>
@@ -384,7 +384,7 @@
 
       <h3>step 4: convert notes to Hz and ticks</h3>
       <p>now translate to GRUB format. get your <code class="syn-tempo">tempo</code>, <code class="syn-tempo">480</code>, and figure out the frequency for each note you desire (rounded to the nearest integer) and its <code class="syn-duration">duration</code> in ticks.</p>
-      
+
       <div class="calculation-steps">
         <p><code>C4 (261.63 Hz, quarter note): <span class="syn-freq">262</span> <span class="syn-duration">4</span></code></p>
         <p><code>D4 (293.67 Hz, quarter note): <span class="syn-freq">294</span> <span class="syn-duration">4</span></code></p>
@@ -398,7 +398,7 @@
       <code><span class="syn-tempo">480</span> <span class="syn-freq">262</span> <span class="syn-duration">4</span> <span class="syn-freq">294</span> <span class="syn-duration">4</span> <span class="syn-freq">330</span> <span class="syn-duration">4</span> <span class="syn-freq">392</span> <span class="syn-duration">4</span> <span class="syn-freq">440</span> <span class="syn-duration">4</span></code>
 
         <figure id="freq-chart" class="notes-reference">
-          <img src="assets/notes.GIF" alt="MIDI note frequency reference table">
+          <img src="/assets/objects/notes.gif" alt="MIDI note frequency reference table">
           <figcaption>
             MIDI frequency reference chart.
             source: <a href="https://newt.phys.unsw.edu.au/jw/notes.html" target="_blank">University of New South Wales (UNSW)</a>
@@ -448,9 +448,10 @@
     </div>
   </div>
 
-  <script src="js/midi-parser.js"></script>
-  <script src="js/midi-converter.js"></script>
-  <script src="js/audio-player.js"></script>
-  <script src="js/main.js"></script>
+  <script src="./js/midi-parser.js"></script>
+  <script src="./js/midi-converter.js"></script>
+  <script src="./js/audio-player.js"></script>
+  <script src="./js/main.js"></script>
 </body>
+<script src="/neko/neko.js" defer></script>
 </html>

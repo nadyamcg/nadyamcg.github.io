@@ -1,28 +1,27 @@
 /* contact: cards, grid, lists, pgp section */
 
 .contact-group h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     font-size: large;
     text-align: left;
 }
 
 .contact-group ul {
-    margin: 0;
+    margin: 12px;
 }
 
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-    gap: 20px;
+    gap: 12px;
     margin: 30px 0;
 }
 
 .contact-card {
     border: 1px solid var(--rule);
-    border-radius: 8px;
     background: rgba(17, 17, 34, 0.25);
-    padding: 20px;
+    margin: 0;
+    padding: 12px;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -58,7 +57,7 @@
 }
 
 .contact-list li:first-child {
-    margin-top: 0;
+    margin-top: 0px;
 }
 
 .contact-list li:last-child {

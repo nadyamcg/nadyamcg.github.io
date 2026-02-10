@@ -1,36 +1,64 @@
-/* layout: main container, navbar, footer, responsive */
+/* ============================================
+   LAYOUT
+   main container, navbar, footer, hr styling
+   ============================================ */
 
 main {
-    width: min(100%, 860px);
-    margin-inline: auto;
-    min-width: 0;
+  width: min(100%, 860px);
+  margin-inline: auto;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+  background: var(--black);
+  padding: 20px;
+  border: 1px solid var(--rule);
+  box-shadow: 0 0 30px rgba(136, 153, 255, 0.15);
 }
 
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
 #navbar {
-    letter-spacing: 0.1em;
+  text-align: center;
+  letter-spacing: 0.1em;
 }
 
 #navbar a {
-    margin: 0 10px;
-    transition: text-shadow 0.3s ease;
+  color: var(--primary);
+  margin: 0 12px;
+  text-decoration: none;
+  transition: text-shadow 0.3s ease;
 }
 
 #navbar a:hover {
-    text-shadow: 0 0 6px var(--glow);
+  text-shadow: 0 0 6px var(--glow);
+  text-decoration: underline;
 }
+
+/* ============================================
+   HORIZONTAL RULES
+   ============================================ */
 
 hr {
-    margin-top: 20px;
-    border-color: var(--rule)
+  margin: 20px auto;
+  box-shadow: 0 0 8px var(--glow);
 }
 
-.footer {
-    text-align: left;
-    margin-top: 20px
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer p {
+  margin-top: 20px;
+  text-align: center;
 }
 
-@media (max-width: 800px) {
-    body {
-        margin: var(--outer-space)
-    }
+footer a, .footer a {
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+footer a:hover, .footer a:hover {
+  text-decoration: none;
 }

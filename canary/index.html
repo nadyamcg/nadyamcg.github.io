@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>canary</title>
+<title>⌈ｃａｎａｒｙ⌋</title>
 <meta name="description" content="canary">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="/favicon.png" type="image/png">
@@ -10,15 +10,15 @@
 </head>
 <body>
 <main>
-<h1>canary</h1>
+<h1>ｃａｎａｒｙ</h1>
 
-<div id="navbar">
-    <a href="/index.html">home</a> |
-    <a href="/blog/">blog</a> |
-    <a href="/web-projects/">web projects</a> |
-    <a href="/canary/">canary</a> |
-    <a href="/contact/">contact</a>
-</div>
+<nav id="navbar">
+  <a href="/index.html">home</a> |
+  <a href="/blog/">blog</a> |
+  <a href="/web-projects/">web projects</a> |
+  <a href="/canary/">canary</a> |
+  <a href="/contact/">contact</a>
+</nav>
 <hr>
 
 <p>this page is a <b>dead man's switch</b> style canary. if the token below is not refreshed within a set window, assume something may be wrong.</p>
@@ -37,86 +37,14 @@
         <p>if you know me personally, please try my usual channels first. then phone number, if you have it.</p>
         <p>I am sorry if this is the last you see of me.</p>
       </div>
-      <div style="margin-top:12px; text-align:right;">
+      <div class="actions-right">
         <button id="dismiss-overlay" class="btn small">dismiss</button>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-function fmtDuration(ms){
-  const s = Math.max(0, Math.floor(ms/1000));
-  const d = Math.floor(s/86400);
-  const h = Math.floor((s%86400)/3600);
-  const m = Math.floor((s%3600)/60);
-  const sec = s%60;
-  const dd = d ? d + "d " : "";
-  const hh = String(h).padStart(2,"0");
-  const mm = String(m).padStart(2,"0");
-  const ss = String(sec).padStart(2,"0");
-  return dd + hh + ":" + mm + ":" + ss;
-}
-
-async function check(){
-  try{
-    const res = await fetch('./canary.json', {cache:'no-cache'});
-    const data = await res.json();
-    const last = new Date(data.last_update);
-    const windowDays = Number(data.window_days || 14);
-    const nextDue = new Date(last.getTime() + windowDays*24*60*60*1000);
-    const now = new Date();
-    const alive = now <= nextDue;
-    const daysLeft = Math.ceil((nextDue - now)/(24*60*60*1000));
-
-    const el = document.getElementById('status');
-    el.innerHTML = `
-      <p><b>last update (utc):</b> ${last.toISOString()}</p>
-      <p><b>token:</b> <code>${data.token || '(missing)'}</code></p>
-      <p><b>window:</b> ${windowDays} days</p>
-      <p><b>next due by (utc):</b> ${nextDue.toISOString()}</p>
-      <p><b>status:</b> ${alive ? '✅ ok ' + daysLeft + ' day(s) remaining' : '❌ overdue - please check on me'}</p>
-    `;
-
-    // overlay behavior
-    const overlay = document.getElementById('expired-overlay');
-    const msg = document.getElementById('expired-message');
-    const timerEl = document.getElementById('expired-timer');
-
-    if (data.expired_message_html) { msg.innerHTML = data.expired_message_html; }
-
-    if (!alive) {
-      overlay.classList.add('show');
-      overlay.setAttribute('aria-hidden','false');
-
-      const tick = () => {
-        const elapsed = new Date() - nextDue;
-        timerEl.textContent = `expired ${fmtDuration(elapsed)} ago`;
-      };
-      tick();
-      const interval = setInterval(tick, 1000);
-
-      const close = document.getElementById('dismiss-overlay');
-      close?.addEventListener('click', () => {
-        overlay.classList.remove('show');
-        overlay.setAttribute('aria-hidden','true');
-        clearInterval(interval);
-      }, { once:true });
-
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          overlay.classList.remove('show');
-          overlay.setAttribute('aria-hidden','true');
-          clearInterval(interval);
-        }
-      }, { once:true });
-    }
-  }catch(e){
-    document.getElementById('status').textContent = 'could not read canary.json';
-  }
-}
-check();
-</script>
+<script src="/js/pages/canary.js" defer></script>
 
 <div class="note small">
   <p><b>how I update this:</b> manually generate a token through a verified SSH to <code>canary/canary.json</code> and change both <code>last_update</code> (utc iso) and <code>token</code> (any new random string). commit &amp; push.</p>
@@ -126,11 +54,11 @@ check();
 
 <div class="note small">
   <p><b>ssh public key:</b></p>
-  <pre style="font-family: monospace; text-align:left; overflow-x:auto;">
+  <pre class="pre-block">
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILZQZd3Y2SSio2DN97JDQ5DY8zMrk571BtqYjeMVE+E2 nadyamcg@proton.me
   </pre>
   <p><b>visual fingerprint:</b></p>
-  <pre class="fingerprint" style="font-family: monospace; overflow-x:auto;">
+  <pre class="fingerprint pre-block">
   +--[ED25519 256]--+
   |     . ..++.o    |
   |    . . +=oB .   |
