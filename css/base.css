@@ -8,6 +8,7 @@
     --link-visited: #4455aa;
     --accent: #00a0c0;
     --rule: #334477;
+    --extra: #1234ff;
     --outer-space: clamp(12px, 4vw, 60px);
 
     /* glow effects */

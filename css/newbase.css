@@ -1,0 +1,200 @@
+/* to be implemented */
+
+/* ============================================
+   BASE STYLES
+   variables, resets, keyframes, body, typography
+   ============================================ */
+
+/* ============================================
+   RESET & GLOBAL VARIABLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+    /* neutrals */
+  --black: #000;
+  --ink: #000312;
+  --white: #fafeff;
+  --lavendergrey: #9999aa;
+  --powderblue: #aabbcc;
+  --lightgrey: #e0e0e0;
+  --medgrey: #888;
+  --darkgrey: #666;
+  --darkergrey: #1a1a2e;
+
+    /* blues */
+  --blue: #1234ff;
+  --navy: #000f6e;
+  --frost: #a6ebff;
+  --skyaqua: #00d1fb;
+  --turquoise: #00a0c0;
+  --ocean: #218ab2;
+
+    /* forget me not */
+  --forgetmenot: #8899ff;
+  --fmnLight: #99aaff;
+  --fmnLightest: #adbaff;
+  --fmnDark: #4455aa;
+  --fmnDarkest: #000044;
+
+    /* reds */
+  --red: #f82520;
+  --redpink: #ff0066;
+  --magenta: #ff00ff;
+  --blush: #ffdcdc;
+
+    /* glow */
+  --glow: rgba(136, 153, 255, 0.7);
+  --glow-soft: rgba(136, 153, 255, 0.5);
+
+    /* color mappings */
+  --mainbg: var(--black);
+  --secondarybg: var(--ink);
+  --altbg: var(--fmnDarkest);
+  --text: var(--forgetmenot);
+  --primary: var(--forgetmenot);
+  --secondary: var(--turquoise);
+  --tertiary: var(--blue);
+  --rule: var(--fmnDark);
+  --headers: var(--secondary);
+  --link: var(--fmnLight);
+
+    /* responsive font scale */
+  --font-base: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  --font-small: clamp(0.875rem, 0.825rem + 0.4vw, 1.1rem);
+  --font-large: clamp(1.125rem, 1rem + 0.6vw, 1.4rem);
+  --font-xlarge: clamp(1.25rem, 1.1rem + 0.75vw, 1.6rem);
+
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+@keyframes static-slide {
+  from { background-position: -800px 0; }
+  to { background-position: 800px 0; }
+}
+
+@keyframes text-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  97% { opacity: 0.9; }
+  98% { opacity: 1; }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ============================================
+   BODY BASE STYLES
+   ============================================ */
+
+body {
+  font-family: sylfaen, times, serif;
+  font-size: var(--font-base);
+  background-color: var(--mainbg);
+  color: var(--primary);
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  cursor: url('../assets/cursor.gif'), auto;
+  animation: fade-in 0.4s ease-out;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+h1 {
+  letter-spacing: 0.12em;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 0;
+  font-size: clamp(1.5rem, 1.3rem + 1vw, 2.2rem);
+  text-shadow: 0 0 10px var(--glow), 0 0 20px var(--glow-soft);
+  animation: text-flicker 4s infinite;
+}
+
+h2 {
+  color: var(--secondary);
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 5px;
+  font-size: var(--font-xlarge);
+}
+
+h3 {
+  color: var(--blue);
+  margin-top: 20px;
+  font-size: var(--font-large);
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text);
+  margin-top: 5px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 10px 0;
+}
+
+b {
+  color: var(--secondary);
+}
+
+p, li {
+  font-size: var(--font-base);
+  line-height: 1.6;
+  text-align: justify;
+  margin: 0.6em 0;
+}
+
+/* inline code preformatted */
+code {
+  background-color: var(--fmnDarkest);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  color: var(--fmnLightest);
+  font-size: var(--font-small);
+}
+
+pre {
+  background-color: var(--mainbg);
+  border: 1px solid var(--rule);
+  padding: 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: var(--font-small);
+  margin: 10px 0;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  display: block;
+}

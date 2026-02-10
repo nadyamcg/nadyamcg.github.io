@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-refresh_canary.py — SSH-only canary updater
+refresh_canary.py
 """
 from __future__ import annotations
 import json

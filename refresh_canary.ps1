@@ -1,5 +1,6 @@
-<# refresh_canary.ps1 — SSH-only canary updater (Windows PowerShell) #>
-$ErrorActionPreference = "Stop"
+<# refresh_canary.ps1 #>
+<# WARNING: I don't use windows and don't care to figure out if this currently works or not #>
+$ErrorActionPreference = "stop"
 function Get-OriginUrl { (git remote get-url origin).Trim() }
 $origin = Get-OriginUrl
 if ($origin -like "https://*") {
@@ -20,4 +21,4 @@ $branch = (git rev-parse --abbrev-ref HEAD).Trim()
 $commit = "canary: refresh $utc token $rand"
 git commit -m $commit
 git push origin $branch
-Write-Host "ok ✓ pushed over SSH"
+Write-Host "ok! pushed over SSH"

@@ -36,7 +36,7 @@ async function loadProjects(){
       const li = document.createElement('li');
       const a = document.createElement('a');
       a.href = './'+p.slug+'.html';
-      a.textContent = `${p.title} — ${p.date}`;
+      a.textContent = `${p.title} - ${p.date}`;
       li.appendChild(a);
       if(p.summary){
         const s = document.createElement('div');
@@ -58,7 +58,7 @@ loadProjects();
 
 <hr>
 <div class="footer">
-<p>last update to this page: December 18, 2025.</p>
+<p>last update to this page: February 10, 2026.</p>
 </div>
 </main>
 </body>
