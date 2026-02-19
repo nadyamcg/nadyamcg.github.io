@@ -1,15 +1,18 @@
 /* components: note, buttons, modals, intro sections, cursors */
 
 /* interactive cursor for clickable elements */
+/* Disabled - using JavaScript for animated cursor instead */
+/*
 a, button, label, select, .file-label, summary {
     cursor: url('/assets/cursor/cursor2.gif'), pointer;
 }
+*/
 
 .note {
     border: 1px solid var(--rule);
     border-radius: 0px;
     background: rgba(17, 17, 34, .35);
-    padding: 16px 18px;
+    padding: var(--space-md);
     display: block;
     min-width: 0;
     overflow-wrap: anywhere;
@@ -18,16 +21,9 @@ a, button, label, select, .file-label, summary {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-.note h1, .note h2, .note h3, .note p:first-child {
-    margin-top: 0;
-}
-
-.note h2, .note h3 {
-    padding-top: 0;
-}
-
-.note p:last-child {
-    margin-bottom: 0;
+/* content rhythm inside notes */
+.note > * + * {
+    margin-top: var(--space-sm);
 }
 
 .intro {
@@ -65,7 +61,7 @@ a, button, label, select, .file-label, summary {
     background: transparent;
     color: var(--link);
     border: 1px solid var(--rule);
-    padding: 8px 12px;
+    padding: var(--space-sm) var(--space-md);
     border-radius: 0px;
     cursor: pointer;
 }
@@ -95,7 +91,7 @@ a, button, label, select, .file-label, summary {
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: var(--space-lg);
     z-index: 9999;
     backdrop-filter: blur(1px);
 }
@@ -111,7 +107,7 @@ a, button, label, select, .file-label, summary {
 #expired-timer {
     text-align: center;
     font-weight: 600;
-    margin: 6px 0 10px 0;
+    margin: var(--space-sm) 0;
     color: var(--accent);
 }
 

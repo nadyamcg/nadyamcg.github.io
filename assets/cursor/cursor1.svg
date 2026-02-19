@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150">
+	<g id="cursor1">
+		<g id="_a_frm0,0">
+			<path id="Path 0" class="s0" d="M0 10V0h10v10z" style="fill:#8899ff"/>
+			<path id="Path 1" fill-rule="evenodd" class="s0" d="M60 150v-30H50V90H40V70H30V60H20V40H10V10h30v10h20v10h10v10h20v10h30v10h30v30h-10v10h-10v10h-10v10h-10v10h-10v10H90v10zM30 40h10V30H30zm30 10H50v10h10zm20 10V50H70v10zM70 70V60H60v10zm20 0V60H80v10zm20 0V60h-10v10zm-50 0H50v10h10zm20 10V70H70v10zm20 0V70H90v10zm20 0V70h-10v10zm20 0V70h-10v10zm-70 0H60v10h10zm20 10V80H80v10zm20 0V80h-10v10zm20 0V80h-10v10zm-50 10V90H70v10zm20 0V90H90v10zm20 0V90h-10v10zm-50 0H60v10h10zm20 10v-10H80v10zm20 0v-10h-10v10zm-30 0H70v10h10zm20 10v-10H90v10zm-10 10v-10H80v10zm-20 0v10h10v-10z" style="fill:#8899ff"/>
+			<path id="Path 2" class="s0" d="M80 120v-10h10v10z" style="fill:#8899ff"/>
+			<path id="Path 3" class="s0" d="M90 110v-10h10v10z" style="fill:#8899ff"/>
+			<path id="Path 4" class="s0" d="M70 110v-10h10v10z" style="fill:#8899ff"/>
+			<path id="Path 5" class="s0" d="M100 100V90h10v10z" style="fill:#8899ff"/>
+			<path id="Path 6" class="s0" d="M80 100V90h10v10z" style="fill:#8899ff"/>
+			<path id="Path 7" class="s0" d="M110 90V80h10v10z" style="fill:#8899ff"/>
+			<path id="Path 8" class="s0" d="M90 90V80h10v10z" style="fill:#8899ff"/>
+			<path id="Path 9" class="s0" d="M70 90V80h10v10z" style="fill:#8899ff"/>
+			<path id="Path 10" class="s0" d="M100 80V70h10v10z" style="fill:#8899ff"/>
+			<path id="Path 11" class="s0" d="M80 80V70h10v10z" style="fill:#8899ff"/>
+			<path id="Path 12" class="s0" d="M60 80V70h10v10z" style="fill:#8899ff"/>
+			<path id="Path 13" class="s0" d="M70 70V60h10v10z" style="fill:#8899ff"/>
+		</g>
+	</g>
+</svg>

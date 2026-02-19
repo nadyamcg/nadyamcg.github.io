@@ -27,33 +27,58 @@
     <div class="intro">
       <p class="greeting">my name is <b>Nadezhda</b>, but I simply go by <b>Nadya</b>.</p>
       <span class="request">forget me not.</span>
-      <p class="greeting">· • —– ٠ ✤ ٠ —– • ·</p>
+      <p class="greeting">· • —– ٠ <span class="flower-glow">✿</span> ٠ —– • ·</p>
       <p class="small intro-links"><a href="https://github.com/nadyamcg">github</a> | <a href="https://discord.com/users/1319646536577192029">discord</a></p>
     </div>
 
   <section id="now">
-    <div class="contact-card">
-      <h2>now</h2>
-      <p class="small">
-        tinkering with <b>Linux</b> in a variety of distros, studying computer science, reconnecting with <b>MIDI</b>, and learning to mod <b>Vintage Story</b>. currently leading 3 modding projects. I also occasionally write about <b>digital identity</b> and <b>mental illness</b>, observations from the perspective of the schizoaffective experience.
-      </p>
+    <div class="now-header">
+      <span class="now-label pulse-glow">NOW</span>
+      <span class="now-rule"></span>
     </div>
+    <div class="now-entries small mono">
+      <p><span class="now-prompt">></span> tinkering with <b>Linux</b> across distros</p>
+      <p><span class="now-prompt">></span> studying <b>computer science</b></p>
+      <p><span class="now-prompt">></span> reconnecting with <b>MIDI</b></p>
+      <p><span class="now-prompt">></span> leading 3 <b>Vintage Story</b> modding projects</p>
+      <p><span class="now-prompt">></span> writing on <b>digital identity</b> and <b>mental illness</b></p>
+    </div>
+    <p class="now-timestamp small mono">updated 2026-02-12</p>
+    <a href="/canary/" id="canary-status" class="now-canary small mono" title="check canary page">
+      <span class="now-prompt">></span> canary: <span id="canary-status-text">checking...</span>
+    </a>
   </section>
 
   <!-- recent + explore -->
   <section class="two-col">
-    <div class="note" id="recent">
-      <p class="small"><b>latest:</b> loading…</p>
+    <div class="latest-card" id="recent">
+      <p class="latest-header">latest</p>
+      <p class="small">loading…</p>
     </div>
-    <div class="contact-card">
-      <p class="small"><b>explore:</b></p>
-      <ul class="list small">
-        <li><a href="https://github.com/nadyamcg">github</a> - my code and projects.</li>
-        <li><a href="/blog/">read the blog</a> - what I think and feel.</li>
-        <li><a href="/web-projects/">try a web app</a> - tools and experiments.</li>
-        <li><a href="/canary/">check the canary</a> - proof I'm still here.</li>
-        <li><a href="/contact/">contact</a> - where you can reach me.</li>
-      </ul>
+    <div class="explore-card">
+      <p class="explore-header">explore</p>
+      <nav class="explore-nav">
+        <a href="https://github.com/nadyamcg" class="explore-link">
+          <span class="explore-link-title">github</span>
+          <span class="explore-link-desc">my code and projects</span>
+        </a>
+        <a href="/blog/" class="explore-link">
+          <span class="explore-link-title">blog</span>
+          <span class="explore-link-desc">what I think and feel</span>
+        </a>
+        <a href="/web-projects/" class="explore-link">
+          <span class="explore-link-title">web projects</span>
+          <span class="explore-link-desc">tools and experiments</span>
+        </a>
+        <a href="/canary/" class="explore-link">
+          <span class="explore-link-title">canary</span>
+          <span class="explore-link-desc">proof I'm still here</span>
+        </a>
+        <a href="/contact/" class="explore-link">
+          <span class="explore-link-title">contact</span>
+          <span class="explore-link-desc">where to reach me</span>
+        </a>
+      </nav>
     </div>
   </section>
 
@@ -104,15 +129,13 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILZQZd3Y2SSio2DN97JDQ5DY8zMrk571BtqYjeMVE+E2
   </p>
 </section>
 
-<hr>
-
 <div class="footer">
+  <hr>
   <p>last update to this page: February 7, 2026. <a href="https://github.com/nadyamcg/nadyamcg.github.io">view source</a></p>
 </div>
-
 </main>
-
 <script src="/js/pages/index.js"></script>
+<script src="/js/cursor.js"></script>
 </body>
 <script src="/neko/neko.js" defer></script>
 </html>

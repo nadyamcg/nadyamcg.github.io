@@ -10,9 +10,13 @@ main {
   position: relative;
   z-index: 1;
   background: var(--black);
-  padding: 20px;
-  border: 1px solid var(--rule);
-  box-shadow: 0 0 30px rgba(136, 153, 255, 0.15);
+  padding: var(--space-lg);
+  border: 2px solid var(--rule);
+  box-shadow: 0 0 30px rgba(136, 153, 255, 0.25);
+}
+
+main > * + * {
+  margin-top: var(--space-md);
 }
 
 /* ============================================
@@ -25,15 +29,17 @@ main {
 }
 
 #navbar a {
-  color: var(--primary);
-  margin: 0 12px;
+  color: var(--fmnLight);
+  margin: 0 var(--space-sm);
   text-decoration: none;
   transition: text-shadow 0.3s ease;
 }
 
 #navbar a:hover {
+  color: var(--fmnLightest);
   text-shadow: 0 0 6px var(--glow);
-  text-decoration: underline;
+  text-decoration: none;
+  animation: link-glow-pulse 1.2s ease-out infinite;
 }
 
 /* ============================================
@@ -41,8 +47,25 @@ main {
    ============================================ */
 
 hr {
-  margin: 20px auto;
-  box-shadow: 0 0 8px var(--glow);
+  margin: var(--space-lg);
+  border: none;
+  height: 1px;
+  background: var(--rule);
+  opacity: 0.3;
+}
+
+#navbar + hr {
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--ink) 10%,
+    var(--fmnDark) 25%,
+    var(--forgetmenot) 50%,
+    var(--fmnDark) 75%,
+    var(--ink) 90%,
+    transparent
+  );
+  opacity: 1;
 }
 
 /* ============================================
@@ -50,7 +73,7 @@ hr {
    ============================================ */
 
 .footer p {
-  margin-top: 20px;
+  margin-top: var(--space-md);
   text-align: center;
 }
 
@@ -61,4 +84,5 @@ footer a, .footer a {
 
 footer a:hover, .footer a:hover {
   text-decoration: none;
+  animation: link-glow-pulse 1s ease-out infinite;
 }

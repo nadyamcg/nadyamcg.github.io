@@ -23,10 +23,11 @@
     image-rendering: pixelated;
     -webkit-font-smoothing: none;
     font-smooth: never;
-    cursor: url('assets/mouse01.gif'), auto;
+    /* cursor: url('assets/mouse01.gif'), auto; */
 }
 
-/* custom cursors */
+/* custom cursor logic is disabled, using new js cursor */
+/*
 a, button, [role="button"] {
     cursor: url('assets/mouse01.gif'), pointer;
 }
@@ -34,10 +35,11 @@ a, button, [role="button"] {
 *:active {
     cursor: url('assets/mouse02.gif'), wait;
 }
+*/
 
 body {
     background-color: var(--bg);
-    background-image: url('assets/bg-noise.gif');
+    background-image: url('assets/bg/bg-noise.gif');
     background-repeat: repeat;
     background-attachment: fixed;
     color: var(--text);
@@ -74,7 +76,7 @@ body {
     content: "";
     position: fixed;
     inset: 0;
-    background-image: url('assets/fg_flikr004.gif');
+    background-image: url('assets/overlay/fg_flikr004.gif');
     background-repeat: repeat;
     background-size: auto;
     opacity: 0.1;
@@ -439,8 +441,10 @@ body {
     <span class="d5">║░░░░░░░░░░░║</span>
 </div>
 
-<img class="figure" src="assets/2.png" alt="">
+<img class="figure" src="assets/objects/2.png" alt="">
 
 </div>
 </body>
+<script src="/js/cursor.js"></script>
+<script src="/neko/neko.js" defer></script>
 </html>
