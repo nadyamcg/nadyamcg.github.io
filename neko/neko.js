@@ -190,7 +190,7 @@
     posY = r.y;
     el.style.left = (posX - 16) + "px";
     el.style.top = (posY - 16) + "px";
-    el.style.zIndex = String(Number.MAX_VALUE);
+    el.style.zIndex = "2147483647";
     el.style.cursor = "pointer";
     el.style.pointerEvents = "none";
 

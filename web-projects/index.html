@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>web projects</title>
+<title>⌈ｗｅｂ　ｐｒｏｊｅｃｔｓ⌋</title>
 <meta name="description" content="projects">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="/favicon.png" type="image/png">
@@ -10,55 +10,26 @@
 </head>
 <body>
 <main>
-<h1>web projects</h1>
+<h1>ｗｅｂ　ｐｒｏｊｅｃｔｓ</h1>
 
-<div id="navbar">
-    <a href="/index.html">home</a> |
-    <a href="/blog/">blog</a> |
-    <a href="/web-projects/">web projects</a> |
-    <a href="/canary/">canary</a> |
-    <a href="/contact/">contact</a>
-</div>
+<nav id="navbar">
+  <a href="/index.html">home</a> |
+  <a href="/blog/">blog</a> |
+  <a href="/web-projects/">web projects</a> |
+  <a href="/canary/">canary</a> |
+  <a href="/contact/">contact</a>
+</nav>
 
 <hr>
 
 <p>small tools and experiments I've made.</p>
 <div id="projects" class="note small">loading projects…</div>
 
-<script>
-async function loadProjects(){
-  try{
-    const res = await fetch('./projects.json', {cache:'no-cache'});
-    const data = await res.json();
-    const list = document.createElement('ul');
-    list.className = 'list';
-    (data.projects||[]).sort((a,b)=> (a.date<b.date?1:-1)).forEach(p=>{
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = './'+p.slug+'.html';
-      a.textContent = `${p.title} — ${p.date}`;
-      li.appendChild(a);
-      if(p.summary){
-        const s = document.createElement('div');
-        s.className = 'small';
-        s.textContent = p.summary;
-        li.appendChild(s);
-      }
-      list.appendChild(li);
-    });
-    const target = document.getElementById('projects');
-    target.innerHTML = '';
-    target.appendChild(list);
-  }catch(e){
-    document.getElementById('projects').textContent = 'could not load projects.';
-  }
-}
-loadProjects();
-</script>
+<script src="/js/pages/projects-index.js" defer></script>
 
 <hr>
 <div class="footer">
-<p>last update to this page: December 18, 2025.</p>
+<p>last update to this page: February 10, 2026.</p>
 </div>
 </main>
 </body>

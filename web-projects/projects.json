@@ -4,7 +4,13 @@
       "title": "hex color sorter",
       "slug": "hex-sort",
       "date": "2025-12-18",
-      "summary": "sort hex colors by hue or luminance. simple interface with localStorage persistence."
+      "summary": "sort hex colors by hue or luminance."
+    },
+    {
+      "title": "MIDI to GRUB converter",
+      "slug": "midi-grub/index",
+      "date": "2026-02-10",
+      "summary": "MIDI files to GRUB boot tune format."
     }
   ]
 }

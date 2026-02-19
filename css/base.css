@@ -1,18 +1,71 @@
 /* base: theme, resets, typography, utilities */
 
-:root {
-    --bg: #000;
-    --text: #8899ff;
-    --headers: #aabbcc;
-    --link: #99aaff;
-    --link-visited: #4455aa;
-    --accent: #00a0c0;
-    --rule: #334477;
-    --outer-space: clamp(12px, 4vw, 60px);
+/* ============================================
+   VARIABLES
+   ============================================ */
 
-    /* glow effects */
-    --glow: rgba(136, 153, 255, 0.5);
-    --glow-soft: rgba(136, 153, 255, 0.2);
+:root {
+    /* named colors */
+    --black: #000;
+    --ink: #000312;
+    --prussian: #112233;
+    --white: #fff;
+
+    --forgetmenot: #8899ff;
+    --fmnLight: #99aaff;
+    --fmnLightest: #adbaff;
+    --fmnDark: #4455aa;
+    --fmnDarkest: #000044;
+
+    --frost: #a6ebff;
+    --skyaqua: #00d1fb;
+    --turquoise: #00a0c0;
+    --ocean: #218ab2;
+
+    --blue: #1234ff;
+    --navy: #000f6e;
+
+    --magenta: #ff00ff;
+    --red: #f82520;
+    --redpink: #ff0066;
+    --hotpink: #ff007b;
+
+    --lavendergrey: #9999aa;
+    --powderblue: #aabbcc;
+    --blush: #ffdcdc;
+    --medgrey: #888;
+    --lightgrey: #e0e0e0;
+    --darkgrey: #666;
+    --lightpink: #ffe6f2;
+    --darkbg: #1a1a2e;
+
+    --glow: rgba(136, 153, 255, 0.7);
+    --glow-soft: rgba(136, 153, 255, 0.5);
+
+    /* mappings */
+    --mainbg: var(--black);
+    --secondarybg: var(--ink);
+    --altbg: var(--fmnDarkest);
+    --text: var(--forgetmenot);
+    --primary: var(--forgetmenot);
+    --secondary: var(--turquoise);
+    --tertiary: var(--blue);
+    --rule: var(--fmnDark);
+    --headers: var(--secondary);
+    --link: var(--fmnLight);
+
+    /* backwards-compat aliases */
+    --bg: var(--black);
+    --accent: var(--turquoise);
+    --link-visited: var(--fmnDark);
+    --muted: var(--lavendergrey);
+
+    /* spacing scale */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 40px;
 
     /* responsive font scale */
     --font-base: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
@@ -21,12 +74,22 @@
     --font-xlarge: clamp(1.25rem, 1.1rem + 0.75vw, 1.6rem);
 }
 
+/* ============================================
+   RESET
+   ============================================ */
+
 * {
     box-sizing: border-box;
     image-rendering: pixelated;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: grayscale;
     font-smooth: never;
+}
+
+*::-webkit-scrollbar {
+    display: none;
 }
 
 html, body {
@@ -36,72 +99,163 @@ html, body {
     min-height: 0;
 }
 
+h1, h2, h3, h4, p, ul, ol, section, figure, pre, blockquote, hr {
+    margin: 0;
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
 @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
+@keyframes static-slide {
+    from { background-position: -800px 0; }
+    to { background-position: 800px 0; }
+}
+
+@keyframes text-flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.8; }
+    94% { opacity: 1; }
+    97% { opacity: 0.9; }
+    98% { opacity: 1; }
+}
+
+/* ============================================
+   BODY
+   ============================================ */
+
 body {
     color: var(--text);
-    background-color: var(--bg);
-    margin: var(--outer-space);
+    background-color: var(--mainbg);
+    padding: var(--space-lg);
     font-family: sylfaen, times, serif;
     font-size: var(--font-base);
-    text-align: center;
-    min-height: 100vh;
+    line-height: 1.6;
+    /* cursor: url('/assets/cursor/cursor.gif'), auto; */ /* Disabled - using JS cursor */
     animation: fade-in 0.4s ease-out;
 }
 
-p, li {
-    font-size: var(--font-large);
-    line-height: 1.6;
-    text-align: justify;
-    margin: 0.6em 0;
-}
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
 
 h1, h2, h3 {
-    color: var(--headers);
     text-align: center;
-    letter-spacing: 0.12em;
 }
 
 h1 {
-    margin-top: 0em;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    margin-bottom: var(--space-sm);
     font-size: clamp(1.5rem, 1.3rem + 1vw, 2.2rem);
+    text-shadow: 0 0 10px var(--glow), 0 0 20px var(--glow-soft);
+    animation: text-flicker 4s infinite;
 }
 
 h2 {
-    padding-top: 20px;
-    margin-top: 0em;
-    margin-bottom: 0.5em;
-    font-size: clamp(1.3rem, 1.15rem + 0.75vw, 1.8rem);
+    color: var(--secondary);
+    margin-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: var(--space-sm);
+    font-size: var(--font-xlarge);
 }
 
 h3 {
-    padding-top: 20px;
-    margin-top: 0em;
-    margin-bottom: 0.5em;
-    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.5rem);
+    color: var(--blue);
+    font-size: var(--font-large);
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text);
+}
+
+p, li {
+    font-size: var(--font-base);
+    line-height: 1.6;
+    text-align: justify;
 }
 
 b {
-    color: var(--accent)
+    color: var(--secondary);
 }
 
+/* ============================================
+   LINKS
+   ============================================ */
+
 a:link {
-    color: var(--link)
+    color: var(--link);
+    text-decoration: none;
 }
 
 a:visited {
-    color: var(--link-visited)
+    color: var(--link-visited);
+    text-decoration: none;
 }
 
 a:hover, a:focus {
-    background-color: #000044;
-    text-decoration: underline;
-    outline: 2px dotted var(--link);
-    outline-offset: 2px;
+    text-decoration: none;
+    animation: link-glow-pulse 1s ease-out infinite;
 }
+
+/* respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    a:hover, a:focus {
+        animation: none;
+        text-shadow: 0 0 4px var(--skyaqua), 0 0 12px rgba(0, 209, 251, 0.6);
+    }
+}
+
+/* ============================================
+   CODE & PREFORMATTED
+   ============================================ */
+
+code {
+    background-color: var(--fmnDarkest);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: 0px;
+    font-family: 'Courier New', monospace;
+    color: var(--fmnLightest);
+    font-size: var(--font-small);
+}
+
+pre {
+    background-color: var(--mainbg);
+    border: 1px solid var(--rule);
+    padding: var(--space-md);
+    border-radius: 0px;
+    overflow-x: auto;
+    font-size: var(--font-small);
+    white-space: pre;
+    text-align: left;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0px;
+    display: block;
+}
+
+/* ============================================
+   HORIZONTAL RULES
+   ============================================ */
+
+hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
 
 .small {
     font-size: var(--font-small);
@@ -114,18 +268,18 @@ a:hover, a:focus {
 .list {
     list-style: square;
     padding-left: 1.25rem;
-    margin: 0
+    margin-top: 0px;
 }
 
 .stack {
     display: grid;
-    gap: 18px
+    gap: var(--space-md);
 }
 
 .two-col {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-    gap: 18px;
+    gap: var(--space-md);
     align-items: start;
 }
 
@@ -137,11 +291,4 @@ p, li, .list {
     overflow-wrap: anywhere;
     word-break: break-word;
     hyphens: auto;
-}
-
-pre {
-    white-space: pre;
-    overflow-x: auto;
-    overflow-y: visible;
-    text-align: left;
 }

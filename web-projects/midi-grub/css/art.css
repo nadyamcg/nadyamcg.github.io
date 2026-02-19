@@ -1,0 +1,12 @@
+/* midi-grub page art */
+
+/* semi-transparent panel so background art shows through */
+main {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+/* CRT static background */
+body::before {
+    background: url('/assets/bg/Static2.gif');
+    animation: static-slide 5s linear infinite;
+}

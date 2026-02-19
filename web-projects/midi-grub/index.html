@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="convert MIDI files to GRUB_INIT_TUNE boot tune format.">
+  <title>⌈ＭＩＤＩ　ｔｏ　ＧＲＵＢ⌋</title>
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="stylesheet" href="./css/art.css">
+</head>
+<body>
+  <main>
+    <h1>ＭＩＤＩ　ｔｏ　ＧＲＵＢ　ｔｕｎｅ</h1>
+    <p class="subtitle">convert MIDI files to GRUB boot tunes</p>
+
+    <nav id="navbar">
+      <a href="/index.html">home</a> |
+      <a href="/blog/">blog</a> |
+      <a href="/web-projects/">web projects</a> |
+      <a href="/canary/">canary</a> |
+      <a href="/contact/">contact</a>
+    </nav>
+
+    <hr>
+
+    <!-- file handling -->
+    <section id="upload-section">
+      <h2>upload a MIDI file</h2>
+      <div id="drop-zone" class="drop-zone">
+        <p>drag and drop a MIDI file here, or</p>
+        <input type="file" id="file-input" accept=".mid,.midi">
+        <label for="file-input" class="file-label">choose a file</label>
+      </div>
+      <div id="file-info" class="file-info hidden">
+        <span id="file-name"></span>
+        <button id="clear-file" type="button" class="btn-small">clear</button>
+      </div>
+    </section>
+
+    <!-- settings -->
+    <section id="settings-section">
+      <h2>settings</h2>
+
+      <div class="option-group">
+        <label for="duration-limit">max tune duration: <span id="duration-value">10</span>s</label>
+        <input type="range" id="duration-limit" min="1" max="20" value="10">
+      </div>
+
+      <div class="option-group">
+        <label for="volume-slider">preview volume: <span id="volume-value">70</span>%</label>
+        <input type="range" id="volume-slider" min="0" max="100" value="70" step="1">
+        <p><span class="warning-prefix">WARNING:</span> PC speaker is only on or off. changing volume only affects the web preview.</p>
+      </div>
+
+      <div class="option-group">
+        <label>
+          <input type="checkbox" id="dev-mode-toggle" class="dev-mode-checkbox">
+          dev mode (no time limit)
+        </label>
+        <p><span class="warning-prefix">WARNING:</span> GRUB will not show boot menu until tune finishes!</p>
+
+        <div id="dev-mode-warning" class="warning-note hidden" style="margin-top: 10px;">
+          <strong>⚠ DEV MODE ACTIVE</strong><br>
+          no duration limit. long tunes will delay GRUB boot menu.
+          if misconfigured, you may need external boot media to recover. use with caution!
+        </div>
+      </div>
+    </section>
+
+    <!-- track selection -->
+    <section id="track-section" class="hidden">
+      <h2>2. select track</h2>
+      <select id="track-select">
+        <option value="">-- select a track --</option>
+      </select>
+      <div id="track-info" class="track-info hidden">
+        <span id="track-note-count">0</span> notes in selected track
+      </div>
+    </section>
+
+    <!-- conversion options -->
+    <section id="options-section" class="hidden">
+      <h2>3. conversion options</h2>
+
+      <div class="option-group">
+        <label for="polyphony-mode">polyphony resolution:</label>
+        <select id="polyphony-mode">
+          <option value="highest">highest note wins</option>
+          <option value="lowest">lowest note wins</option>
+          <option value="loudest">loudest note wins (by velocity)</option>
+          <option value="first">first note wins (earliest start)</option>
+        </select>
+        <small>how to handle overlapping notes (PC speaker only plays one note at a time)</small>
+      </div>
+
+      <button id="convert-btn" type="button" class="btn-primary">convert to GRUB tune</button>
+    </section>
+
+    <!-- unified tune editor -->
+    <section id="tune-editor-section">
+      <div class="tune-editor-header">
+        <h2>GRUB tune</h2>
+        <button id="clear-tune-btn" type="button" class="btn-small" title="clear tune">clear</button>
+      </div>
+
+      <div id="tune-warnings" class="warning-box hidden">
+        <strong>warnings:</strong>
+        <ul id="tune-warning-list"></ul>
+      </div>
+
+      <div id="tune-info" class="info-box hidden">
+        <span id="tune-note-count">0</span> notes,
+        <span id="tune-duration">0ms</span>,
+        tempo: <span id="tune-tempo">0</span>
+      </div>
+
+      <div class="tune-editor-wrapper">
+        <textarea id="tune-input" class="tune-input" spellcheck="false" placeholder="480 440 1"></textarea>
+        <div id="tune-syntax-display" class="tune-syntax-display" aria-hidden="true"></div>
+      </div>
+
+      <div class="tune-editor-controls">
+        <button id="play-tune-btn" type="button" class="btn-play">play</button>
+        <button id="stop-tune-btn" type="button" class="btn-stop hidden">stop</button>
+        <button id="copy-tune-btn" type="button" class="btn-secondary">copy</button>
+        <button id="share-tune-btn" type="button" class="btn-secondary">share URL</button>
+        <button id="export-audio-btn" type="button" class="btn-secondary">export audio</button>
+        <span id="tune-feedback" class="copy-feedback hidden"></span>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- info -->
+    <section id="faq-section">
+      <h2>info</h2>
+
+      <details class="info-collapsible">
+        <summary>how to add to GRUB</summary>
+        <p>edit <code>/etc/default/grub</code> and find this line:</p>
+        <div class="terminal-block">
+          <div class="terminal-header">/etc/default/grub</div>
+          <pre>GRUB_INIT_TUNE="480 440 1"</pre>
+        </div>
+        <p>replace with your tune. remove the <code>#</code> if present. save, then run:</p>
+        <div class="terminal-block">
+          <div class="terminal-header">terminal</div>
+          <pre><span class="terminal-prompt">$ </span>sudo update-grub</pre>
+        </div>
+        <div class="warning-box-inline">
+          <strong>⚠ WARNING</strong>
+          GRUB plays tunes before showing the boot menu. playback of tunes will delay booting indefinitely until completed.
+        </div>
+      </details>
+
+      <h3>example tunes</h3>
+      <div class="examples-gallery">
+        <div class="example-card" data-tune="480 262 1 440 1">
+          <img src="/assets/objects/suprdsk00.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Single A4 Note</div>
+            <div class="example-desc">default GRUB tone</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="600 988 1 1319 4">
+          <img src="/assets/objects/suprdsk01.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Mario Coin</div>
+            <div class="example-desc">my life is like a video game</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="1750 523 1 392 1 523 1 659 1 784 1 1047 1 784 1 415 1 523 1 622 1 831 1 622 1 831 1 1046 1 1244 1 1661 1 1244 1 466 1 587 1 698 1 932 1 1185 1 1397 1 1865 1 1397 1">
+          <img src="/assets/objects/suprdsk02.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Mario Powerup</div>
+            <div class="example-desc">this one just sounds cool</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="440 1319 1 1175 1 740 2 831 2 1100 1 1000 1 587 2 659 2 988 1 880 1 554 2 659 2 880 6">
+          <img src="/assets/objects/suprdsk03.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Nokia Ringtone</div>
+            <div class="example-desc">do u have games on ur phone</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="57820 784 62 0 92 784 62 0 92 784 62 0 92 784 62 0 92 784 62 0 492 932 62 0 92 932 62 0 92 932 62 0 92 932 62 0 92 932 62 0 92 932 62 0 92 932 62 0 492 1047 20 1319 20 1047 20 1319 20 1047 20 1319 20 1047 123">
+          <img src="/assets/objects/suprdsk00.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Star Wars Battlefront</div>
+            <div class="example-desc">beep beep beep beep beep</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="48000 622 341 0 14 311 113 0 7 466 227 0 14 415 480 622 227 0 14 466 480">
+          <img src="/assets/objects/suprdsk01.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Windows XP Startup</div>
+            <div class="example-desc">"who's been drawing dicks?"</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="43200 294 238 0 2 294 240 392 720 370 240 330 240 370 240 392 240 440 240 392 480 294 720">
+          <img src="/assets/objects/suprdsk02.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Radio Moscow</div>
+            <div class="example-desc">позывные радио москвы</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="3378 330 34 0 2 247 5 0 2 247 4 0 2 330 11 0 2 247 10 0 2 330 11 0 2 415 10 0 2 494 23 0 2 440 21 0 3 415 23 0 2 370 10 0 2 247 11 0 2 330 34 0 2 311 11 0 2 370 10 0 2 330 11 0 2 247 10 0 2 208 11 0 2 277 46 0 2 220 35 0 2 277 10 0 2 370 35 0 2 330 10 0 2 311 11 0 2 277 10 0 2 247 17 0 2 220 4 0 2 208 70">
+          <img src="/assets/objects/suprdsk03.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Internationale</div>
+            <div class="example-desc">C64 version</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="76860 233 480 294 1714 0 16 233 193 294 480 311 480 294 480 262 288 233 993">
+          <img src="/assets/objects/suprdsk00.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Komm, süsser Tod</div>
+            <div class="example-desc">End of Evangelion</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="40800 523 238 0 2 466 238 0 2 440 455 0 25 392 227 0 13 440 683 0 37 349 455">
+          <img src="/assets/objects/suprdsk01.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Cruel World</div>
+            <div class="example-desc">Red Dead Redemption 2</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="48340 587 240 554 240 494 240 554 240 587 240 659 360 740 360 494 900">
+          <img src="/assets/objects/suprdsk02.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">Duvet</div>
+            <div class="example-desc">Serial Experiments Lain</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="load and preview">▶</button>
+            <button class="example-copy-btn" title="copy to clipboard">📋</button>
+          </div>
+        </div>
+
+        <div class="example-card" data-tune="34560 659 96 0 96 659 96 0 96 880 96 0 192 988 96 1047 96">
+          <img src="/assets/objects/suprdsk03.gif" alt="cassette" class="example-art" loading="lazy">
+          <div class="example-info">
+            <div class="example-name">We Are Charlie Kirk</div>
+            <div class="example-desc">we carry the flame</div>
+          </div>
+          <div class="example-actions">
+            <button class="example-preview-btn" title="preview">▶</button>
+            <button class="example-copy-btn" title="copy">📋</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="syntax-reference-box">
+        <h3>syntax reference</h3>
+        <div class="syntax-format">
+          <code><span class="syn-tempo">tempo</span> <span class="syn-freq">freq</span> <span class="syn-duration">duration</span> [<span class="syn-freq">freq</span> <span class="syn-duration">duration</span> ...]</code>
+        </div>
+        <p class="syntax-note">each variable is <b>only</b> valid as a whole number. <code class="syn-tempo">tempo</code> can only be defined once, at the start of the <code class="syn-config">GRUB_INIT_TUNE</code> value. <code class="syn-freq">freq</code></dt> value must be followed with a <code class="syn-duration">duration</code> value.</p>
+        <dl>
+          <dt><code class="syn-tempo">tempo</code></dt>
+          <dd><p>base timing in <b>ticks per minute</b>. not to be confused with <code class="syn-bpm">BPM</code>.<p>
+            <details class="syntax-details">
+              <summary>more info</summary>
+              <p>a larger <code class="syn-tempo">tempo</code> value results in higher resolution for more precise <code class="syn-duration">duration</code> values. increasing this value in an existing <code class="syn-config">GRUB_INIT_TUNE</code> value will result in faster playback, and slower if decreased.</p>
+              <p>for converting from MIDI, <code class="syn-tempo">tempo</code> can be calculated by multiplying the beats per minute <code class="syn-bpm">BPM</code> by the number of ticks per beat or <code class="syn-ppq">PPQ</code> (parts per quarter note), and then rounding this value to the nearest whole number:</p>
+              <p><code><span class="syn-freq">grubTempo</span> = <span class="syn-math">ROUND</span>(<span class="syn-bpm">BPM</span> × <span class="syn-ppq">PPQ</span>)</code></p>
+              <p>... where <code class="syn-ppq">PPQ</code> is the file's resolution (e.g., 480, 960). MIDI files store <code class="syn-ppq">PPQ</code> value in their header. you may find more information about how this web tool gathers and uses this information <a href="https://github.com/nadyamcg/nadyamcg.github.io">here</a>.</p>
+              <hr>
+            </details>
+          </dd>
+
+          <dt><code class="syn-freq">freq</code></dt>
+          <dd><p>frequency of a note in <code class="syn-hz">Hz</code>. one of the two required values to create one note.</p>
+            <details class="syntax-details">
+              <summary>more info</summary>
+              <p><code class="syn-hz">Hz</code> for most notes rarely correlate to an integer, so it is best practice to round up or down to the nearest whole number (close enough for most human ears).</p>
+              <p><b>middle C</b>, referred to as <code class="syn-note">C4</code> in scientific pitch notation and note number <code class="syn-midi-num">60</code> in MIDI standard, is generally recognized as approximately <code>261.626 <span class="syn-hz">Hz</span></code>. so for our purposes:</p>
+              <p><code><span class="syn-freq">262</span> <span class="syn-hz">Hz</span> = <span class="syn-note">C4</span></code></p>
+              <p><code><span class="syn-freq">0</span> = silence/rest</code></p>
+              <p>refer to <a href="#freq-chart">this image</a> for a helpful reference table for converting standard notation, MIDI note numbers, and <code class="syn-hz">Hz</code> respectively.</p>
+              <hr>
+            </details>
+          </dd>
+
+          <dt><code class="syn-duration">duration</code></dt>
+          <dd><p>duration of a note in <b>ticks</b>, relative to <code class="syn-tempo">tempo</code> (ticks per minute). the final value required to create a valid note.</p>
+            <details class="syntax-details">
+              <summary>more info</summary>
+              <p><code><span class="syn-duration">0</span> = nothing</code>, skipped/ignored by GRUB.</p>
+              <p><code><span class="syn-tempo">60</span> <span class="syn-freq">262</span> <span class="syn-duration">1</span></code> ... will result in the <code class="syn-note">C4</code> note lasting for 1 second (60 seconds = 1 minute).</p>
+            </details>
+          </dd>
+        </dl>
+      <hr>
+      <p>as an example, let's say you wanted to write the <b>pentatonic scale</b> from <code class="syn-note">C4</code> in <b>4/4 time</b>.</p>
+      <code class="syn-note">C4</code>, <code class="syn-note">D4</code>, <code class="syn-note">E4</code>, <code class="syn-note">G4</code>, and <code class="syn-note">A4</code>.
+
+      <h3>step 1: choose tempo and BPM</h3>
+      <p>we'll use <code><span class="syn-tempo">480</span></code> as our <code class="syn-tempo">tempo</code> and <code>120 <span class="syn-bpm">BPM</span></code>. <b>why</b> <code><span class="syn-tempo">tempo</span> = <span class="syn-tempo">480</span></code>? it provides enough resolution for common note values to land on integers. <b>fractional values are invalid</b> in GRUB.</p>
+
+      <div class="calculation-steps">
+        <p><code>sixteenth note = <span class="syn-duration">1</span> tick</code></p>
+        <p><code>eighth note = <span class="syn-duration">2</span> ticks</code></p>
+        <p><code>quarter note = <span class="syn-duration">4</span> ticks</code></p>
+        <p><code>whole note = <span class="syn-duration">16</span> ticks</code></p>
+      </div>
+
+      <p>remember, <code class="syn-tempo">tempo</code> and <code class="syn-duration">duration</code> operate in <b>ticks</b>, not beats. <code class="syn-bpm">BPM</code> <b>does not exist</b> in GRUB or define such a value. we're working with a bootloader operating hardware on a <b>low level</b>, so the luxuries provided by MIDI through DAWs and sequencers do not apply.</p>
+
+      <p><code>duration = 0</code> does nothing (gets skipped). decimals aren't supported. a lower <code class="syn-tempo">tempo</code> like <code class="syn-tempo">60</code> would make quarter notes <b>impossible</b>. that would require <code><span class="syn-duration">duration</span> = <span class="syn-duration">0.5</span></code>, which is invalid.</p>
+
+      <h3>step 2: convert BPM to seconds</h3>
+      <p>at <code class="syn-bpm">120 BPM</code>, we can calculate note durations in seconds:</p>
+
+      <div class="calculation-steps">
+        <p><code>120 quarter notes per minute</code></p>
+        <p><code>60 seconds ÷ 120 beats = <b>0.5 seconds</b> per quarter note</code></p>
+        <p><code>4 quarter notes = 1 whole note = <b>2 seconds</b></code></p>
+      </div>
+
+      <h3>step 3: convert seconds to ticks</h3>
+      <p>the relationship: <code>seconds per note = <span class="syn-duration">(duration in ticks)</span> ÷ <span class="syn-tempo">(tempo in ticks/min)</span> × 60</code></p>
+
+      <p>with <code><span class="syn-tempo">tempo</span> = <span class="syn-tempo">480</span></code>:</p>
+
+      <div class="calculation-steps">
+        <p><code>1 minute = <span class="syn-duration">480</span> ticks</code></p>
+        <p><code>1 second = <span class="syn-duration">8</span> ticks (480 ÷ 60)</code></p>
+        <p><code>quarter note (0.5 sec) = <span class="syn-duration">4</span> ticks (8 × 0.5)</code></p>
+      </div>
+
+      <h3>step 4: convert notes to Hz and ticks</h3>
+      <p>now translate to GRUB format. get your <code class="syn-tempo">tempo</code>, <code class="syn-tempo">480</code>, and figure out the frequency for each note you desire (rounded to the nearest integer) and its <code class="syn-duration">duration</code> in ticks.</p>
+
+      <div class="calculation-steps">
+        <p><code>C4 (261.63 Hz, quarter note): <span class="syn-freq">262</span> <span class="syn-duration">4</span></code></p>
+        <p><code>D4 (293.67 Hz, quarter note): <span class="syn-freq">294</span> <span class="syn-duration">4</span></code></p>
+        <p><code>E4 (329.63 Hz, quarter note): <span class="syn-freq">330</span> <span class="syn-duration">4</span></code></p>
+        <p><code>G4 (392 Hz, quarter note): <span class="syn-freq">392</span> <span class="syn-duration">4</span></code></p>
+        <p><code>A4 (440 Hz, quarter note): <span class="syn-freq">440</span> <span class="syn-duration">4</span></code></p>
+      </div>
+
+      <p>final output:</p>
+
+      <code><span class="syn-tempo">480</span> <span class="syn-freq">262</span> <span class="syn-duration">4</span> <span class="syn-freq">294</span> <span class="syn-duration">4</span> <span class="syn-freq">330</span> <span class="syn-duration">4</span> <span class="syn-freq">392</span> <span class="syn-duration">4</span> <span class="syn-freq">440</span> <span class="syn-duration">4</span></code>
+
+        <figure id="freq-chart" class="notes-reference">
+          <img src="/assets/objects/notes.gif" alt="MIDI note frequency reference table">
+          <figcaption>
+            MIDI frequency reference chart.
+            source: <a href="https://newt.phys.unsw.edu.au/jw/notes.html" target="_blank">University of New South Wales (UNSW)</a>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <hr>
+
+    <div class="footer">
+      <p>last update to this page: February 7, 2026. <a href="https://github.com/nadyamcg/nadyamcg.github.io">view source</a></p>
+    </div>
+  </main>
+
+  <!-- audio export modal -->
+  <div id="export-modal" class="export-modal hidden">
+    <div class="export-modal-overlay"></div>
+    <div class="export-modal-content">
+      <h3>export audio</h3>
+      <p>export your GRUB tune as an audio file</p>
+
+      <div class="export-options">
+        <label>
+          <input type="radio" name="export-format" value="wav" checked>
+          WAV (uncompressed, larger file)
+        </label>
+        <label>
+          <input type="radio" name="export-format" value="ogg">
+          OGG (compressed, smaller file)
+        </label>
+      </div>
+
+      <div class="export-info">
+        <span id="export-duration">0.0s</span> duration,
+        <span id="export-size-estimate">~0KB</span> estimated size
+      </div>
+
+      <div class="export-actions">
+        <button id="export-cancel-btn" type="button" class="btn-small">cancel</button>
+        <button id="export-download-btn" type="button" class="btn-primary">download</button>
+      </div>
+
+      <div id="export-progress" class="hidden">
+        <p>rendering audio...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/midi-parser.js"></script>
+  <script src="./js/midi-converter.js"></script>
+  <script src="./js/audio-player.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+<script src="/neko/neko.js" defer></script>
+<script src="/js/cursor.js"></script>
+</html>

@@ -1,36 +1,88 @@
-/* layout: main container, navbar, footer, responsive */
+/* ============================================
+   LAYOUT
+   main container, navbar, footer, hr styling
+   ============================================ */
 
 main {
-    width: min(100%, 860px);
-    margin-inline: auto;
-    min-width: 0;
+  width: min(100%, 860px);
+  margin-inline: auto;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+  background: var(--black);
+  padding: var(--space-lg);
+  border: 2px solid var(--rule);
+  box-shadow: 0 0 30px rgba(136, 153, 255, 0.25);
 }
 
+main > * + * {
+  margin-top: var(--space-md);
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
 #navbar {
-    letter-spacing: 0.1em;
+  text-align: center;
+  letter-spacing: 0.1em;
 }
 
 #navbar a {
-    margin: 0 10px;
-    transition: text-shadow 0.3s ease;
+  color: var(--fmnLight);
+  margin: 0 var(--space-sm);
+  text-decoration: none;
+  transition: text-shadow 0.3s ease;
 }
 
 #navbar a:hover {
-    text-shadow: 0 0 6px var(--glow);
+  color: var(--fmnLightest);
+  text-shadow: 0 0 6px var(--glow);
+  text-decoration: none;
+  animation: link-glow-pulse 1.2s ease-out infinite;
 }
+
+/* ============================================
+   HORIZONTAL RULES
+   ============================================ */
 
 hr {
-    margin-top: 20px;
-    border-color: var(--rule)
+  margin: var(--space-lg);
+  border: none;
+  height: 1px;
+  background: var(--rule);
+  opacity: 0.3;
 }
 
-.footer {
-    text-align: left;
-    margin-top: 20px
+#navbar + hr {
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--ink) 10%,
+    var(--fmnDark) 25%,
+    var(--forgetmenot) 50%,
+    var(--fmnDark) 75%,
+    var(--ink) 90%,
+    transparent
+  );
+  opacity: 1;
 }
 
-@media (max-width: 800px) {
-    body {
-        margin: var(--outer-space)
-    }
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer p {
+  margin-top: var(--space-md);
+  text-align: center;
+}
+
+footer a, .footer a {
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+footer a:hover, .footer a:hover {
+  text-decoration: none;
+  animation: link-glow-pulse 1s ease-out infinite;
 }

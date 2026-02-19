@@ -1,0 +1,48 @@
+/* ============================================
+   RESPONSIVENESS
+   mobile and small screen adaptations
+   ============================================ */
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .drop-zone {
+    padding: 25px 15px;
+  }
+
+  button {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .file-info {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .examples-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .example-art {
+    height: 140px;
+  }
+
+  .calculation-steps {
+    margin-left: 0;
+    padding: 12px;
+  }
+
+  .calculation-steps p {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+}
