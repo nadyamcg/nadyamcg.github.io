@@ -107,7 +107,7 @@ body::after {
     to { background-position: 100px 100px; }
 }
 
-/* flower icon — slow blink with glow pulse (matches 404 style) */
+/* flower icon */
 @keyframes flower-glow {
     0%, 100% {
         opacity: 0.8;
