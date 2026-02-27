@@ -168,7 +168,7 @@
 }
 
 .now-canary {
-  display: block;
+  display: inline-block;
   margin-top: var(--space-sm);
   text-align: left;
   text-decoration: none;
@@ -183,11 +183,11 @@
 }
 
 .now-canary.status-pass {
-  color: var(--skyaqua);
+  color: var(--sky-aqua);
 }
 
 .now-canary.status-overdue {
-  color: var(--redpink);
+  color: var(--red-pink);
 }
 
 /* ============================================

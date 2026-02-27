@@ -79,11 +79,11 @@ body::after {
 @keyframes link-glow-pulse {
     0%, 100% {
         color: var(--link);
-        text-shadow: 0 0 2px var(--skyaqua), 0 0 6px rgba(0, 209, 251, 0.3);
+        text-shadow: 0 0 2px var(--sky-aqua), 0 0 6px rgba(0, 209, 251, 0.3);
     }
     50% {
-        color: var(--skyaqua);
-        text-shadow: 0 0 4px var(--skyaqua), 0 0 12px rgba(0, 209, 251, 0.6);
+        color: var(--sky-aqua);
+        text-shadow: 0 0 4px var(--sky-aqua), 0 0 12px rgba(0, 209, 251, 0.6);
     }
 }
 

@@ -8,7 +8,7 @@
     /* named colors */
     --black: #000;
     --ink: #000312;
-    --prussian: #112233;
+    --черный: #112233;
     --white: #fff;
 
     --forgetmenot: #8899ff;
@@ -16,28 +16,54 @@
     --fmnLightest: #adbaff;
     --fmnDark: #4455aa;
     --fmnDarkest: #000044;
-
+    
+    --blue-bell: #449de0;
     --frost: #a6ebff;
-    --skyaqua: #00d1fb;
+    --sky-aqua: #00d1fb;
     --turquoise: #00a0c0;
-    --ocean: #218ab2;
+    --teal-blue: #227bb5;
+    --лазурный-крайола: #218ab2;
+    --teal: #37767f;
+    --tealDark: #06373c;
 
     --blue: #1234ff;
     --navy: #000f6e;
 
-    --magenta: #ff00ff;
-    --red: #f82520;
-    --redpink: #ff0066;
-    --hotpink: #ff007b;
+    --indigo: #48318f;
+    --twilight: #273466;
+    --blue-violet: #8a2be2;
+    --royal-violet: #8516b1;
+    --plum: #cc99cd;
+    --purple: #800080;
+    --burgundy: #66004d;
+    --hot-rose: #c00073;
 
-    --lavendergrey: #9999aa;
-    --powderblue: #aabbcc;
+    --magenta: #ff00ff;
+    --red: #f82032;
+    --red-pink: #ff0066;
+
+    --bloom: #f8296c;
+    --granite: #9f9c9d;
+    --steel-sky: #b4d0df;
+    --красный-лепесток: #ecced3;
+    --холодный-синий: #6bd5fe;
+    --кораллово-красный: #fe88a0;
+    --лазурный-азур: #007fff;
+    --сверкающий-синий: #6fc7ea;
+    --кадетский-синий: #5a9bb5;
+    --бежевый: #fdc7c3;
+    --стальной-серый: #88bcd4;
+
+    --lavender-grey: #9999aa;
+    --powder-blue: #aabbcc;
     --blush: #ffdcdc;
-    --medgrey: #888;
-    --lightgrey: #e0e0e0;
-    --darkgrey: #666;
-    --lightpink: #ffe6f2;
-    --darkbg: #1a1a2e;
+    --greyMed: #888;
+    --greyLight: #e0e0e0;
+    --greyDark: #666;
+    --роза-блаш: #ffe6f2;
+    --bgDark: #1a1a2e;
+    --snow: #fafaff;
+    --ghost: #f2f2f8;
 
     --glow: rgba(136, 153, 255, 0.7);
     --glow-soft: rgba(136, 153, 255, 0.5);
@@ -55,10 +81,11 @@
     --link: var(--fmnLight);
 
     /* backwards-compat aliases */
+    --незабудка: var(--forgetmenot);
     --bg: var(--black);
     --accent: var(--turquoise);
     --link-visited: var(--fmnDark);
-    --muted: var(--lavendergrey);
+    --muted: var(--lavender-grey);
 
     /* spacing scale */
     --space-xs: 4px;
@@ -209,7 +236,7 @@ a:hover, a:focus {
 @media (prefers-reduced-motion: reduce) {
     a:hover, a:focus {
         animation: none;
-        text-shadow: 0 0 4px var(--skyaqua), 0 0 12px rgba(0, 209, 251, 0.6);
+        text-shadow: 0 0 4px var(--sky-aqua), 0 0 12px rgba(0, 209, 251, 0.6);
     }
 }
 

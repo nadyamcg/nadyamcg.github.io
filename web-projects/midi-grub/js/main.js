@@ -177,7 +177,7 @@
 
       // visual feedback on button
       const originalBg = this.style.backgroundColor;
-      this.style.backgroundColor = 'var(--lavendergrey)';
+      this.style.backgroundColor = 'var(--lavender-grey)';
       setTimeout(() => {
         this.style.backgroundColor = originalBg;
       }, 200);
@@ -192,7 +192,7 @@
 
       // visual feedback on button
       const originalBg = this.style.backgroundColor;
-      this.style.backgroundColor = 'var(--lavendergrey)';
+      this.style.backgroundColor = 'var(--lavender-grey)';
       setTimeout(() => {
         this.style.backgroundColor = originalBg;
       }, 200);
@@ -229,7 +229,7 @@
 
       // visual feedback on button
       const originalBg = this.style.backgroundColor;
-      this.style.backgroundColor = 'var(--lavendergrey)';
+      this.style.backgroundColor = 'var(--lavender-grey)';
       setTimeout(() => {
         this.style.backgroundColor = originalBg;
       }, 200);
