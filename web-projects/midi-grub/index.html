@@ -352,11 +352,19 @@
               <summary>more info</summary>
               <p><code class="syn-freq">freq</code> is one of the two required values in order to create a valid note in GRUB.</p>
               <p><span class="syn-note">notes</span> are distinguished by their <span class="syn-freq">frequency</span> measured in <span class="syn-hz">Hz</span>. <span class="syn-hz">Hz</span> values for most <span class="syn-note">notes</span> rarely correlate to an integer, this means we must <span class="syn-math">round</span> them the nearest whole number. as the quantization is <span class="syn-operator">±</span><span class="syn-hz">1 Hz</span>, this is <i>close enough</i> for most human ears.</p>
-              <p><b>middle C</b>, referred to as <code class="syn-note">C4</code> in <span class="syn-note">scientific pitch notation</span> and note number <code class="syn-midi-num">60</code> in <span class="syn-midi-num">MIDI standard</span>, is generally recognized as approximately <code class="syn-hz">261.626 Hz</code>. so, for our purposes:</p>
+              <p><b>middle C</b>, referred to as <code class="syn-note">C4</code> in <span class="syn-note">scientific pitch notation</span> and note number <code class="syn-midi-num">60</code> in <span class="syn-midi-num">MIDI standard</span>, is generally recognized as approximately <code class="syn-hz">261.626 Hz</code>. the standard formula for deriving <span class="syn-hz">Hz</span> from a <span class="syn-midi-num">MIDI note number</span> is:</p>
               <div class="calculation-steps">
-                <p><code><span class="syn-freq">frequency</span> <span class="syn-operator">=</span> <span class="syn-math">round(</span><span class="syn-bpm">BPM</span></code></p>
-                <p><code><span class="syn-freq">262</span> <span class="syn-hz">Hz</span> = <span class="syn-note">C4</span></code></p>
-                <p><code><span class="syn-freq">0</span> = rest (silence)</code></p>
+                <p><code><span class="syn-freq">freq</span> <span class="syn-operator">=</span> <span class="syn-math">round(</span><span class="syn-hz">440</span> <span class="syn-operator">×</span> <span class="syn-number">2</span><sup class="syn-superscript"><span class="syn-operator">(</span><span class="syn-midi-num">n</span> <span class="syn-operator">−</span> <span class="syn-number">69</span><span class="syn-operator">)</span> <span class="syn-operator">÷</span> <span class="syn-number">12</span></sup><span class="syn-math">)</span></code></p>
+              </div>
+              <p>... where <span class="syn-midi-num">n</span> is the <span class="syn-midi-num">MIDI note number</span> and <span class="syn-hz">440</span> is the reference pitch <code class="syn-note">A4</code> <span class="syn-operator">=</span> <code class="syn-hz">440 Hz</code>. so, for <code class="syn-note">C4</code> (<span class="syn-midi-num">MIDI note</span> <code class="syn-midi-num">60</code>):</p>
+              <div class="calculation-steps">
+                <p><code><span class="syn-freq">freq</span> <span class="syn-operator">=</span> <span class="syn-math">round(</span><span class="syn-hz">440</span> <span class="syn-operator">×</span> <span class="syn-number">2</span><sup class="syn-superscript"><span class="syn-operator">(</span><span class="syn-midi-num">60</span> <span class="syn-operator">−</span> <span class="syn-number">69</span><span class="syn-operator">)</span> <span class="syn-operator">÷</span> <span class="syn-number">12</span></sup><span class="syn-math">)</span></code></p>
+                <p><code><span class="syn-freq">freq</span> <span class="syn-operator">=</span> <span class="syn-math">round(</span><span class="syn-hz">261.626</span><span class="syn-math">)</span></code></p>
+                <p><code><span class="syn-freq">freq</span> <span class="syn-operator">=</span> <span class="syn-freq">262</span></code></p>
+              </div>
+              <div class="calculation-steps">
+                <p><code><span class="syn-freq">262</span> <span class="syn-hz">Hz</span> <span class="syn-operator">=</span> <span class="syn-note">C4</span></code></p>
+                <p><code><span class="syn-freq">0</span> <span class="syn-operator">=</span> rest <span class="syn-operator">(</span>silence<span class="syn-operator">)</span></code></p>
               </div>
               <p>refer to <b><a href="#freq-chart">this image</a></b> for a helpful reference table for converting between <span class="syn-note">standard notation</span>, <span class="syn-midi-num">MIDI note numbers</span>, and <code class="syn-hz">Hz</code> values respectively.</p>
             </details>
@@ -368,10 +376,20 @@
             </div>
             <details class="syntax-details">
               <summary>more info</summary>
+              <p><code class="syn-duration">duration</code> is the other required value for each note. it tells GRUB how long to hold the <code class="syn-freq">frequency</code> before moving to the next note. it's measured in <b>ticks</b>, not seconds or milliseconds.</p>
+              <p>the actual length of time a tick represents depends entirely on the <code class="syn-tempo">tempo</code> value:</p>
               <div class="calculation-steps">
-                <p><code><span class="syn-duration">0</span> = nothing</code>, skipped/ignored by GRUB.</p>
+                <p><code><span class="syn-var">seconds per tick</span> <span class="syn-operator">=</span> <span class="syn-number">60</span> <span class="syn-operator">÷</span> <span class="syn-tempo">tempo</span></code></p>
+                <p><code><span class="syn-var">note length</span> <span class="syn-operator">=</span> <span class="syn-duration">duration</span> <span class="syn-operator">×</span> <span class="syn-number">60</span> <span class="syn-operator">÷</span> <span class="syn-tempo">tempo</span></code></p>
               </div>
-              <p><code><span class="syn-tempo">60</span> <span class="syn-freq">262</span> <span class="syn-duration">1</span></code> will result in the <code class="syn-note">C4</code> note lasting for <b>1 second</b>, as <code><span class="syn-tempo">tempo</span> = <span class="syn-tempo">60</span></code> and <code>60 seconds = 1 minute</code>.</p>
+              <p>for example, <code><span class="syn-tempo">60</span> <span class="syn-freq">262</span> <span class="syn-duration">1</span></code> plays <code class="syn-note">C4</code> for <b>1 second</b>, because <code><span class="syn-tempo">tempo</span> <span class="syn-operator">=</span> <span class="syn-tempo">60</span></code> means <span class="syn-number">60</span> ticks per minute, so each tick <span class="syn-operator">=</span> <span class="syn-number">1</span> second.</p>
+              <div class="calculation-steps">
+                <p><code><span class="syn-var">note length</span> <span class="syn-operator">=</span> <span class="syn-duration">1</span> <span class="syn-operator">×</span> <span class="syn-number">60</span> <span class="syn-operator">÷</span> <span class="syn-tempo">60</span> <span class="syn-operator">=</span> <span class="syn-number">1 second</span></code></p>
+              </div>
+              <p>higher <code class="syn-tempo">tempo</code> values give you finer <code class="syn-duration">duration</code> control. at <code><span class="syn-tempo">tempo</span> <span class="syn-operator">=</span> <span class="syn-tempo">480</span></code>, each tick is only <span class="syn-number">0.125</span> seconds (<span class="syn-number">125</span>ms), allowing precise note lengths without needing fractional values.</p>
+              <div class="calculation-steps">
+                <p><code><span class="syn-duration">0</span> <span class="syn-operator">=</span> nothing</code>, skipped/ignored by GRUB.</p>
+              </div>
             </details>
           </div>
         </div>
@@ -396,44 +414,40 @@
 
       <p>remember, <code class="syn-tempo">tempo</code> and <code class="syn-duration">duration</code> operate in <b>ticks</b>, not beats. <code class="syn-bpm">BPM</code> <b>does not exist</b> in GRUB or define such a value. we're working with a bootloader operating hardware on a <b>low level</b>, so the luxuries provided by MIDI through DAWs and sequencers do not apply.</p>
 
-      <p><code>duration = 0</code> does nothing (gets skipped). decimals aren't supported. a lower <code class="syn-tempo">tempo</code> like <code class="syn-tempo">60</code> would make quarter notes <b>impossible</b>. that would require <code><span class="syn-duration">duration</span> = <span class="syn-duration">0.5</span></code>, which is invalid.</p>
+      <p><code><span class="syn-duration">duration</span> <span class="syn-operator">=</span> <span class="syn-duration">0</span></code> does nothing (gets skipped). decimals aren't supported. a lower <code class="syn-tempo">tempo</code> like <code class="syn-tempo">60</code> would make quarter notes <b>impossible</b>. that would require <code><span class="syn-duration">duration</span> <span class="syn-operator">=</span> <span class="syn-duration">0.5</span></code>, which is invalid.</p>
 
       <h4>step 2: convert BPM to seconds</h4>
       <p>at <code class="syn-bpm">120 BPM</code>, we can calculate note durations in seconds:</p>
 
       <div class="calculation-steps">
-        <p><code class="syn-bpm">120 quarter notes (or beats) per minute</code></p>
-        <p><code>60 seconds ÷ 120 beats = <b>0.5 seconds</b> per quarter note</code></p>
-        <p><code>4 quarter notes = 1 whole note = <b>2 seconds</b></code></p>
+        <p><code><span class="syn-bpm">120</span> quarter notes <span class="syn-operator">(</span>or beats<span class="syn-operator">)</span> per minute</code></p>
+        <p><code><span class="syn-number">60</span> seconds <span class="syn-operator">÷</span> <span class="syn-bpm">120</span> beats <span class="syn-operator">=</span> <span class="syn-number">0.5 seconds</span> per quarter note</code></p>
+        <p><code><span class="syn-number">4</span> quarter notes <span class="syn-operator">=</span> <span class="syn-number">1</span> whole note <span class="syn-operator">=</span> <span class="syn-number">2 seconds</span></code></p>
       </div>
 
       <h4>step 3: convert seconds to ticks</h4>
       <p>the relationship:</p>
       <div class="calculation-steps">
-      <p><code>seconds per note = <span class="syn-duration">(duration in ticks)</span> ÷ <span class="syn-tempo">(tempo in ticks/min)</span> × 60</code></p>
+      <p><code><span class="syn-var">seconds per note</span> <span class="syn-operator">=</span> <span class="syn-duration">duration</span> <span class="syn-operator">÷</span> <span class="syn-tempo">tempo</span> <span class="syn-operator">×</span> <span class="syn-number">60</span></code></p>
       </div>
-      <p>with <code><span class="syn-tempo">tempo</span> = <span class="syn-tempo">480</span></code>:</p>
+      <p>with <code><span class="syn-tempo">tempo</span> <span class="syn-operator">=</span> <span class="syn-tempo">480</span></code>:</p>
 
       <div class="calculation-steps">
-        <p><code>1 minute = <span class="syn-duration">480</span> ticks</code></p>
-        <p><code>1 second = <span class="syn-duration">8</span> ticks (480 ÷ 60)</code></p>
-        <p><code>quarter note (0.5 sec) = <span class="syn-duration">4</span> ticks (8 × 0.5)</code></p>
+        <p><code><span class="syn-number">1</span> minute <span class="syn-operator">=</span> <span class="syn-tempo">480</span> ticks</code></p>
+        <p><code><span class="syn-number">1</span> second <span class="syn-operator">=</span> <span class="syn-duration">8</span> ticks <span class="syn-operator">(</span><span class="syn-tempo">480</span> <span class="syn-operator">÷</span> <span class="syn-number">60</span><span class="syn-operator">)</span></code></p>
+        <p><code>quarter note <span class="syn-operator">(</span><span class="syn-number">0.5</span> sec<span class="syn-operator">)</span> <span class="syn-operator">=</span> <span class="syn-duration">4</span> ticks <span class="syn-operator">(</span><span class="syn-duration">8</span> <span class="syn-operator">×</span> <span class="syn-number">0.5</span><span class="syn-operator">)</span></code></p>
       </div>
 
       <p>we've identified that quarter notes in our context should equal to <code class="syn-duration">4</code>.</p>
 
       <h4>step 4: convert notes to Hz and ticks</h4>
-      <p>now translate to GRUB format. get your <code class="syn-tempo">tempo</code>, <code class="syn-tempo">480</code>, and figure out the <span class="syn-freq">frequency</span> for each note you desire (a <span class="syn-note">note</span>'s respective <span class="syn-hz">Hz</span> value <span class="syn-math">rounded</span> to the nearest integer) and its <span class="syn-duration">duration</span> in ticks, in our case it is <code class="syn-duration">4</code>.</p>
+      <p>now translate to GRUB format. each note needs a <span class="syn-freq">freq</span> and a <span class="syn-duration">duration</span>. we already know our <code class="syn-duration">duration</code> is <code class="syn-duration">4</code> ticks (quarter note), so for each <span class="syn-note">note</span> we just need to <span class="syn-math">round</span> its <span class="syn-hz">Hz</span> value to the nearest integer:</p>
       <div class="calculation-steps">
-        <p><span class="syn-note">C4</span> (<code class="syn-hz">261.626 Hz</code>), quarter note</p>
-        <p>one note in GRUB tune requires <span class="syn-freq">freq</span> and <span class="syn-duration">duration</span>, so we <span class="syn-math">round</span> <span class="syn-hz">261.626</span> to get our <span class="syn-freq">freq</span> value by matching </p>
-        <p><code><span class="syn-math">ROUND</span>(<span class="syn-hz">261.626</span>) = <span class="syn-freq">262</span></code></p>
-        <p><code><span class="syn-duration">duration</span> = <span class="syn-duration">4</span></code></p>
-        <p><code><span class="syn-freq">262</span> <span class="syn-duration">4</span></code></p>
-        <p><span class="syn-note">D4</span> (<span class="syn-hz">293.67 Hz</span>), quarter note: <span class="syn-freq">294</span> <span class="syn-duration">4</span></code></p>
-        <p><span class="syn-note">E4</span> (<span class="syn-hz">329.63 Hz</span>), quarter note: <span class="syn-freq">330</span> <span class="syn-duration">4</span></code></p>
-        <p><span class="syn-note">G4</span> (<span class="syn-hz">392 Hz</span>), quarter note: <span class="syn-freq">392</span> <span class="syn-duration">4</span></code></p>
-        <p><span class="syn-note">A4</span> (<span class="syn-hz">440 Hz</span>), quarter note: <span class="syn-freq">440</span> <span class="syn-duration">4</span></code></p>
+        <p><code><span class="syn-note">C4</span> <span class="syn-operator">(</span><span class="syn-hz">261.626 Hz</span><span class="syn-operator">)</span></code> -> <code><span class="syn-math">round(</span><span class="syn-hz">261.626</span><span class="syn-math">)</span> <span class="syn-operator">=</span> <span class="syn-freq">262</span></code> -> <code><span class="syn-freq">262</span> <span class="syn-duration">4</span></code></p>
+        <p><code><span class="syn-note">D4</span> <span class="syn-operator">(</span><span class="syn-hz">293.665 Hz</span><span class="syn-operator">)</span></code> -> <code><span class="syn-math">round(</span><span class="syn-hz">293.665</span><span class="syn-math">)</span> <span class="syn-operator">=</span> <span class="syn-freq">294</span></code> -> <code><span class="syn-freq">294</span> <span class="syn-duration">4</span></code></p>
+        <p><code><span class="syn-note">E4</span> <span class="syn-operator">(</span><span class="syn-hz">329.628 Hz</span><span class="syn-operator">)</span></code> -> <code><span class="syn-math">round(</span><span class="syn-hz">329.628</span><span class="syn-math">)</span> <span class="syn-operator">=</span> <span class="syn-freq">330</span></code> -> <code><span class="syn-freq">330</span> <span class="syn-duration">4</span></code></p>
+        <p><code><span class="syn-note">G4</span> <span class="syn-operator">(</span><span class="syn-hz">391.995 Hz</span><span class="syn-operator">)</span></code> -> <code><span class="syn-math">round(</span><span class="syn-hz">391.995</span><span class="syn-math">)</span> <span class="syn-operator">=</span> <span class="syn-freq">392</span></code> -> <code><span class="syn-freq">392</span> <span class="syn-duration">4</span></code></p>
+        <p><code><span class="syn-note">A4</span> <span class="syn-operator">(</span><span class="syn-hz">440 Hz</span><span class="syn-operator">)</span></code> -> <code><span class="syn-math">round(</span><span class="syn-hz">440</span><span class="syn-math">)</span> <span class="syn-operator">=</span> <span class="syn-freq">440</span></code> -> <code><span class="syn-freq">440</span> <span class="syn-duration">4</span></code></p>
       </div>
 
       <h4>final output</h4>

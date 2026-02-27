@@ -930,6 +930,13 @@ p:has(+ .terminal-block) {
   color: inherit;
 }
 
+.calculation-steps sup,
+.syn-superscript {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+}
+
 /* piecewise notation */
 .piecewise {
   display: flex;
