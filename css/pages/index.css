@@ -138,10 +138,53 @@ body::before {
   background: none;
   border: none;
   font-size: inherit;
-  line-height: inherit;
+  line-height: 1;
   white-space: pre;
   overflow: visible;
 }
+
+.side-logo span {
+  display: block;
+  line-height: 1;
+  animation: blink 2s linear infinite;
+}
+
+.side-logo .sl1  { animation-delay: 0.00s; }
+.side-logo .sl2  { animation-delay: 0.11s; }
+.side-logo .sl3  { animation-delay: 0.22s; }
+.side-logo .sl4  { animation-delay: 0.33s; }
+.side-logo .sl5  { animation-delay: 0.44s; }
+.side-logo .sl6  { animation-delay: 0.55s; }
+.side-logo .sl7  { animation-delay: 0.66s; }
+.side-logo .sl8  { animation-delay: 0.77s; }
+.side-logo .sl9  { animation-delay: 0.88s; }
+.side-logo .sl10 { animation-delay: 0.99s; }
+.side-logo .sl11 { animation-delay: 1.10s; }
+.side-logo .sl12 { animation-delay: 1.21s; }
+.side-logo .sl13 { animation-delay: 1.32s; }
+.side-logo .sl14 { animation-delay: 1.43s; }
+.side-logo .sl15 { animation-delay: 1.54s; }
+.side-logo .sl16 { animation-delay: 1.65s; }
+.side-logo .sl17 { animation-delay: 1.76s; }
+.side-logo .sl18 { animation-delay: 1.87s; }
+.side-logo .sl19 { animation-delay: 1.98s; }
+.side-logo .sl20 { animation-delay: 2.09s; }
+.side-logo .sl21 { animation-delay: 2.20s; }
+.side-logo .sl22 { animation-delay: 2.31s; }
+.side-logo .sl23 { animation-delay: 2.42s; }
+.side-logo .sl24 { animation-delay: 2.53s; }
+.side-logo .sl25 { animation-delay: 2.64s; }
+.side-logo .sl26 { animation-delay: 2.75s; }
+.side-logo .sl27 { animation-delay: 2.86s; }
+.side-logo .sl28 { animation-delay: 2.97s; }
+.side-logo .sl29 { animation-delay: 3.08s; }
+.side-logo .sl30 { animation-delay: 3.19s; }
+.side-logo .sl31 { animation-delay: 3.30s; }
+.side-logo .sl32 { animation-delay: 3.41s; }
+.side-logo .sl33 { animation-delay: 3.52s; }
+.side-logo .sl34 { animation-delay: 3.63s; }
+.side-logo .sl35 { animation-delay: 3.74s; }
+.side-logo .sl36 { animation-delay: 3.85s; }
 
 @media (max-width: 1400px) {
   .side-logo { display: none; }
