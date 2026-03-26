@@ -13,19 +13,15 @@
 </head>
 <body>
   <main>
-    <h1>ＭＩＤＩ　ｔｏ　ＧＲＵＢ　ｔｕｎｅ</h1>
-    <p class="subtitle">convert MIDI files to GRUB boot tunes</p>
+    <div class="panel" id="panel-nav">
+      <h1>ＭＩＤＩ　ｔｏ　ＧＲＵＢ　ｔｕｎｅ</h1>
+      <p class="subtitle">convert MIDI files to GRUB boot tunes</p>
+      <nav id="navbar">
+        <a href="/index.html">home</a><span class="nav-sep">|</span><a href="/blog/">blog</a><span class="nav-sep">|</span><a href="/web-projects/">web projects</a><span class="nav-sep">|</span><a href="/canary/">canary</a><span class="nav-sep">|</span><a href="/contact/">contact</a>
+      </nav>
+    </div>
 
-    <nav id="navbar">
-      <a href="/index.html">home</a> |
-      <a href="/blog/">blog</a> |
-      <a href="/web-projects/">web projects</a> |
-      <a href="/canary/">canary</a> |
-      <a href="/contact/">contact</a>
-    </nav>
-
-    <hr>
-
+    <div class="panel" id="panel-main">
     <!-- file handling -->
     <section id="upload-section">
       <h2>upload a MIDI file</h2>
@@ -41,8 +37,8 @@
     </section>
 
     <!-- settings -->
-    <section id="settings-section">
-      <h2>settings</h2>
+    <details id="settings-section" class="info-collapsible">
+      <summary>settings</summary>
 
       <div class="option-group">
         <label for="duration-limit">max tune duration: <span id="duration-value">10</span>s</label>
@@ -68,7 +64,7 @@
           if misconfigured, you may need external boot media to recover. use with caution!
         </div>
       </div>
-    </section>
+    </details>
 
     <!-- track selection -->
     <section id="track-section" class="hidden">
@@ -405,16 +401,9 @@
       <h4>step 1: choose tempo and BPM</h4>
       <p>we'll use <code><span class="syn-tempo">480</span></code> as our <code class="syn-tempo">tempo</code> and <code class="syn-bpm">120 BPM</code>. <i>why</i> <code><span class="syn-tempo">tempo</span> = <span class="syn-tempo">480</span></code>? it provides enough resolution for common note values to land on integers. <b>fractional values are invalid</b> in GRUB.</p>
 
-      <div class="calculation-steps">
-        <p><code>sixteenth note = <span class="syn-duration">1</span> tick</code></p>
-        <p><code>eighth note = <span class="syn-duration">2</span> ticks</code></p>
-        <p><code>quarter note = <span class="syn-duration">4</span> ticks</code></p>
-        <p><code>whole note = <span class="syn-duration">16</span> ticks</code></p>
-      </div>
-
       <p>remember, <code class="syn-tempo">tempo</code> and <code class="syn-duration">duration</code> operate in <b>ticks</b>, not beats. <code class="syn-bpm">BPM</code> <b>does not exist</b> in GRUB or define such a value. we're working with a bootloader operating hardware on a <b>low level</b>, so the luxuries provided by MIDI through DAWs and sequencers do not apply.</p>
 
-      <p><code><span class="syn-duration">duration</span> <span class="syn-operator">=</span> <span class="syn-duration">0</span></code> does nothing (gets skipped). decimals aren't supported. a lower <code class="syn-tempo">tempo</code> like <code class="syn-tempo">60</code> would make quarter notes <b>impossible</b>. that would require <code><span class="syn-duration">duration</span> <span class="syn-operator">=</span> <span class="syn-duration">0.5</span></code>, which is invalid.</p>
+      <p>a lower <code class="syn-tempo">tempo</code> like <code class="syn-tempo">60</code> would make quarter notes <b>impossible</b>. that would require <code><span class="syn-duration">duration</span> <span class="syn-operator">=</span> <span class="syn-duration">0.5</span></code>, which is invalid.</p>
 
       <h4>step 2: convert BPM to seconds</h4>
       <p>at <code class="syn-bpm">120 BPM</code>, we can calculate note durations in seconds:</p>
@@ -438,7 +427,15 @@
         <p><code>quarter note <span class="syn-operator">(</span><span class="syn-number">0.5</span> sec<span class="syn-operator">)</span> <span class="syn-operator">=</span> <span class="syn-duration">4</span> ticks <span class="syn-operator">(</span><span class="syn-duration">8</span> <span class="syn-operator">×</span> <span class="syn-number">0.5</span><span class="syn-operator">)</span></code></p>
       </div>
 
-      <p>we've identified that quarter notes in our context should equal to <code class="syn-duration">4</code>.</p>
+      <p>we've identified that quarter notes in our context should equal to <code class="syn-duration">4</code>. applying the same math to other note types:</p>
+
+      <div class="calculation-steps">
+        <p><code>sixteenth note <span class="syn-operator">(</span><span class="syn-number">0.125</span> sec<span class="syn-operator">)</span> <span class="syn-operator">=</span> <span class="syn-duration">1</span> tick <span class="syn-operator">(</span><span class="syn-duration">8</span> <span class="syn-operator">×</span> <span class="syn-number">0.125</span><span class="syn-operator">)</span></code></p>
+        <p><code>eighth note <span class="syn-operator">(</span><span class="syn-number">0.25</span> sec<span class="syn-operator">)</span> <span class="syn-operator">=</span> <span class="syn-duration">2</span> ticks <span class="syn-operator">(</span><span class="syn-duration">8</span> <span class="syn-operator">×</span> <span class="syn-number">0.25</span><span class="syn-operator">)</span></code></p>
+        <p><code>quarter note <span class="syn-operator">(</span><span class="syn-number">0.5</span> sec<span class="syn-operator">)</span> <span class="syn-operator">=</span> <span class="syn-duration">4</span> ticks <span class="syn-operator">(</span><span class="syn-duration">8</span> <span class="syn-operator">×</span> <span class="syn-number">0.5</span><span class="syn-operator">)</span></code></p>
+        <p><code>half note <span class="syn-operator">(</span><span class="syn-number">1</span> sec<span class="syn-operator">)</span> <span class="syn-operator">=</span> <span class="syn-duration">8</span> ticks <span class="syn-operator">(</span><span class="syn-duration">8</span> <span class="syn-operator">×</span> <span class="syn-number">1</span><span class="syn-operator">)</span></code></p>
+        <p><code>whole note <span class="syn-operator">(</span><span class="syn-number">2</span> sec<span class="syn-operator">)</span> <span class="syn-operator">=</span> <span class="syn-duration">16</span> ticks <span class="syn-operator">(</span><span class="syn-duration">8</span> <span class="syn-operator">×</span> <span class="syn-number">2</span><span class="syn-operator">)</span></code></p>
+      </div>
 
       <h4>step 4: convert notes to Hz and ticks</h4>
       <p>now translate to GRUB format. each note needs a <span class="syn-freq">freq</span> and a <span class="syn-duration">duration</span>. we already know our <code class="syn-duration">duration</code> is <code class="syn-duration">4</code> ticks (quarter note), so for each <span class="syn-note">note</span> we just need to <span class="syn-math">round</span> its <span class="syn-hz">Hz</span> value to the nearest integer:</p>
@@ -451,8 +448,14 @@
       </div>
 
       <h4>final output</h4>
-      <div class="highlight-code">
-        <code><span class="syn-tempo">480</span> <span class="syn-freq">262</span> <span class="syn-duration">4</span> <span class="syn-freq">294</span> <span class="syn-duration">4</span> <span class="syn-freq">330</span> <span class="syn-duration">4</span> <span class="syn-freq">392</span> <span class="syn-duration">4</span> <span class="syn-freq">440</span> <span class="syn-duration">4</span></code>
+      <div class="tune-result-card" data-tune="480 262 4 294 4 330 4 392 4 440 4">
+        <div class="tune-result-code">
+          <code><span class="syn-tempo">480</span> <span class="syn-freq">262</span> <span class="syn-duration">4</span> <span class="syn-freq">294</span> <span class="syn-duration">4</span> <span class="syn-freq">330</span> <span class="syn-duration">4</span> <span class="syn-freq">392</span> <span class="syn-duration">4</span> <span class="syn-freq">440</span> <span class="syn-duration">4</span></code>
+        </div>
+        <div class="tune-result-actions">
+          <button class="tune-result-load-btn" title="load into tune editor">load</button>
+          <button class="tune-result-copy-btn" title="copy to clipboard">copy</button>
+        </div>
       </div>
     </div>
 
@@ -466,10 +469,10 @@
       </div>
     </section>
 
-    <hr>
+    </div>
 
     <div class="footer">
-      <p>last update to this page: February 7, 2026. <a href="https://github.com/nadyamcg/nadyamcg.github.io">view source</a></p>
+      <p>last update to this page: March 1, 2026. <a href="https://github.com/nadyamcg/nadyamcg.github.io">view source</a></p>
     </div>
   </main>
 

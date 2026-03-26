@@ -1,6 +1,5 @@
 /* ============================================
    LAYOUT
-   main container, navbar, footer, hr styling
    ============================================ */
 
 main {
@@ -9,14 +8,23 @@ main {
   min-width: 0;
   position: relative;
   z-index: 1;
-  background: var(--black);
-  padding: var(--space-lg);
-  border: 2px solid var(--rule);
-  box-shadow: 0 0 30px rgba(136, 153, 255, 0.25);
 }
 
 main > * + * {
-  margin-top: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+/* ============================================
+   PANELS
+   ============================================ */
+
+.panel {
+  background-color: transparent;
+  padding: var(--space-lg);
+  border: 2px solid var(--rule);
+  box-shadow: 0 0 30px rgba(136, 153, 255, 0.25);
+  background-repeat: repeat;
+  position: relative;
 }
 
 /* ============================================
@@ -33,6 +41,12 @@ main > * + * {
   margin: 0 var(--space-sm);
   text-decoration: none;
   transition: text-shadow 0.3s ease;
+}
+
+.nav-sep {
+  color: var(--accent);
+  opacity: 0.6;
+  user-select: none;
 }
 
 #navbar a:hover {

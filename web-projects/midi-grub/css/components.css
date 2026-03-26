@@ -55,20 +55,9 @@ input[type="range"] {
   margin-top: 5px;
 }
 
-/* settings section */
+/* settings section (collapsible) */
 #settings-section {
-  background-color: var(--secondarybg);
-  border: 1px solid var(--rule);
-  border-radius: 0px;
-  padding: 20px;
   margin: 20px 0;
-}
-
-#settings-section h2 {
-  margin-top: 0;
-  color: var(--headers);
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 8px;
 }
 
 /* drop zone */
@@ -807,6 +796,75 @@ p:has(+ .terminal-block) {
 .highlight-code code {
   font-size: var(--font-medium);
   padding: 8px 12px;
+}
+
+/* tune result card: interactive output with load/copy */
+.tune-result-card {
+  background-color: var(--black);
+  border: 2px solid var(--rule);
+  margin: 15px auto;
+  max-width: fit-content;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tune-result-card:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 0 12px var(--glow), inset 0 0 20px rgba(0, 160, 192, 0.04);
+}
+
+.tune-result-code {
+  text-align: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 0.3s ease;
+}
+
+.tune-result-card:hover .tune-result-code {
+  border-color: var(--secondary);
+}
+
+.tune-result-code code {
+  font-size: var(--font-medium);
+  letter-spacing: 0.03em;
+}
+
+.tune-result-actions {
+  display: flex;
+}
+
+.tune-result-load-btn,
+.tune-result-copy-btn {
+  flex: 1;
+  padding: 9px 8px;
+  font-size: var(--font-small);
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  transition: background-color 0.2s;
+}
+
+.tune-result-load-btn {
+  background-color: var(--secondary);
+  color: var(--mainbg);
+  border-right: 1px solid var(--rule);
+}
+
+.tune-result-load-btn:hover {
+  background-color: var(--sky-aqua);
+}
+
+.tune-result-copy-btn {
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+.tune-result-copy-btn:hover {
+  background-color: var(--blue);
+}
+
+.tune-result-copy-btn.copied {
+  background-color: var(--fmnDarkest);
+  color: var(--white);
 }
 
 /* syntax colors for reference */

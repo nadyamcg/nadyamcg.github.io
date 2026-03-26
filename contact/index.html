@@ -10,19 +10,17 @@
 </head>
 <body>
 <main>
-<h1>ｃｏｎｔａｃｔ</h1>
+<div class="panel" id="panel-nav">
+  <h1>ｃｏｎｔａｃｔ</h1>
+  <nav id="navbar">
+    <a href="/index.html">home</a><span class="nav-sep">|</span><a href="/blog/">blog</a><span class="nav-sep">|</span><a href="/web-projects/">web projects</a><span class="nav-sep">|</span><a href="/canary/">canary</a><span class="nav-sep">|</span><a href="/contact/">contact</a>
+  </nav>
+</div>
 
-<nav id="navbar">
-  <a href="/index.html">home</a> |
-  <a href="/blog/">blog</a> |
-  <a href="/web-projects/">web projects</a> |
-  <a href="/canary/">canary</a> |
-  <a href="/contact/">contact</a>
-</nav>
-<hr>
-
-<div class="intro-note">
+<div class="panel" id="panel-main">
+<div class="intro-note intro-split">
   <p class="greeting">I prefer async, text-first contact.</p>
+  <p class="greeting">my midnight is your <time datetime="1774497600" data-f="t">12:00 AM EST</time>.</p>
 </div>
 
 <section class="contact-grid">
@@ -63,11 +61,13 @@
   <p class="small mono">soon, I may provide a PGP-signed message here.</p>
 </div>
 
-<hr>
+</div>
+
 <div class="footer">
-<p>last update to this page: December 18, 2025.</p>
+  <p>last update to this page: December 18, 2025.</p>
 </div>
 </main>
 </body>
+<script src="/js/localtime.js" defer></script>
 <script src="/neko/neko.js" defer></script>
 </html>

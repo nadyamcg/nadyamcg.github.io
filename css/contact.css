@@ -1,5 +1,14 @@
 /* contact: cards, grid, lists, pgp section */
 
+.intro-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    max-width: none;
+}
+
 .contact-group h3 {
     margin-bottom: var(--space-md);
     font-size: large;

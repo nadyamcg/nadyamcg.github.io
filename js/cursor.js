@@ -178,13 +178,14 @@ class AnimatedCursor {
     document.addEventListener('mouseleave', () => this.hide())
 
     document.addEventListener('mouseover', (e) => {
-      if (e.target.matches('a, button, label, select, .file-label, summary')) {
+      if (e.target.closest('a, button, label, select, .file-label, summary')) {
         this.isHovering = true
         this.switchToHoverState()
       }
     })
     document.addEventListener('mouseout', (e) => {
-      if (e.target.matches('a, button, label, select, .file-label, summary')) {
+      const leaving = e.target.closest('a, button, label, select, .file-label, summary')
+      if (leaving && !leaving.contains(e.relatedTarget)) {
         this.isHovering = false
         this.switchToDefaultState()
       }

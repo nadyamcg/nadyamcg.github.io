@@ -10,42 +10,38 @@
 </head>
 <body>
 <main>
-<h1>ｈｅｌｌｏ，　ｗｏｒｌｄ</h1>
-
-<nav id="navbar">
-  <a href="/index.html">home</a> |
-  <a href="/blog/">blog</a> |
-  <a href="/web-projects/">web projects</a> |
-  <a href="/canary/">canary</a> |
-  <a href="/contact/">contact</a>
-</nav>
-<hr>
-
-<div class="blog-metadata small">
-    <span class="published">published on 2025-10-15</span>
-    <span class="edited">edited on 2026-02-10</span>
-</div>
-<h2 class="blog-title">hello, world</h2>
-
-<div class="note blog-content">
-<p>hello, world.</p>
-<p>if you're seeing this, then it works! if you'd like to copy me, here is how.</p>
-<p>the blog is static: a simple <code>posts.json</code> file lists posts, and each post is a plain html file.</p>
-<div class="note small">
-<p><b>how to add a post:</b></p>
-<ol class="list">
-<li>copy this file as <code>hello-world-old-web.html</code> and edit.</li>
-<li>add a new entry to <code>posts.json</code> with <code>title</code>, <code>slug</code>, <code>date</code>, and optional <code>summary</code>.</li>
-<li>commit and push. the blog index updates automatically.</li>
-</ol>
-</div>
+<div class="panel" id="panel-nav">
+  <h1>ｈｅｌｌｏ，　ｗｏｒｌｄ</h1>
+  <nav id="navbar">
+    <a href="/index.html">home</a><span class="nav-sep">|</span><a href="/blog/">blog</a><span class="nav-sep">|</span><a href="/web-projects/">web projects</a><span class="nav-sep">|</span><a href="/canary/">canary</a><span class="nav-sep">|</span><a href="/contact/">contact</a>
+  </nav>
 </div>
 
-<hr>
+<div class="panel" id="panel-main">
+  <div class="blog-metadata small">
+      <span class="published">published on 2025-10-15</span>
+      <span class="edited">edited on 2026-02-10</span>
+  </div>
+  <h2 class="blog-title">hello, world</h2>
+
+  <div class="note blog-content">
+    <p>hello, world.</p>
+    <p>if you're seeing this, then it works! if you'd like to copy me, here is how.</p>
+    <p>the blog is static: a simple <code>posts.json</code> file lists posts, and each post is a plain html file.</p>
+    <div class="note small">
+      <p><b>how to add a post:</b></p>
+      <ol class="list">
+        <li>copy this file as <code>hello-world-old-web.html</code> and edit.</li>
+        <li>add a new entry to <code>posts.json</code> with <code>title</code>, <code>slug</code>, <code>date</code>, and optional <code>summary</code>.</li>
+        <li>commit and push. the blog index updates automatically.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
 <div class="footer">
-<p>last update to this page: February 10, 2026.</p>
+  <p>last update to this page: February 10, 2026.</p>
 </div>
-
 </main>
 
 </body>

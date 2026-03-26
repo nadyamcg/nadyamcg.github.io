@@ -1,7 +1,7 @@
 /* components: note, buttons, modals, intro sections, cursors */
 
 /* interactive cursor for clickable elements */
-/* Disabled - using JavaScript for animated cursor instead */
+/* disabled - using JavaScript for animated cursor instead */
 /*
 a, button, label, select, .file-label, summary {
     cursor: url('/assets/cursor/cursor2.gif'), pointer;

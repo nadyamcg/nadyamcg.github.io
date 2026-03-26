@@ -10,26 +10,21 @@
 </head>
 <body>
 <main>
-<h1>ｎａｄｙａ＇ｓ　ｂｌｏｇ</h1>
+<div class="panel" id="panel-nav">
+  <h1>ｎａｄｙａ＇ｓ　ｂｌｏｇ</h1>
+  <nav id="navbar">
+    <a href="/index.html">home</a><span class="nav-sep">|</span><a href="/blog/">blog</a><span class="nav-sep">|</span><a href="/web-projects/">web projects</a><span class="nav-sep">|</span><a href="/canary/">canary</a><span class="nav-sep">|</span><a href="/contact/">contact</a>
+  </nav>
+</div>
 
-<nav id="navbar">
-  <a href="/index.html">home</a> |
-  <a href="/blog/">blog</a> |
-  <a href="/web-projects/">web projects</a> |
-  <a href="/canary/">canary</a> |
-  <a href="/contact/">contact</a>
-</nav>
-<hr>
+<div class="panel" id="panel-main">
+  <p>I will write here when I have something to say.</p>
+  <div id="posts" class="note small">loading posts…</div>
+  <script src="/js/pages/blog-index.js" defer></script>
+</div>
 
-
-<p>I will write here when I have something to say.</p>
-<div id="posts" class="note small">loading posts…</div>
-
-<script src="/js/pages/blog-index.js" defer></script>
-
-<hr>
 <div class="footer">
-<p>last update to this page: February 10, 2026.</p>
+  <p>last update to this page: February 10, 2026.</p>
 </div>
 </main>
 </body>

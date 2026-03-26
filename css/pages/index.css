@@ -1,12 +1,148 @@
-/* body::before { background-image: url('/assets/bg/wind4.gif'); }
- *
- * body::before { opacity: 0.3; animation: none; }
- *
- * main { background: rgba(0, 0, 0, 0.75); }
- *
- * <img class="page-decor" id="decor-xxx" ...>
- * #decor-moon { bottom: 20px; right: 40px; width: 120px; opacity: 0.6; }
- * ------------------------------------------------ */
+body::before {
+  background: url(/assets/bg/bg_decay.gif), url(/assets/bg/bg_dark_anim_0_08.gif);
+  background-color: var(--mainbg);
+}
+
+/* per-panel backgrounds */
+#panel-nav,
+#panel-main,
+#panel-verify {
+  background-image: url('/assets/bg/bg-rip-02.gif');
+}
+
+/* ============================================
+   PANEL-NAV: greeting header
+   ============================================ */
+
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#panel-nav .intro {
+  padding-top: var(--space-md);
+}
+
+#panel-nav .intro > * {
+  animation: intro-rise 0.5s ease-out both;
+}
+
+#panel-nav .intro > *:nth-child(1) { animation-delay: 0.1s; }
+#panel-nav .intro > *:nth-child(2) { animation-delay: 0.25s; }
+#panel-nav .intro > *:nth-child(3) { animation-delay: 0.4s; }
+#panel-nav .intro > *:nth-child(4) { animation-delay: 0.55s; }
+
+#panel-nav .request {
+  display: block;
+  letter-spacing: 0.3em;
+  text-transform: lowercase;
+  color: var(--headers);
+  text-shadow: 0 0 12px var(--glow-soft);
+  font-style: italic;
+  opacity: 1;
+}
+
+/* ============================================
+   GLITCH TEXT
+   ============================================ */
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  text-align: inherit;
+  text-shadow: none;
+  pointer-events: none;
+}
+
+.glitch-text::before {
+  color: #ff0044;
+  opacity: 0;
+  transform: translate(-2px, 0);
+  clip-path: inset(0 0 50% 0);
+  animation: chromatic-red 8s step-end infinite;
+}
+
+.glitch-text::after {
+  color: #00ffff;
+  opacity: 0;
+  transform: translate(2px, 0);
+  clip-path: inset(50% 0 0 0);
+  animation: glitch-reveal 8s step-end infinite, chromatic-cyan 8s step-end infinite;
+}
+
+#panel-nav .request.glitch-text::before,
+#panel-nav .request.glitch-text::after {
+  animation-duration: 11s;
+  animation-delay: 3s;
+}
+
+@keyframes glitch-reveal {
+  0%, 14.8%, 15.5%, 41.8%, 42.3%, 72.5%, 75%, 100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  15%, 15.3%  { opacity: 1; transform: translate(0, 0); }
+  15.35%      { opacity: 1; transform: translate(-3px, 0); }
+  15.4%       { opacity: 1; transform: translate(2px, 0); }
+  42%, 42.15% { opacity: 0.9; transform: translate(0, 0); }
+  42.2%       { opacity: 0.9; transform: translate(1px, 1px); }
+  73%, 74%    { opacity: 1; transform: translate(0, 0); }
+  74.2%       { opacity: 1; transform: translate(-2px, 0); }
+  74.5%       { opacity: 0.6; clip-path: inset(15% 0 40% 0); }
+}
+
+@keyframes chromatic-red {
+  0%, 14.8%, 15.5%, 41.8%, 42.3%, 72.5%, 75%, 100% { opacity: 0; }
+  15.1%, 15.35%  { opacity: 0.5; }
+  42.05%, 42.15% { opacity: 0.4; }
+  73.5%, 74.3%   { opacity: 0.6; }
+}
+
+@keyframes chromatic-cyan {
+  0%, 14.8%, 15.5%, 41.8%, 42.3%, 72.5%, 75%, 100% { opacity: 0; }
+  15.15%, 15.38% { opacity: 0.5; }
+  42.08%, 42.18% { opacity: 0.4; }
+  73.6%, 74.35%  { opacity: 0.6; }
+}
+
+/* ============================================
+   PANEL DECO
+   ============================================ */
+
+.panel-deco {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: var(--font-small);
+  letter-spacing: 0;
+  color: var(--text);
+  opacity: 0.12;
+  text-align: right;
+  line-height: 1.6;
+  pointer-events: none;
+  user-select: none;
+}
+
+.panel-deco span { display: block; }
+
+.panel-deco .d1 { animation: blink 2s linear infinite; }
+.panel-deco .d2 { animation: blink 2s linear infinite; animation-delay: 0.4s; }
+.panel-deco .d3 { animation: blink 2s linear infinite; animation-delay: 0.8s; }
+.panel-deco .d4 { animation: blink 2s linear infinite; animation-delay: 1.2s; }
+.panel-deco .d5 { animation: blink 2s linear infinite; animation-delay: 1.6s; }
+
+@media (max-width: 600px) {
+  .panel-deco { display: none; }
+}
 
 /* homepage styles */
 
@@ -112,7 +248,7 @@
 }
 
 /* ============================================
-   NOW — terminal status readout
+   NOW
    ============================================ */
 
 #now {
@@ -191,7 +327,7 @@
 }
 
 /* ============================================
-   LATEST & EXPLORE — sidebar cards
+   LATEST & EXPLORE
    ============================================ */
 
 .latest-card,
@@ -245,8 +381,8 @@
   display: block;
   text-decoration: none;
   padding: var(--space-sm);
-  border: 1px solid rgba(68, 85, 170, 0.2);
-  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--primary);
+  background: var(--mainbg);
   transition: all 0.2s ease;
   position: relative;
 }

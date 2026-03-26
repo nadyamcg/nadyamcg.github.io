@@ -1,6 +1,5 @@
 /* effects: bgs, scanlines, glow, animations */
 
-/* static background overlay */
 body::before {
     content: '';
     position: fixed;
@@ -8,9 +7,10 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
+    background-repeat: repeat;
+    background-attachment: fixed;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.4;
 }
 
 /* scanlines overlay */
@@ -21,13 +21,11 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.12) 0px,
-        rgba(0, 0, 0, 0.12) 1px,
-        transparent 1px,
-        transparent 3px
-    );
+    background-image: url('/assets/overlay/fg_flikr004.gif');
+    background-repeat: repeat;
+    background-size: auto;
+    opacity: 0.1;
+    mix-blend-mode: overlay;
     pointer-events: none;
     z-index: 9999;
 }
@@ -75,7 +73,7 @@ body::after {
     animation: pulse-glow 3s ease-in-out infinite;
 }
 
-/* link hover glow - fauux-inspired pulsing effect */
+/* link hover glow */
 @keyframes link-glow-pulse {
     0%, 100% {
         color: var(--link);

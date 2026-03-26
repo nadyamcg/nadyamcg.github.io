@@ -17,6 +17,7 @@
     setupEventListeners();
     setupTuneEditor();
     setupExampleGallery();
+    setupTuneResultCards();
     checkUrlParams();
   }
 
@@ -554,6 +555,51 @@
       // card click: same as preview
       card.addEventListener('click', function() {
         previewBtn.click();
+      });
+    });
+  }
+
+  // set up tune result cards (interactive output blocks in docs)
+  function setupTuneResultCards() {
+    var cards = document.querySelectorAll('.tune-result-card');
+
+    cards.forEach(function(card) {
+      var tuneData = card.getAttribute('data-tune');
+      var loadBtn = card.querySelector('.tune-result-load-btn');
+      var copyBtn = card.querySelector('.tune-result-copy-btn');
+
+      loadBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+
+        var result = {
+          tuneString: tuneData,
+          noteCount: 0,
+          durationMs: 0,
+          warnings: []
+        };
+
+        var info = AudioPlayer.getTuneInfo(tuneData);
+        if (info) {
+          result.noteCount = info.noteCount;
+          result.durationMs = info.durationMs;
+        }
+
+        loadMidiOutputIntoEditor(result);
+        el.tuneEditorSection.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      copyBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        copyToClipboard(tuneData, el.tuneFeedback, 'Copied!');
+
+        var originalText = this.textContent;
+        this.classList.add('copied');
+        this.textContent = '\u2713';
+
+        setTimeout(function() {
+          copyBtn.classList.remove('copied');
+          copyBtn.textContent = originalText;
+        }, 1500);
       });
     });
   }
