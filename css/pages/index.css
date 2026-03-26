@@ -114,34 +114,37 @@ body::before {
 }
 
 /* ============================================
-   PANEL DECO
+   SIDE LOGO (rat ASCII art)
    ============================================ */
 
-.panel-deco {
-  position: absolute;
-  top: var(--space-md);
-  right: var(--space-md);
+.side-logo {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: calc(50% + 430px + 24px);
   font-family: ui-monospace, Menlo, Consolas, monospace;
-  font-size: var(--font-small);
-  letter-spacing: 0;
+  font-size: 0.45rem;
+  line-height: 1.15;
   color: var(--text);
   opacity: 0.12;
-  text-align: right;
-  line-height: 1.6;
   pointer-events: none;
   user-select: none;
+  z-index: 0;
 }
 
-.panel-deco span { display: block; }
+.side-logo pre {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: pre;
+  overflow: visible;
+}
 
-.panel-deco .d1 { animation: blink 2s linear infinite; }
-.panel-deco .d2 { animation: blink 2s linear infinite; animation-delay: 0.4s; }
-.panel-deco .d3 { animation: blink 2s linear infinite; animation-delay: 0.8s; }
-.panel-deco .d4 { animation: blink 2s linear infinite; animation-delay: 1.2s; }
-.panel-deco .d5 { animation: blink 2s linear infinite; animation-delay: 1.6s; }
-
-@media (max-width: 600px) {
-  .panel-deco { display: none; }
+@media (max-width: 1400px) {
+  .side-logo { display: none; }
 }
 
 /* homepage styles */
