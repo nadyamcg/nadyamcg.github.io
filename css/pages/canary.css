@@ -1,0 +1,191 @@
+/* canary page — per-page overrides */
+
+/* ============================================
+   BACKGROUND SLOT
+   ============================================ */
+
+body::before {
+  /* background: url(/assets/bg/); */
+  background-color: var(--mainbg);
+}
+
+#panel-nav,
+#panel-main,
+#panel-verify {
+  /* background-image: url('/assets/bg/'); */
+}
+
+/* ============================================
+   STATUS BLOCK
+   ============================================ */
+
+.canary-status-row {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.canary-status-row p {
+  text-align: left;
+  line-height: 1.7;
+  display: flex;
+  gap: var(--space-sm);
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.canary-label {
+  color: var(--accent);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: var(--font-small);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 10ch;
+}
+
+.canary-value {
+  color: var(--text);
+}
+
+.canary-status-row .status-pass {
+  color: var(--sky-aqua);
+}
+
+.canary-status-row .status-overdue {
+  color: var(--red-pink);
+}
+
+.canary-check {
+  color: var(--sky-aqua);
+  text-shadow: 0 0 6px var(--sky-aqua), 0 0 14px rgba(0, 209, 251, 0.5);
+}
+
+.canary-cross {
+  color: var(--red-pink);
+  text-shadow: 0 0 6px var(--red-pink), 0 0 14px rgba(255, 0, 102, 0.5);
+}
+
+/* status heading row */
+.canary-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.canary-label-title {
+  color: var(--accent);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: var(--font-small);
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+
+.canary-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+  box-shadow: 0 0 6px var(--glow);
+}
+
+/* ============================================
+   EXPLANATION NOTE
+   ============================================ */
+
+.canary-explain p {
+  text-align: left;
+}
+
+/* ============================================
+   SSH VERIFICATION  (mirrors index.html)
+   ============================================ */
+
+.ssh-header {
+  margin-bottom: var(--space-lg);
+}
+
+.ssh-header h2 {
+  margin: 0 0 var(--space-sm) 0;
+  text-align: center;
+}
+
+.ssh-header p {
+  margin: 0;
+  text-align: center;
+}
+
+.ssh-key-box {
+  background: rgba(17, 17, 34, 0.25);
+  border: 1px solid var(--rule);
+  padding: var(--space-md);
+  margin: var(--space-lg) 0;
+  text-align: left;
+}
+
+.ssh-key-label {
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--accent);
+}
+
+.ssh-key-pre {
+  margin: 0 0 var(--space-md) 0;
+  padding: var(--space-sm);
+  background: rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
+  white-space: pre;
+  user-select: all;
+  cursor: text;
+}
+
+.ssh-key-actions {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ssh-key-actions .btn {
+  font-size: 0.9em;
+}
+
+.ssh-fingerprint-text {
+  color: var(--accent);
+}
+
+.fingerprint-container {
+  text-align: center;
+  padding: var(--space-md);
+  position: relative;
+}
+
+.fingerprint-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.fingerprint-art {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.95em;
+  line-height: 1.2;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0;
+  color: var(--text);
+  position: relative;
+  z-index: 2;
+}
+
+.fingerprint-border {
+  position: absolute;
+  top: -10px;
+  left: -12px;
+  right: -12px;
+  bottom: -8px;
+  border: 1px solid rgba(153, 170, 255, 0.1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ssh-footer {
+  text-align: center;
+  margin: var(--space-md) 0;
+}

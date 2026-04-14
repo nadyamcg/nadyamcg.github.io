@@ -23,13 +23,17 @@ async function check() {
     const alive = now <= nextDue;
     const daysLeft = Math.ceil((nextDue - now) / (24 * 60 * 60 * 1000));
 
+    const statusClass = alive ? 'status-pass' : 'status-overdue';
+    const statusText = alive
+      ? '<span class="canary-check">\u2713</span> ok, ' + daysLeft + ' day(s) remaining'
+      : '<span class="canary-cross">\u2717</span> overdue, please check on me';
     const el = document.getElementById('status');
     el.innerHTML =
-      '<p><b>last update (utc):</b> ' + last.toISOString() + '</p>' +
-      '<p><b>token:</b> <code>' + (data.token || '(missing)') + '</code></p>' +
-      '<p><b>window:</b> ' + windowDays + ' days</p>' +
-      '<p><b>next due by (utc):</b> ' + nextDue.toISOString() + '</p>' +
-      '<p><b>status:</b> ' + (alive ? '\u2705 ok ' + daysLeft + ' day(s) remaining' : '\u274c overdue - please check on me') + '</p>';
+      '<p><span class="canary-label">last update</span><span class="canary-value">' + last.toISOString() + '</span></p>' +
+      '<p><span class="canary-label">token</span><span class="canary-value"><code>' + (data.token || '(missing)') + '</code></span></p>' +
+      '<p><span class="canary-label">window</span><span class="canary-value">' + windowDays + ' days</span></p>' +
+      '<p><span class="canary-label">next due</span><span class="canary-value">' + nextDue.toISOString() + '</span></p>' +
+      '<p><span class="canary-label">status</span><span class="canary-value ' + statusClass + '">' + statusText + '</span></p>';
 
     // overlay behavior
     const overlay = document.getElementById('expired-overlay');
