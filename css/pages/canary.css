@@ -9,11 +9,12 @@ body::before {
   background-color: var(--mainbg);
 }
 
+/* panel background slot — uncomment and set url to add a repeating gif:
 #panel-nav,
 #panel-main,
 #panel-verify {
-  /* background-image: url('/assets/bg/'); */
-}
+  background-image: url('/assets/bg/');
+} */
 
 /* ============================================
    STATUS BLOCK
