@@ -9,7 +9,7 @@ body::before {
   background-color: var(--mainbg);
 }
 
-/* panel background slot — uncomment and set url to add a repeating gif:
+/* panel background slot
 #panel-nav,
 #panel-main,
 #panel-verify {
@@ -189,4 +189,104 @@ body::before {
 .ssh-footer {
   text-align: center;
   margin: var(--space-md) 0;
+}
+
+/* ============================================
+   EXPIRED OVERLAY / MODAL
+   ============================================ */
+
+#expired-overlay {
+  background: rgba(0, 0, 3, 0.88);
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  width: min(480px, 100%);
+  border: 2px solid var(--rule);
+  box-shadow:
+    0 0 0 1px var(--fmnDarkest),
+    0 0 40px rgba(136, 153, 255, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.8);
+  animation: fade-in 0.2s ease-out;
+}
+
+/* title bar */
+.modal-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--fmnDark);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--rule);
+}
+
+.modal-title {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: var(--font-small);
+  letter-spacing: 0.15em;
+  color: var(--fmnLightest);
+  text-shadow: 0 0 8px var(--glow-soft);
+}
+
+.modal-titlebar-dots {
+  display: flex;
+  gap: 6px;
+  opacity: 0.5;
+}
+
+.modal-titlebar-dots span {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--forgetmenot);
+  display: block;
+}
+
+/* modal body */
+.modal-body {
+  background: rgba(0, 0, 18, 0.95);
+  padding: var(--space-lg);
+  display: grid;
+  gap: var(--space-md);
+}
+
+.modal-body p {
+  text-align: left;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+  line-height: 1.7;
+}
+
+#expired-timer {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: var(--font-small);
+  color: var(--red-pink);
+  text-shadow: 0 0 8px rgba(255, 0, 102, 0.5);
+  letter-spacing: 0.1em;
+  text-align: left;
+  margin: 0;
+  font-weight: normal;
+}
+
+#expired-message {
+  display: grid;
+  gap: var(--space-sm);
+  border-top: 1px solid rgba(68, 85, 170, 0.3);
+  padding-top: var(--space-md);
+  color: var(--text);
+  opacity: 0.85;
+}
+
+/* modal footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid rgba(68, 85, 170, 0.3);
+  padding-top: var(--space-md);
+}
+
+#dismiss-overlay {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: var(--font-small);
+  letter-spacing: 0.1em;
 }

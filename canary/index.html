@@ -91,31 +91,37 @@
   </p>
 </div>
 
-<!-- expired overlay -->
-<div id="expired-overlay" class="overlay" aria-hidden="true">
-  <div class="modal">
-    <div class="note">
-      <h2>canary expired</h2>
-      <p id="expired-timer" class="small" aria-live="polite"></p>
-      <div id="expired-message" class="small">
-        <p>if you're seeing this, I missed my update window. this does not <i>necessarily</i> prove harm; life happens.</p>
-        <p>this mainly proves that whatever is happening is unplanned.</p>
-        <p>if you know me personally, please try my usual channels first. then phone number, if you have it.</p>
-        <p>I am sorry if this is the last you see of me.</p>
-      </div>
-      <div class="actions-right">
-        <button id="dismiss-overlay" class="btn small">dismiss</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="footer">
   <hr>
   <p>last update to this page: April 14, 2026.</p>
 </div>
 
 </main>
+
+<!-- expired overlay outside <main> so position:fixed covers full viewport -->
+<div id="expired-overlay" class="overlay" aria-hidden="true">
+  <div class="modal">
+    <div class="modal-titlebar">
+      <span class="modal-title">⌈ｃａｎａｒｙ　ｅｘｐｉｒｅｄ⌋</span>
+      <div class="modal-titlebar-dots" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p id="expired-timer" class="small mono" aria-live="polite"></p>
+      <div id="expired-message" class="small">
+        <p>if you're seeing this, I missed my update window. this does not <i>necessarily</i> prove harm; life happens.</p>
+        <p>this mainly proves that whatever is happening is unplanned.</p>
+        <p>if you know me personally, please try my usual channels first. then phone number, if you have it.</p>
+        <p>I am sorry if this is the last you see of me.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="dismiss-overlay" class="btn small">dismiss</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="/js/pages/canary.js" defer></script>
 <script src="/js/cursor.js"></script>
 <script>
