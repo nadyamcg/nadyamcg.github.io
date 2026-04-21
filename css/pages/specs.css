@@ -1,0 +1,102 @@
+/* specs page */
+
+.specs-prompt {
+  border: 1px solid var(--rule);
+  background: rgba(17, 17, 34, 0.45);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-lg);
+  border-left: 2px solid var(--fmnDark);
+}
+
+.prompt-user   { color: var(--sky-aqua); }
+.prompt-sep    { color: var(--muted); }
+.prompt-path   { color: var(--secondary); }
+.prompt-sym    { color: var(--muted); }
+.prompt-cmd    { color: var(--text); }
+
+.specs-device {
+  text-align: center;
+  font-family: ui-monospace, Menlo, Consolas, "Liberation Mono", monospace;
+  margin: var(--space-md) 0;
+}
+
+.device-name {
+  display: block;
+  font-size: var(--font-xlarge);
+  color: var(--fmnLightest);
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 8px var(--glow), 0 0 20px var(--glow-soft);
+  animation: text-flicker 4s infinite;
+}
+
+.device-model {
+  display: block;
+  font-size: var(--font-small);
+  color: var(--muted);
+  margin-top: var(--space-xs);
+  letter-spacing: 0.05em;
+}
+
+.specs-divider {
+  margin: var(--space-lg) 0 !important;
+  height: 1px !important;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--fmnDark) 30%,
+    var(--fmnDark) 70%,
+    transparent
+  ) !important;
+  opacity: 0.35 !important;
+}
+
+.specs-section {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.specs-row {
+  display: grid;
+  grid-template-columns: 9ch 1fr;
+  gap: var(--space-md);
+  font-family: ui-monospace, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: var(--font-small);
+  align-items: start;
+}
+
+.specs-key {
+  color: var(--secondary);
+  text-align: right;
+  white-space: nowrap;
+  padding-top: 0.1em;
+}
+
+.specs-val {
+  color: var(--fmnLight);
+  text-align: left;
+}
+
+.spec-sub {
+  display: block;
+  color: var(--muted);
+  margin-top: var(--space-xs);
+}
+
+.spec-sub::before {
+  content: "· ";
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+@media (max-width: 480px) {
+  .specs-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .specs-key {
+    text-align: left;
+    opacity: 0.8;
+  }
+  .specs-key::after {
+    content: ":";
+  }
+}
