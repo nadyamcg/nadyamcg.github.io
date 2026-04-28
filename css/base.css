@@ -315,7 +315,6 @@ hr {
 }
 
 p, li, .list {
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    overflow-wrap: break-word;
     hyphens: auto;
 }
