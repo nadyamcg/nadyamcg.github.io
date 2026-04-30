@@ -24,6 +24,7 @@
 
 .blog-content p {
     text-indent: 2em;
+    hyphens: none;
 }
 
 .blog-content p:first-child {
