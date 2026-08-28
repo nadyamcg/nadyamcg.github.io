@@ -3,3 +3,10 @@ node_modules/
 ideas/
 package*.json*
 *.code-workspace
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
