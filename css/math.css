@@ -1,0 +1,135 @@
+/* math: syntax-coloured formulas, calculation steps, piecewise, fractions */
+/* originally written for web-projects/midi-grub, shared site-wide */
+
+/* ============================================
+   SYNTAX COLORS
+   ============================================ */
+
+/* GRUB tune syntax */
+.syn-tempo { color: var(--magenta); }
+.syn-freq { color: var(--холодный-синий); }
+.syn-duration { color: var(--bloom); }
+.syn-bpm { color: var(--стальной-серый); }
+.syn-ppq { color: var(--лазурный-азур); }
+.syn-hz { color: var(--бежевый); }
+.syn-note { color: var(--лазурный-азур); }
+.syn-midi-num { color: var(--сверкающий-синий); }
+.syn-config { color: var(--powder-blue); }
+
+/* MIDI pitch bend */
+.syn-bend { color: var(--frost); }         /* 14-bit bend value, 0-16383 */
+.syn-semitone { color: var(--plum); }      /* semitone shift, n */
+.syn-range { color: var(--blue-bell); }    /* one-sided sensitivity in semitones */
+.syn-cc { color: var(--steel-sky); }       /* CC and RPN numbers */
+.syn-byte { color: var(--красный-лепесток); } /* hex bytes e.g 0xE0, 0x7F */
+
+/* general */
+.syn-math { color: var(--red); }      /* functions e.g round, ⌊, ⌋, (, ), etc. */
+.syn-var { color: var(--роза-блаш); }          /* x, y, z */
+.syn-number { color: var(--ghost); }     /* 0.5 */
+.syn-condition { color: var(--кораллово-красный); }  /* if */
+.syn-operator { color: var(--lavender-grey); } /* +, ×, ÷, =, <, ≥, − */
+.syn-unit { color: var(--snow); }
+
+/* ============================================
+   CALCULATION STEPS
+   ============================================ */
+
+.calculation-steps {
+  margin: var(--space-md);
+  padding-left: var(--space-md);
+  border-left: 3px solid var(--blue);
+  background: linear-gradient(90deg, rgba(18, 52, 255, 0.12), transparent);
+  font-family: 'Courier New', monospace;
+  font-size: var(--font-small);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
+}
+
+.calculation-steps p {
+  margin: var(--space-md) 0;
+  line-height: 1.6;
+  /* base.css justifies p, which stretches the spaces in a wrapped formula */
+  text-align: left;
+}
+
+.calculation-steps code {
+  background: transparent;
+  color: inherit;
+}
+
+.calculation-steps sup,
+.syn-superscript {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+/* ============================================
+   PIECEWISE NOTATION
+   ============================================ */
+
+.piecewise {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  margin: 1em 0.5em;
+  flex-wrap: wrap;
+}
+
+.piecewise-cases {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid var(--rule);
+  padding-left: 1em;
+  margin-left: 0.5em;
+}
+
+.case {
+  margin-bottom: 0.5em;
+  white-space: nowrap;
+}
+
+.case:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   FRACTIONS
+   stacked numerator over denominator, for values
+   that should stay exact rather than be rounded
+   ============================================ */
+
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.2;
+  margin: 0 0.15em;
+}
+
+.frac .num {
+  padding: 0 0.3em;
+}
+
+.frac .den {
+  border-top: 1px solid currentColor;
+  padding: 0 0.3em;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 600px) {
+  .calculation-steps {
+    margin-left: 0;
+    padding: 12px;
+  }
+
+  .calculation-steps p {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+}

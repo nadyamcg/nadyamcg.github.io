@@ -1,4 +1,4 @@
-/* components: note, buttons, modals, intro sections, cursors */
+/* components: note, buttons, modals, intro sections, cursors, disclosure, tables */
 
 /* interactive cursor for clickable elements */
 /* disabled - using JavaScript for animated cursor instead */
@@ -116,4 +116,100 @@ a, button, label, select, .file-label, summary {
     pointer-events: none;
     z-index: 0;
     image-rendering: pixelated;
+}
+
+/* collapsible section with a rotating marker */
+
+.syntax-details {
+    margin-top: 8px;
+}
+
+.syntax-details summary {
+    list-style: none;
+    cursor: pointer;
+    color: var(--secondary);
+    font-size: var(--font-small);
+    transition: color 0.2s;
+}
+
+.syntax-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.syntax-details summary::before {
+    content: '>';
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    display: inline-block;
+    margin-right: 0.4em;
+    transition: transform 0.2s ease;
+}
+
+.syntax-details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.syntax-details summary:hover {
+    animation: link-glow-pulse 1s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .syntax-details summary:hover {
+        animation: none;
+        text-shadow: 0 0 4px var(--sky-aqua), 0 0 12px rgba(0, 209, 251, 0.6);
+    }
+}
+
+.syntax-details > p {
+    margin-top: 8px;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: var(--font-small);
+    text-align: left;
+}
+
+caption {
+    caption-side: top;
+    text-align: left;
+    color: var(--muted);
+    font-size: var(--font-small);
+    padding-bottom: var(--space-sm);
+}
+
+th, td {
+    border: 1px solid var(--rule);
+    padding: var(--space-xs) var(--space-sm);
+    /* .note sets break-word/anywhere; numbers must not split */
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+th {
+    color: var(--headers);
+    background: var(--fmnDarkest);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(17, 17, 34, 0.5);
+}
+
+/* numeric columns read better right-aligned and unwrapped */
+.num-col {
+    text-align: right;
+    white-space: nowrap;
+    font-family: 'Courier New', monospace;
+}
+
+/* utility: horizontal scroll for wide tables on narrow screens */
+.table-scroll {
+    overflow-x: auto;
+    margin: var(--space-md) 0;
 }

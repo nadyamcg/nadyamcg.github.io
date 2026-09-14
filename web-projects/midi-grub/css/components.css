@@ -867,65 +867,7 @@ p:has(+ .terminal-block) {
   color: var(--white);
 }
 
-/* syntax colors for reference */
-.syn-tempo { color: var(--magenta); }
-.syn-freq { color: var(--холодный-синий); }
-.syn-duration { color: var(--bloom); }
-.syn-bpm { color: var(--стальной-серый); }
-.syn-ppq { color: var(--лазурный-азур); }
-.syn-hz { color: var(--бежевый); }
-.syn-note { color: var(--лазурный-азур); }
-.syn-midi-num { color: var(--сверкающий-синий); }
-.syn-config { color: var(--powder-blue); }
-.syn-math { color: var(--red); }      /* functions e.g round, ⌊, ⌋, (, ), etc. */
-.syn-var { color: var(--роза-блаш); }          /* x, y, z */
-.syn-number { color: var(--ghost); }     /* 0.5 */
-.syn-condition { color: var(--кораллово-красный); }  /* if */
-.syn-operator { color: var(--lavender-grey); } /* +, ×, ÷, =, <, ≥, − */
-.syn-unit { color: var(--snow); }
-
-.syntax-details {
-  margin-top: 8px;
-}
-
-.syntax-details summary {
-  list-style: none;
-  cursor: pointer;
-  color: var(--secondary);
-  font-size: var(--font-small);
-  transition: color 0.2s;
-}
-
-.syntax-details summary::-webkit-details-marker {
-  display: none;
-}
-
-.syntax-details summary::before {
-  content: '>';
-  font-family: ui-monospace, Menlo, Consolas, monospace;
-  display: inline-block;
-  margin-right: 0.4em;
-  transition: transform 0.2s ease;
-}
-
-.syntax-details[open] summary::before {
-  transform: rotate(90deg);
-}
-
-.syntax-details summary:hover {
-  animation: link-glow-pulse 1s ease-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .syntax-details summary:hover {
-    animation: none;
-    text-shadow: 0 0 4px var(--sky-aqua), 0 0 12px rgba(0, 209, 251, 0.6);
-  }
-}
-
-.syntax-details > p {
-  margin-top: 8px;
-}
+/* syntax colors, .syntax-details, .calculation-steps and .piecewise now site-wide in /css/math.css and /css/components.css */
 
 /* term-list: two-column header row + full-width expandable details */
 .syntax-reference-box .term-list {
@@ -964,61 +906,6 @@ p:has(+ .terminal-block) {
 /* summary intended to sit under definition column */
 .term-entry .syntax-details summary {
   padding-left: calc(var(--term-col) + var(--space-md));
-}
-
-/* calculation steps */
-.calculation-steps {
-  margin: var(--space-md);
-  padding-left: var(--space-md);
-  border-left: 3px solid var(--blue);
-  background: linear-gradient(90deg, rgba(18, 52, 255, 0.12), transparent);
-  font-family: 'Courier New', monospace;
-  font-size: var(--font-small);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  overflow-x: auto;
-}
-
-.calculation-steps p {
-  margin: var(--space-md) 0;
-  line-height: 1.6;
-}
-
-.calculation-steps code {
-  background: transparent;
-  color: inherit;
-}
-
-.calculation-steps sup,
-.syn-superscript {
-  font-size: 0.75em;
-  vertical-align: super;
-  line-height: 0;
-}
-
-/* piecewise notation */
-.piecewise {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5em;
-  margin: 1em 0.5em;
-  flex-wrap: wrap;
-}
-
-.piecewise-cases {
-  display: flex;
-  flex-direction: column;
-  border-left: 2px solid var(--rule);
-  padding-left: 1em;
-  margin-left: 0.5em;
-}
-
-.case {
-  margin-bottom: 0.5em;
-  white-space: nowrap;
-}
-
-.case:last-child {
-  margin-bottom: 0;
 }
 
 /* notes reference */

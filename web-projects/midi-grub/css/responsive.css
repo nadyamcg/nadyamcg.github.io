@@ -35,14 +35,4 @@
   .example-art {
     height: 140px;
   }
-
-  .calculation-steps {
-    margin-left: 0;
-    padding: 12px;
-  }
-
-  .calculation-steps p {
-    padding: 6px 10px;
-    font-size: 0.85rem;
-  }
 }

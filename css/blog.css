@@ -31,6 +31,13 @@
     text-indent: 0;
 }
 
+/* formulas, tables and lists set their own alignment */
+.blog-content .calculation-steps p,
+.blog-content td p,
+.blog-content li p {
+    text-indent: 0;
+}
+
 /* disclosure */
 
 .blog-disclosure {
