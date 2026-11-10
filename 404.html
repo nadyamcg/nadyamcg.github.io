@@ -358,28 +358,77 @@ body {
     display: inline-block;
 }
 
-/* decorative lines */
+/* corner logo */
 .deco {
     position: absolute;
     top: 6%;
     right: 8%;
-    font-size: clamp(10px, 1.5vw, 14px);
-    letter-spacing: 0.1em;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: clamp(4.5px, 0.55vw, 7.5px);
+    letter-spacing: normal;
+    line-height: 1;
     color: var(--text);
-    opacity: 0.15;
-    text-align: right;
-    line-height: 1.8;
+    opacity: 0.14;
+    pointer-events: none;
+    user-select: none;
 }
 
+.deco pre {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    font-size: inherit;
+    line-height: 1;
+    /* the UA default for <pre> is white-space: pre, which would render the newlines between the rows as blank lines */
+    white-space: normal;
+    overflow: visible;
+}
+
+/* each row is its own block, so the line breaks come from display:block and only the row's own spacing needs preserving */
 .deco span {
     display: block;
+    white-space: pre;
+    line-height: 1;
+    animation: blink 2s linear infinite;
 }
 
-.deco .d1 { animation: blink 2s linear infinite; }
-.deco .d2 { animation: blink 2s linear infinite; animation-delay: 0.4s; }
-.deco .d3 { animation: blink 2s linear infinite; animation-delay: 0.8s; }
-.deco .d4 { animation: blink 2s linear infinite; animation-delay: 1.2s; }
-.deco .d5 { animation: blink 2s linear infinite; animation-delay: 1.6s; }
+.deco span:nth-child(1) { animation-delay: 0.00s; }
+.deco span:nth-child(2) { animation-delay: 0.11s; }
+.deco span:nth-child(3) { animation-delay: 0.22s; }
+.deco span:nth-child(4) { animation-delay: 0.33s; }
+.deco span:nth-child(5) { animation-delay: 0.44s; }
+.deco span:nth-child(6) { animation-delay: 0.55s; }
+.deco span:nth-child(7) { animation-delay: 0.66s; }
+.deco span:nth-child(8) { animation-delay: 0.77s; }
+.deco span:nth-child(9) { animation-delay: 0.88s; }
+.deco span:nth-child(10) { animation-delay: 0.99s; }
+.deco span:nth-child(11) { animation-delay: 1.10s; }
+.deco span:nth-child(12) { animation-delay: 1.21s; }
+.deco span:nth-child(13) { animation-delay: 1.32s; }
+.deco span:nth-child(14) { animation-delay: 1.43s; }
+.deco span:nth-child(15) { animation-delay: 1.54s; }
+.deco span:nth-child(16) { animation-delay: 1.65s; }
+.deco span:nth-child(17) { animation-delay: 1.76s; }
+.deco span:nth-child(18) { animation-delay: 1.87s; }
+.deco span:nth-child(19) { animation-delay: 1.98s; }
+.deco span:nth-child(20) { animation-delay: 2.09s; }
+.deco span:nth-child(21) { animation-delay: 2.20s; }
+.deco span:nth-child(22) { animation-delay: 2.31s; }
+.deco span:nth-child(23) { animation-delay: 2.42s; }
+.deco span:nth-child(24) { animation-delay: 2.53s; }
+.deco span:nth-child(25) { animation-delay: 2.64s; }
+.deco span:nth-child(26) { animation-delay: 2.75s; }
+.deco span:nth-child(27) { animation-delay: 2.86s; }
+.deco span:nth-child(28) { animation-delay: 2.97s; }
+.deco span:nth-child(29) { animation-delay: 3.08s; }
+.deco span:nth-child(30) { animation-delay: 3.19s; }
+.deco span:nth-child(31) { animation-delay: 3.30s; }
+.deco span:nth-child(32) { animation-delay: 3.41s; }
+.deco span:nth-child(33) { animation-delay: 3.52s; }
+.deco span:nth-child(34) { animation-delay: 3.63s; }
+.deco span:nth-child(35) { animation-delay: 3.74s; }
+.deco span:nth-child(36) { animation-delay: 3.85s; }
 
 /* image positioned bottom right */
 .figure {
@@ -419,7 +468,7 @@ body {
     <div class="title glitch-text" data-en="PAGE NOT FOUND"><span>страница не найдена</span></div>
 
     <div class="message">
-        ты заблудился.<br>
+        вы заблудились.<br>
         нет такой страницы.<br><br>
 
         <a href="/index.html">← вернуться домой</a><br>
@@ -433,12 +482,43 @@ body {
     </div>
 </div>
 
-<div class="deco">
-    <span class="d1">║░░░░░░░░░░░║</span>
-    <span class="d2">║░▒▒▒▒▒▒▒▒░║</span>
-    <span class="d3">║░▒░░░░░░▒░║</span>
-    <span class="d4">║░▒▒▒▒▒▒▒▒░║</span>
-    <span class="d5">║░░░░░░░░░░░║</span>
+<div class="deco" aria-hidden="true">
+<pre><span>                                                 ▄█████████▄</span>
+<span>                                             ▄█████████████████▄</span>
+<span>                                           ███████████████████████</span>
+<span>                                         ████████▀         ▀███████▄</span>
+<span>                                        ███████              ███████▌</span>
+<span>                                       ███████                ███████</span>
+<span>                ▄█████████▄            ██████                  ███████</span>
+<span>             ████████████████▄         ██████                  ███████</span>
+<span>           ▄███████████████████        █████▌                   ██████</span>
+<span>          ▄███████         █████       █████▌                   ██████</span>
+<span>          ██████▌            ████      ▐█████                  ███████</span>
+<span>          ██████              ███▌      ▀████                  ███████</span>
+<span>          ██████               ███       █████                 ██████▌</span>
+<span>           █████               ▐██        ▀███▄                ██████</span>
+<span>            █████               █▌          ███               ███████</span>
+<span>              ████              █            ███             ███████</span>
+<span>                ▀███                 ▄▄▄       ██           ▐██████▀</span>
+<span>                    ▀█▄          ▄██▀            █▄         ██████▌</span>
+<span>                             ████▀                         ███████</span>
+<span>                         ▄████▀                           ███████</span>
+<span>                      ▄████▀                             ███████</span>
+<span>                    █████▀                              ██████▀</span>
+<span>                 ▄█████▀                              ▄██████▀</span>
+<span>               ▄█████▀                               ███████</span>
+<span>              ██████                 ███           ▄███████</span>
+<span>            ██████▀                ███████       ▄███████</span>
+<span>           ██████                  ███████     ▄███████▀</span>
+<span>          ██████                     ███    ▄███████▀</span>
+<span>         ██████                            ████████▀</span>
+<span>        ██████▀                         ▄████████▀</span>
+<span>       ▐██████                       ▄█████████</span>
+<span>       ███████                    ██████████▀</span>
+<span>       ███████                ███████████▀</span>
+<span>       ▐███████▄        ▄████████████▀</span>
+<span>        ▀████████████████████████▀</span>
+<span>          ▀███████████████▀▀</span></pre>
 </div>
 
 <img class="figure" src="assets/objects/2.png" alt="">
